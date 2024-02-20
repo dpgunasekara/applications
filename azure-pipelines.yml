@@ -385,7 +385,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
-          $(Build.BuildId
+          $(Build.BuildId)
   - job: Build_bobReferencing
     displayName: Build bobReferencing
     pool:
