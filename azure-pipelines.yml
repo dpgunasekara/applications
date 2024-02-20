@@ -470,7 +470,7 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobAuditService
-    displayName: Build obAuditService
+    displayName: Build bobAuditService
     pool:
       vmImage: $(vmImageName)
     steps:
