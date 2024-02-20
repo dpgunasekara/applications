@@ -87,6 +87,10 @@ resources:
      type: github
      name: Novustech-SL/NovatrackApp
      endpoint: Novustech-SL
+   - repository: bobMessagingService # Alias for the repository
+     type: github
+     name: Novustech-SL/bob-MessagingService
+     endpoint: Novustech-SL
 
 
 variables:
@@ -530,6 +534,31 @@ stages:
         mavenPomFile: 'NovatrackApp/pom.xml' # Adjust path if needed
         goals: 'clean package'
         options: '-Dmaven.test.skip=true -s NovatrackApp/settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'novatrackapp'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobMessagingService
+    displayName: Build bobMessagingService
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobMessagingService
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'drcs_alert_system/pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s drcs_alert_system/settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
