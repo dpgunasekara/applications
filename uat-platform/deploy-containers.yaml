@@ -663,3 +663,40 @@ spec:
         - name: bobr3portal-log
           persistentVolumeClaim:
             claimName: bobr3portal-log
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bobmessaging-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobmessaging
+  template:
+    metadata:
+      labels:
+        app: bobmessaging
+    spec:
+      containers:
+        - name: bobmessaging
+          image: cregdcrsuat01.azurecr.io/bobmessaging:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: bobmessaging-config
+              mountPath: /app/config
+            - name: bobmessagingl-data
+              mountPath: /app/data
+            - name: bobmessaging-log
+              mountPath: /app/log
+      volumes:
+        - name: bobmessaging-config
+          persistentVolumeClaim:
+            claimName: bobmessaging-config
+        - name: bobmessaging-data
+          persistentVolumeClaim:
+            claimName: bobmessaging-data
+        - name: bobmessaging-log
+          persistentVolumeClaim:
+            claimName: bobmessaging-log
