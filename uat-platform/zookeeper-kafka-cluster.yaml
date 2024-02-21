@@ -25,7 +25,6 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
   selector:
-    statefulset.kubernetes.io/pod-name: kafka-kafka-0
     app: kafka
   ports:
   - port: 8444
