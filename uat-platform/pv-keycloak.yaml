@@ -28,7 +28,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -60,7 +60,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -92,4 +92,24 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+  name: keycloak-postgres-data-01
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: managed-csi
+  csi:
+    driver: disk.csi.azure.com
+    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-01
+    volumeAttributes:
+      fsType: ext4
+

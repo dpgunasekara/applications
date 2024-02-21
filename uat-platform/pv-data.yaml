@@ -28,7 +28,8 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -60,7 +61,8 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -92,7 +94,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -124,7 +126,8 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -156,7 +159,8 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -188,7 +192,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -220,7 +224,8 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -252,7 +257,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -284,7 +289,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -316,7 +321,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -348,7 +353,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -380,7 +385,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -412,7 +417,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -444,7 +449,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -476,7 +481,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -508,7 +513,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -540,7 +545,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -572,7 +577,7 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -604,4 +609,4 @@ spec:
     - mfsymlinks
     - cache=strict
     - nosharesock
-    - actimeo=30
+    - nobrl
