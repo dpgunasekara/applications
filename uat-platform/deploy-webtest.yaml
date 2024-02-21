@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webtest-deployment
+spec:
+  replicas: 2 # Specifies how many pods to run
+  selector:
+    matchLabels:
+      app: webtest
+  template:
+    metadata:
+      labels:
+        app: webtest
+    spec:
+      containers:
+        - name: webtest
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: webtest-config
+              mountPath: /etc/nginx/conf.d
+            - name: webtest-data
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: webtest-config
+          persistentVolumeClaim:
+            claimName: webtest-config
+        - name: webtest-data
+          persistentVolumeClaim:
+            claimName: webtest-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webtest-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8001
+      targetPort: 80
+  selector:
+    app: webtest # This selector must match the labels of the Pods the Deployment manages
