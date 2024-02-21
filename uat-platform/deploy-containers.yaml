@@ -686,7 +686,7 @@ spec:
           volumeMounts:
             - name: bobmessaging-config
               mountPath: /app/config
-            - name: bobmessagingl-data
+            - name: bobmessaging-data
               mountPath: /app/data
             - name: bobmessaging-log
               mountPath: /app/log
