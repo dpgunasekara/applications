@@ -29,7 +29,7 @@ spec:
     app: kafka
   ports:
   - port: 8444
-    targetPort: 8444
+    targetPort: 9092
   type: LoadBalancer
 ---
 apiVersion: apps/v1
@@ -112,7 +112,7 @@ spec:
             memory: "1G"
             cpu: "1"             
         ports:
-         - containerPort: 8444
+         - containerPort: 9092
         volumeMounts:
         - name: bitnami-data
           mountPath: /bitnami
