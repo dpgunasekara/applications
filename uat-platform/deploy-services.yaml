@@ -263,3 +263,17 @@ spec:
       targetPort: 8080
   selector:
     app: bobmessaging
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackmessaging-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8115
+      targetPort: 8080
+  selector:
+    app: novatrackmessaging
