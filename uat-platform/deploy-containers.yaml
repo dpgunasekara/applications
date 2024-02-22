@@ -737,3 +737,40 @@ spec:
         - name: novatrackmessaging-log
           persistentVolumeClaim:
             claimName: novatrackmessaging-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackauditservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackauditservice
+  template:
+    metadata:
+      labels:
+        app: novatrackauditservice
+    spec:
+      containers:
+        - name: novatrackauditservice
+          image: cregdcrsuat01.azurecr.io/novatrackauditservice:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackauditservice-config
+              mountPath: /app/config
+            - name: novatrackauditservice-data
+              mountPath: /app/data
+            - name: novatrackauditservice-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackauditservice-config
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-config
+        - name: novatrackauditservice-data
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-data
+        - name: novatrackauditservice-log
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-log
