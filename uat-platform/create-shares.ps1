@@ -65,3 +65,7 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobmessaging-config --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobmessaging-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobmessaging-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name novatrackKeycloak-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name novatrackKeycloak-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name novatrackKeycloak-log --enabled-protocols SMB
