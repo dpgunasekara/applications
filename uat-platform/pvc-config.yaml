@@ -244,3 +244,16 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: novatrackmessaging-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: novatrackmessaging-config
+  resources:
+    requests:
+      storage: 5Gi
