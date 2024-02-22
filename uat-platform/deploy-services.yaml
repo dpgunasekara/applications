@@ -273,7 +273,21 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8115
+    - port: 8082
       targetPort: 8080
   selector:
     app: novatrackmessaging
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackauditservice-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8083
+      targetPort: 8080
+  selector:
+    app: novatrackauditservice
