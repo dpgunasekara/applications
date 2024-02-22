@@ -645,7 +645,7 @@ spec:
         - name: bobr3portal
           image: cregdcrsuat01.azurecr.io/bobr3portal:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3006
           volumeMounts:
             - name: bobr3portal-config
               mountPath: /app/config
