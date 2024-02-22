@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackKeycloak
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  selector:
+    app: novatrackKeycloak
+  type: LoadBalancer
+  ports:
+  - port: 8085
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackKeycloak
+spec:
+  selector:
+    matchLabels:
+      app: novatrackKeycloak
+  template:
+    metadata:
+      labels:
+        app: novatrackKeycloak
+    spec:
+      containers:
+        - name: novatrackKeycloak
+          image: quay.io/keycloak/keycloak:21.0.2
+          args: ["start-dev"]
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+            - name: KEYCLOAK_USER
+              value: admin
+            - name: KEYCLOAK_PASSWORD
+              value: admin
+            - name: KEYCLOAK_IMPORT
+              value: /tmp/realm.json
+            - name: DB_VENDOR
+              value: postgres
+            - name: DB_ADDR
+              value: localhost:5432
+            - name: DB_DATABASE
+              value: keycloak
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: postgres
+          volumeMounts:
+            - name: novatrackKeycloak-config
+              mountPath: /tmp/realm.json
+              subPath: realm.json
+            - name: novatrackKeycloak-data
+              mountPath: /data/keycloak
+            - name: novatrackKeycloak-log
+              mountPath: /opt/keycloak/logs
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: keycloak
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: novatrackkeycloak-postgres-data-01
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: novatrackkeycloak-config
+          persistentVolumeClaim:
+            claimName: novatrackkeycloak-config
+        - name: novatrackkeycloak-data
+          persistentVolumeClaim:
+            claimName: novatrackkeycloak-data
+        - name: novatrackkeycloak-log
+          persistentVolumeClaim:
+            claimName: novatrackkeycloak-log
+        - name: novatrackkeycloak-postgres-data-01
+          persistentVolumeClaim:
+            claimName: novatrackkeycloak-postgres-data-01
