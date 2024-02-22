@@ -8,7 +8,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8130
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobagency
 ---
@@ -22,7 +22,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8120
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobauditservice
 ---
@@ -36,7 +36,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8145
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobburs
 ---
@@ -50,7 +50,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8140
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobfileprocessing
 ---
@@ -64,7 +64,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: boblogger
 ---
@@ -78,7 +78,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8155
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobmposinterface
 ---
@@ -92,7 +92,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8155
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: boboag
 ---
@@ -106,7 +106,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8170
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobonegov
 ---
@@ -120,7 +120,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8125
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobpaymentapi
 ---
@@ -134,7 +134,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8100
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobqueuemanager
 ---
@@ -148,7 +148,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8095
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobreferencing
 ---
@@ -162,7 +162,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8160
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobreporting
 ---
@@ -176,7 +176,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8110
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: boburm
 ---
@@ -190,7 +190,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8165
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobuserlimits
 ---
@@ -204,7 +204,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8084
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: novatrackapp
 ---
@@ -218,7 +218,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: novatracklogger
 ---
@@ -232,7 +232,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8081
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: novatrackurm
 ---
@@ -260,6 +260,6 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8115
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: bobmessaging
