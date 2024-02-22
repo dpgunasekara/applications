@@ -257,3 +257,16 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: novatrackauditservice-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: novatrackauditservice-log
+  resources:
+    requests:
+      storage: 5Gi
