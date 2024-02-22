@@ -246,7 +246,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 8080
-      targetPort: 3000
+      targetPort: 3006
   selector:
     app: bobr3portal
 ---
