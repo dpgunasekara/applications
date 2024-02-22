@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: novatrackKeycloak-config
+  name: novatrackkeycloak-config
 spec:
   capacity:
     storage: 5Gi
@@ -13,10 +13,10 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: novatrackKeycloak-config-01
+    volumeHandle: novatrackkeycloak-config-01
     volumeAttributes:
       resourceGroup: rg-dcrs-uat-01
-      shareName: novatrackKeycloak-config
+      shareName: novatrackkeycloak-config
     nodeStageSecretRef:
       name: n0vdcrsuat01
       namespace: default
@@ -35,7 +35,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: novatrackKeycloak-data
+  name: novatrackkeycloak-data
 spec:
   capacity:
     storage: 5Gi
@@ -45,10 +45,10 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: novatrackKeycloak-data-01
+    volumeHandle: novatrackkeycloak-data-01
     volumeAttributes:
       resourceGroup: rg-dcrs-uat-01
-      shareName: novatrackKeycloak-data
+      shareName: novatrackkeycloak-data
     nodeStageSecretRef:
       name: n0vdcrsuat02
       namespace: default
@@ -67,7 +67,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: novatrackKeycloak-log
+  name: novatrackkeycloak-log
 spec:
   capacity:
     storage: 5Gi
@@ -77,7 +77,7 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: novatrackKeycloak-log-01
+    volumeHandle: novatrackkeycloak-log-01
     volumeAttributes:
       resourceGroup: rg-dcrs-uat-01
       shareName: novatrackKeycloak-log
@@ -99,7 +99,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: disk.csi.azure.com
-  name: novatrackKeycloak-postgres-data-01
+  name: novatrackkeycloak-postgres-data-01
 spec:
   capacity:
     storage: 5Gi
