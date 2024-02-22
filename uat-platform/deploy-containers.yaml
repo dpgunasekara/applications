@@ -700,3 +700,40 @@ spec:
         - name: bobmessaging-log
           persistentVolumeClaim:
             claimName: bobmessaging-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackmessaging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackmessaging
+  template:
+    metadata:
+      labels:
+        app: novatrackmessaging
+    spec:
+      containers:
+        - name: novatrackmessaging
+          image: cregdcrsuat01.azurecr.io/novatrackmessaging:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackmessaging-config
+              mountPath: /app/config
+            - name: novatrackmessaging-data
+              mountPath: /app/data
+            - name: novatrackmessaging-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackmessaging-config
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-config
+        - name: novatrackmessaging-data
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-data
+        - name: novatrackmessaging-log
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-log
