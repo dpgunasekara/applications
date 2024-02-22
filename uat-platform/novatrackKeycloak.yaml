@@ -6,7 +6,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   selector:
-    app: novatrackKeycloak
+    app: novatrackkeycloak
   type: LoadBalancer
   ports:
   - port: 8085
@@ -15,18 +15,18 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: novatrackKeycloak
+  name: novatrackkeycloak
 spec:
   selector:
     matchLabels:
-      app: novatrackKeycloak
+      app: novatrackkeycloak
   template:
     metadata:
       labels:
-        app: novatrackKeycloak
+        app: novatrackkeycloak
     spec:
       containers:
-        - name: novatrackKeycloak
+        - name: novatrackkeycloak
           image: quay.io/keycloak/keycloak:21.0.2
           args: ["start-dev"]
           ports:
@@ -53,12 +53,12 @@ spec:
             - name: DB_PASSWORD
               value: postgres
           volumeMounts:
-            - name: novatrackKeycloak-config
+            - name: novatrackkeycloak-config
               mountPath: /tmp/realm.json
               subPath: realm.json
-            - name: novatrackKeycloak-data
+            - name: novatrackkeycloak-data
               mountPath: /data/keycloak
-            - name: novatrackKeycloak-log
+            - name: novatrackkeycloak-log
               mountPath: /opt/keycloak/logs
         - name: postgres
           image: postgres:latest
