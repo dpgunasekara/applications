@@ -4,7 +4,7 @@ metadata:
   name: bitnami-data
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: bitnami-data
   resources:
