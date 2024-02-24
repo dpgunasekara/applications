@@ -646,6 +646,12 @@ spec:
           image: cregdcrsuat01.azurecr.io/bobr3portal:latest
           ports:
             - containerPort: 3006
+          env:
+            - name: API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: bobr3portal-config
+                  key: BASE_URL            
           volumeMounts:
             - name: bobr3portal-config
               mountPath: /app/config
