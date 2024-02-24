@@ -54,9 +54,9 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobr3portal-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobr3portal-log --enabled-protocols SMB
 
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bitnami-config --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bitnami-data --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bitnami-log --enabled-protocols SMB
+#az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bitnami-config --enabled-protocols SMB
+#az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bitnami-data --enabled-protocols SMB
+#az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bitnami-log --enabled-protocols SMB
 
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name keycloak-config --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name keycloak-data --enabled-protocols SMB
