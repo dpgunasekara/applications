@@ -43,14 +43,6 @@ resources:
      type: github
      name: Novustech-SL/BOB-userlimits
      endpoint: Novustech-SL
-   - repository: novatrackLogger # Alias for the repository
-     type: github
-     name: Novustech-SL/NovatrackLogger
-     endpoint: Novustech-SL
-   - repository: novatrackURM # Alias for the repository
-     type: github
-     name: Novustech-SL/NovatrackURM
-     endpoint: Novustech-SL
    - repository: bobMposInterface # Alias for the repository
      type: github
      name: Novustech-SL/bob_mpos_interface
@@ -83,22 +75,31 @@ resources:
      type: github
      name: Novustech-SL/bob-urm
      endpoint: Novustech-SL
-   - repository: NovatrackApp # Alias for the repository
-     type: github
-     name: Novustech-SL/NovatrackApp
-     endpoint: Novustech-SL
    - repository: bobMessagingService # Alias for the repository
      type: github
      name: Novustech-SL/bob-MessagingService
      endpoint: Novustech-SL
-   - repository: novatrackMessagingService # Alias for the repository
-     type: github
-     name: Novustech-SL/NovatrackMessaging
-     endpoint: Novustech-SL
-   - repository: novatrackAuditService # Alias for the repository
-     type: github
-     name: Novustech-SL/NovatrackAudit
-     endpoint: Novustech-SL
+#   - repository: NovatrackApp # Alias for the repository
+#     type: github
+#     name: Novustech-SL/NovatrackApp
+#     endpoint: Novustech-SL
+#   - repository: novatrackMessagingService # Alias for the repository
+#     type: github
+#     name: Novustech-SL/NovatrackMessaging
+#     endpoint: Novustech-SL
+#   - repository: novatrackAuditService # Alias for the repository
+#     type: github
+#     name: Novustech-SL/NovatrackAudit
+#     endpoint: Novustech-SL
+#   - repository: novatrackLogger # Alias for the repository
+#     type: github
+#     name: Novustech-SL/NovatrackLogger
+#     endpoint: Novustech-SL
+#   - repository: novatrackURM # Alias for the repository
+#     type: github
+#     name: Novustech-SL/NovatrackURM
+#     endpoint: Novustech-SL
+
 
 
 variables:
@@ -285,56 +286,6 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobuserlimits'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_novatrackLogger
-    displayName: Build novatrackLogger
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: novatrackLogger
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'novatrack-logger/pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s novatrack-logger/settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'novatracklogger'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_novatrackURM
-    displayName: Build novatrackURM
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: novatrackURM
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'novatrackurm'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -531,31 +482,6 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_NovatrackApp
-    displayName: Build NovatrackApp
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: NovatrackApp
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'NovatrackApp/pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s NovatrackApp/settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'novatrackapp'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
   - job: Build_bobMessagingService
     displayName: Build bobMessagingService
     pool:
@@ -581,54 +507,129 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_novatrackMessagingService
-    displayName: Build novatrackMessagingService
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: novatrackMessagingService
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'novatrack-messaging/pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s novatrack-messaging/settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'novatrackmessaging'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_novatrackAuditService
-    displayName: Build novatrackAuditService
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: novatrackAuditService
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'novatrack-audit/pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s novatrack-audit/settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'novatrackauditservice'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
+#  - job: Build_NovatrackApp
+#    displayName: Build NovatrackApp
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: NovatrackApp
+#    - task: Maven@3
+#      inputs:
+#        mavenPomFile: 'NovatrackApp/pom.xml' # Adjust path if needed
+#        goals: 'clean package'
+#        options: '-Dmaven.test.skip=true -s NovatrackApp/settings.xml'
+#        publishJUnitResults: false
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: '1.17'
+#        mavenAuthenticateFeed: true
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'novatrackapp'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
+#  - job: Build_novatrackMessagingService
+#    displayName: Build novatrackMessagingService
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: novatrackMessagingService
+#    - task: Maven@3
+#      inputs:
+#        mavenPomFile: 'novatrack-messaging/pom.xml' # Adjust path if needed
+#        goals: 'clean package'
+#        options: '-Dmaven.test.skip=true -s novatrack-messaging/settings.xml'
+#        publishJUnitResults: false
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: '1.17'
+#        mavenAuthenticateFeed: true
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'novatrackmessaging'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
+#  - job: Build_novatrackAuditService
+#    displayName: Build novatrackAuditService
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: novatrackAuditService
+#    - task: Maven@3
+#      inputs:
+#        mavenPomFile: 'novatrack-audit/pom.xml' # Adjust path if needed
+#        goals: 'clean package'
+#        options: '-Dmaven.test.skip=true -s novatrack-audit/settings.xml'
+#        publishJUnitResults: false
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: '1.17'
+#        mavenAuthenticateFeed: true
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'novatrackauditservice'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
+#  - job: Build_novatrackLogger
+#    displayName: Build novatrackLogger
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: novatrackLogger
+#    - task: Maven@3
+#      inputs:
+#        mavenPomFile: 'novatrack-logger/pom.xml' # Adjust path if needed
+#        goals: 'clean package'
+#        options: '-Dmaven.test.skip=true -s novatrack-logger/settings.xml'
+#        publishJUnitResults: false
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: '1.17'
+#        mavenAuthenticateFeed: true
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'novatracklogger'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
+#  - job: Build_novatrackURM
+#    displayName: Build novatrackURM
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: novatrackURM
+#    - task: Maven@3
+#      inputs:
+#        mavenPomFile: 'pom.xml' # Adjust path if needed
+#        goals: 'clean package'
+#        options: '-Dmaven.test.skip=true -s settings.xml'
+#        publishJUnitResults: false
+#        javaHomeOption: 'JDKVersion'
+#        jdkVersionOption: '1.17'
+#        mavenAuthenticateFeed: true
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'novatrackurm'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
 
