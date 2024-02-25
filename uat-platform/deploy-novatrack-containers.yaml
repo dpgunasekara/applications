@@ -1,0 +1,184 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackapp
+  template:
+    metadata:
+      labels:
+        app: novatrackapp
+    spec:
+      containers:
+        - name: novatrackapp
+          image: cregdcrsuat01.azurecr.io/novatrackapp:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackapp-config
+              mountPath: /app/config
+            - name: novatrackapp-data
+              mountPath: /app/data
+            - name: novatrackapp-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackapp-config
+          persistentVolumeClaim:
+            claimName: novatrackapp-config
+        - name: novatrackapp-data
+          persistentVolumeClaim:
+            claimName: novatrackapp-data
+        - name: novatrackapp-log
+          persistentVolumeClaim:
+            claimName: novatrackapp-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatracklogger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatracklogger
+  template:
+    metadata:
+      labels:
+        app: novatracklogger
+    spec:
+      containers:
+        - name: novatracklogger
+          image: cregdcrsuat01.azurecr.io/novatracklogger:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatracklogger-config
+              mountPath: /app/config
+            - name: novatracklogger-data
+              mountPath: /app/data
+            - name: novatracklogger-log
+              mountPath: /app/log
+      volumes:
+        - name: novatracklogger-config
+          persistentVolumeClaim:
+            claimName: novatracklogger-config
+        - name: novatracklogger-data
+          persistentVolumeClaim:
+            claimName: novatracklogger-data
+        - name: novatracklogger-log
+          persistentVolumeClaim:
+            claimName: novatracklogger-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackurm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackurm
+  template:
+    metadata:
+      labels:
+        app: novatrackurm
+    spec:
+      containers:
+        - name: novatrackurm
+          image: cregdcrsuat01.azurecr.io/novatrackurm:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackurm-config
+              mountPath: /app/config
+            - name: novatrackurm-data
+              mountPath: /app/data
+            - name: novatrackurm-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackurm-config
+          persistentVolumeClaim:
+            claimName: novatrackurm-config
+        - name: novatrackurm-data
+          persistentVolumeClaim:
+            claimName: novatrackurm-data
+        - name: novatrackurm-log
+          persistentVolumeClaim:
+            claimName: novatrackurm-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackmessaging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackmessaging
+  template:
+    metadata:
+      labels:
+        app: novatrackmessaging
+    spec:
+      containers:
+        - name: novatrackmessaging
+          image: cregdcrsuat01.azurecr.io/novatrackmessaging:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackmessaging-config
+              mountPath: /app/config
+            - name: novatrackmessaging-data
+              mountPath: /app/data
+            - name: novatrackmessaging-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackmessaging-config
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-config
+        - name: novatrackmessaging-data
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-data
+        - name: novatrackmessaging-log
+          persistentVolumeClaim:
+            claimName: novatrackmessaging-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: novatrackauditservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: novatrackauditservice
+  template:
+    metadata:
+      labels:
+        app: novatrackauditservice
+    spec:
+      containers:
+        - name: novatrackauditservice
+          image: cregdcrsuat01.azurecr.io/novatrackauditservice:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: novatrackauditservice-config
+              mountPath: /app/config
+            - name: novatrackauditservice-data
+              mountPath: /app/data
+            - name: novatrackauditservice-log
+              mountPath: /app/log
+      volumes:
+        - name: novatrackauditservice-config
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-config
+        - name: novatrackauditservice-data
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-data
+        - name: novatrackauditservice-log
+          persistentVolumeClaim:
+            claimName: novatrackauditservice-log
