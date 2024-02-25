@@ -1,0 +1,597 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobagency
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobagency
+  template:
+    metadata:
+      labels:
+        app: bobagency
+    spec:
+      containers:
+        - name: bobagency
+          image: cregdcrsuat01.azurecr.io/bobagency:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobagency-config
+              mountPath: /app/config
+            - name: bobagency-data
+              mountPath: /app/data
+            - name: bobagency-log
+              mountPath: /app/log
+      volumes:
+        - name: bobagency-config
+          persistentVolumeClaim:
+            claimName: bobagency-config
+        - name: bobagency-data
+          persistentVolumeClaim:
+            claimName: bobagency-data
+        - name: bobagency-log
+          persistentVolumeClaim:
+            claimName: bobagency-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobauditservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobauditservice
+  template:
+    metadata:
+      labels:
+        app: bobauditservice
+    spec:
+      containers:
+        - name: bobauditservice
+          image: cregdcrsuat01.azurecr.io/bobauditservice:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobauditservice-config
+              mountPath: /app/config
+            - name: bobauditservice-data
+              mountPath: /app/data
+            - name: bobauditservice-log
+              mountPath: /app/log
+      volumes:
+        - name: bobauditservice-config
+          persistentVolumeClaim:
+            claimName: bobauditservice-config
+        - name: bobauditservice-data
+          persistentVolumeClaim:
+            claimName: bobauditservice-data
+        - name: bobauditservice-log
+          persistentVolumeClaim:
+            claimName: bobauditservice-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobburs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobburs
+  template:
+    metadata:
+      labels:
+        app: bobburs
+    spec:
+      containers:
+        - name: bobburs
+          image: cregdcrsuat01.azurecr.io/bobburs:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobburs-config
+              mountPath: /app/config
+            - name: bobburs-data
+              mountPath: /app/data
+            - name: bobburs-log
+              mountPath: /app/log
+      volumes:
+        - name: bobburs-config
+          persistentVolumeClaim:
+            claimName: bobburs-config
+        - name: bobburs-data
+          persistentVolumeClaim:
+            claimName: bobburs-data
+        - name: bobburs-log
+          persistentVolumeClaim:
+            claimName: bobburs-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobfileprocessing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobfileprocessing
+  template:
+    metadata:
+      labels:
+        app: bobfileprocessing
+    spec:
+      containers:
+        - name: bobfileprocessing
+          image: cregdcrsuat01.azurecr.io/bobfileprocessing:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobfileprocessing-config
+              mountPath: /app/config
+            - name: bobfileprocessing-data
+              mountPath: /app/data
+            - name: bobfileprocessing-log
+              mountPath: /app/log
+      volumes:
+        - name: bobfileprocessing-config
+          persistentVolumeClaim:
+            claimName: bobfileprocessing-config
+        - name: bobfileprocessing-data
+          persistentVolumeClaim:
+            claimName: bobfileprocessing-data
+        - name: bobfileprocessing-log
+          persistentVolumeClaim:
+            claimName: bobfileprocessing-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: boblogger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boblogger
+  template:
+    metadata:
+      labels:
+        app: boblogger
+    spec:
+      containers:
+        - name: boblogger
+          image: cregdcrsuat01.azurecr.io/boblogger:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: boblogger-config
+              mountPath: /app/config
+            - name: boblogger-data
+              mountPath: /app/data
+            - name: boblogger-log
+              mountPath: /app/log
+      volumes:
+        - name: boblogger-config
+          persistentVolumeClaim:
+            claimName: boblogger-config
+        - name: boblogger-data
+          persistentVolumeClaim:
+            claimName: boblogger-data
+        - name: boblogger-log
+          persistentVolumeClaim:
+            claimName: boblogger-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobmposinterface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobmposinterface
+  template:
+    metadata:
+      labels:
+        app: bobmposinterface
+    spec:
+      containers:
+        - name: bobmposinterface
+          image: cregdcrsuat01.azurecr.io/bobmposinterface:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobmposinterface-config
+              mountPath: /app/config
+            - name: bobmposinterface-data
+              mountPath: /app/data
+            - name: bobmposinterface-log
+              mountPath: /app/log
+      volumes:
+        - name: bobmposinterface-config
+          persistentVolumeClaim:
+            claimName: bobmposinterface-config
+        - name: bobmposinterface-data
+          persistentVolumeClaim:
+            claimName: bobmposinterface-data
+        - name: bobmposinterface-log
+          persistentVolumeClaim:
+            claimName: bobmposinterface-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: boboag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boboag
+  template:
+    metadata:
+      labels:
+        app: boboag
+    spec:
+      containers:
+        - name: boboag
+          image: cregdcrsuat01.azurecr.io/boboag:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: boboag-config
+              mountPath: /app/config
+            - name: boboag-data
+              mountPath: /app/data
+            - name: boboag-log
+              mountPath: /app/log
+      volumes:
+        - name: boboag-config
+          persistentVolumeClaim:
+            claimName: boboag-config
+        - name: boboag-data
+          persistentVolumeClaim:
+            claimName: boboag-data
+        - name: boboag-log
+          persistentVolumeClaim:
+            claimName: boboag-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobonegov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobonegov
+  template:
+    metadata:
+      labels:
+        app: bobonegov
+    spec:
+      containers:
+        - name: bobonegov
+          image: cregdcrsuat01.azurecr.io/bobonegov:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobonegov-config
+              mountPath: /app/config
+            - name: bobonegov-data
+              mountPath: /app/data
+            - name: bobonegov-log
+              mountPath: /app/log
+      volumes:
+        - name: bobonegov-config
+          persistentVolumeClaim:
+            claimName: bobonegov-config
+        - name: bobonegov-data
+          persistentVolumeClaim:
+            claimName: bobonegov-data
+        - name: bobonegov-log
+          persistentVolumeClaim:
+            claimName: bobonegov-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobpaymentapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobpaymentapi
+  template:
+    metadata:
+      labels:
+        app: bobpaymentapi
+    spec:
+      containers:
+        - name: bobpaymentapi
+          image: cregdcrsuat01.azurecr.io/bobpaymentapi:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobpaymentapi-config
+              mountPath: /app/config
+            - name: bobpaymentapi-data
+              mountPath: /app/data
+            - name: bobpaymentapi-log
+              mountPath: /app/log
+      volumes:
+        - name: bobpaymentapi-config
+          persistentVolumeClaim:
+            claimName: bobpaymentapi-config
+        - name: bobpaymentapi-data
+          persistentVolumeClaim:
+            claimName: bobpaymentapi-data
+        - name: bobpaymentapi-log
+          persistentVolumeClaim:
+            claimName: bobpaymentapi-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobqueuemanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobqueuemanager
+  template:
+    metadata:
+      labels:
+        app: bobqueuemanager
+    spec:
+      containers:
+        - name: bobqueuemanager
+          image: cregdcrsuat01.azurecr.io/bobqueuemanager:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobqueuemanager-config
+              mountPath: /app/config
+            - name: bobqueuemanager-data
+              mountPath: /app/data
+            - name: bobqueuemanager-log
+              mountPath: /app/log
+      volumes:
+        - name: bobqueuemanager-config
+          persistentVolumeClaim:
+            claimName: bobqueuemanager-config
+        - name: bobqueuemanager-data
+          persistentVolumeClaim:
+            claimName: bobqueuemanager-data
+        - name: bobqueuemanager-log
+          persistentVolumeClaim:
+            claimName: bobqueuemanager-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobreferencing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobreferencing
+  template:
+    metadata:
+      labels:
+        app: bobreferencing
+    spec:
+      containers:
+        - name: bobreferencing
+          image: cregdcrsuat01.azurecr.io/bobreferencing:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobreferencing-config
+              mountPath: /app/config
+            - name: bobreferencing-data
+              mountPath: /app/data
+            - name: bobreferencing-log
+              mountPath: /app/log
+      volumes:
+        - name: bobreferencing-config
+          persistentVolumeClaim:
+            claimName: bobreferencing-config
+        - name: bobreferencing-data
+          persistentVolumeClaim:
+            claimName: bobreferencing-data
+        - name: bobreferencing-log
+          persistentVolumeClaim:
+            claimName: bobreferencing-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobreporting
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobreporting
+  template:
+    metadata:
+      labels:
+        app: bobreporting
+    spec:
+      containers:
+        - name: bobreporting
+          image: cregdcrsuat01.azurecr.io/bobreporting:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobreporting-config
+              mountPath: /app/config
+            - name: bobreporting-data
+              mountPath: /app/data
+            - name: bobreporting-log
+              mountPath: /app/log
+      volumes:
+        - name: bobreporting-config
+          persistentVolumeClaim:
+            claimName: bobreporting-config
+        - name: bobreporting-data
+          persistentVolumeClaim:
+            claimName: bobreporting-data
+        - name: bobreporting-log
+          persistentVolumeClaim:
+            claimName: bobreporting-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: boburm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boburm
+  template:
+    metadata:
+      labels:
+        app: boburm
+    spec:
+      containers:
+        - name: boburm
+          image: cregdcrsuat01.azurecr.io/boburm:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: boburm-config
+              mountPath: /app/config
+            - name: boburm-data
+              mountPath: /app/data
+            - name: boburm-log
+              mountPath: /app/log
+      volumes:
+        - name: boburm-config
+          persistentVolumeClaim:
+            claimName: boburm-config
+        - name: boburm-data
+          persistentVolumeClaim:
+            claimName: boburm-data
+        - name: boburm-log
+          persistentVolumeClaim:
+            claimName: boburm-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobuserlimits
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobuserlimits
+  template:
+    metadata:
+      labels:
+        app: bobuserlimits
+    spec:
+      containers:
+        - name: bobuserlimits
+          image: cregdcrsuat01.azurecr.io/bobuserlimits:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobuserlimits-config
+              mountPath: /app/config
+            - name: bobuserlimits-data
+              mountPath: /app/data
+            - name: bobuserlimits-log
+              mountPath: /app/log
+      volumes:
+        - name: bobuserlimits-config
+          persistentVolumeClaim:
+            claimName: bobuserlimits-config
+        - name: bobuserlimits-data
+          persistentVolumeClaim:
+            claimName: bobuserlimits-data
+        - name: bobuserlimits-log
+          persistentVolumeClaim:
+            claimName: bobuserlimits-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobr3portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobr3portal
+  template:
+    metadata:
+      labels:
+        app: bobr3portal
+    spec:
+      containers:
+        - name: bobr3portal
+          image: cregdcrsuat01.azurecr.io/bobr3portal:latest
+          ports:
+            - containerPort: 3006
+          env:
+            - name: API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: bobr3portal-config
+                  key: BASE_URL            
+          volumeMounts:
+            - name: bobr3portal-config
+              mountPath: /app/config
+            - name: bobr3portal-data
+              mountPath: /app/data
+            - name: bobr3portal-log
+              mountPath: /app/log
+      volumes:
+        - name: bobr3portal-config
+          persistentVolumeClaim:
+            claimName: bobr3portal-config
+        - name: bobr3portal-data
+          persistentVolumeClaim:
+            claimName: bobr3portal-data
+        - name: bobr3portal-log
+          persistentVolumeClaim:
+            claimName: bobr3portal-log
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobmessaging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobmessaging
+  template:
+    metadata:
+      labels:
+        app: bobmessaging
+    spec:
+      containers:
+        - name: bobmessaging
+          image: cregdcrsuat01.azurecr.io/bobmessaging:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: bobmessaging-config
+              mountPath: /app/config
+            - name: bobmessaging-data
+              mountPath: /app/data
+            - name: bobmessaging-log
+              mountPath: /app/log
+      volumes:
+        - name: bobmessaging-config
+          persistentVolumeClaim:
+            claimName: bobmessaging-config
+        - name: bobmessaging-data
+          persistentVolumeClaim:
+            claimName: bobmessaging-data
+        - name: bobmessaging-log
+          persistentVolumeClaim:
+            claimName: bobmessaging-log
