@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackapp-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8084
+      targetPort: 8080
+  selector:
+    app: novatrackapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatracklogger-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: novatracklogger
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackurm-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081
+      targetPort: 8080
+  selector:
+    app: novatrackurm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackmessaging-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8082
+      targetPort: 8080
+  selector:
+    app: novatrackmessaging
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novatrackauditservice-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8083
+      targetPort: 8080
+  selector:
+    app: novatrackauditservice
