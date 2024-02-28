@@ -91,7 +91,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8155
+    - port: 8135
       targetPort: 8080
   selector:
     app: boboag
