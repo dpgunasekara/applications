@@ -5,79 +5,75 @@ metadata:
   namespace: default
 data:
   nginx.conf: |
-http {
-include /etc/nginx/mime.types;
-default_type application/octet-stream;
-access_log /var/log/nginx/access.log;
-server {
-    listen 8080;
-    server_name nginx-api-services;
-    location /QR/ {
+    server {
+      listen 8080;
+      server_name nginx-api-services;
+      location /QR/ {
                   proxy_pass http://bobdevapp.novussl.com:8090/QR/;  
                   add_header 'Access-Control-Allow-Methods' 'GET, POST';
                   add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                   add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /authentication/ {
+      location /authentication/ {
                   proxy_pass http://boburm-service:8110/authentication/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /permission/ {
+      location /permission/ {
                   proxy_pass http://boburm-service:8110/permission/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /user/ {
+      location /user/ {
                   proxy_pass http://boburm-service:8110/user/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /role/ {
+      location /role/ {
                   proxy_pass http://boburm-service:8110/role/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /queue/ {
+      location /queue/ {
                   proxy_pass http://bobqueuemanager-service:8100/queue/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /location/ {
+      location /location/ {
                   proxy_pass http://bobqueuemanager-service:8100/location/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /service/ {
+      location /service/ {
                   proxy_pass http://bobqueuemanager-service:8100/service/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /terminal/ {
+      location /terminal/ {
                   proxy_pass http://bobqueuemanager-service:8100/terminal/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    location /bob/ {
+      location /bob/ {
                   proxy_pass http://bobagency-service:8130/bob/;
                     add_header 'Access-Control-Allow-Methods' 'GET, POST';
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-     location /master/ {
+      location /master/ {
                    proxy_pass http://bobagency-service:8130/master/;
                      add_header 'Access-Control-Allow-Methods' 'GET, POST';
                      add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                      add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-       }
+      }
       location /oag/ {
                    proxy_pass http://boboag-service:8135/oag/;
                      add_header 'Access-Control-Allow-Methods' 'GET, POST';
@@ -195,5 +191,4 @@ server {
                     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
                     add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
       }
-    }
-}
+   }
