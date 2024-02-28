@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   nginx.conf: |
-http {
+  http {
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
     access_log /var/log/nginx/access.log;
@@ -200,5 +200,4 @@ http {
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
         }
     }
- }
-
+  }
