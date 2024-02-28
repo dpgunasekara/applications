@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: bobr3portal-config
 data:
-  BASE_URL: "http://bobqueuemanager-service:8100/"
+  BASE_URL: "http://bobagency-service:8130/"
