@@ -13,7 +13,7 @@ spec:
     app: nginx-api-gateway
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: nginx-api-gateway
   labels:
