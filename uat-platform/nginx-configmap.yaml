@@ -200,4 +200,4 @@ http {
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
         }
     }
-}
+    }
