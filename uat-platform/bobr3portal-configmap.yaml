@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: bobr3portal-config
 data:
-  BASE_URL: "http://nginx-api-servic:8080/"
+  BASE_URL: "http://nginx-api-service.novusware.com.sg:8080/"
