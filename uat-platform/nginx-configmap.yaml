@@ -31,98 +31,85 @@ data:
         }
         location /permission/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/permission/;
         }
         location /user/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/user/;
         }
         location /role/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/role/;
         }
         location /queue/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobqueuemanager-service:8100/queue/;
         }
         location /location/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobqueuemanager-service:8100/location/;
         }
         location /service/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobqueuemanager-service:8100/service/;
         }
         location /terminal/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobqueuemanager-service:8100/terminal/;
         }
         location /bob/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobagency-service:8130/bob/;
         }
         location /master/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*';
             proxy_pass http://bobagency-service:8130/master/;
         }
         location /oag/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boboag-service:8135/oag/;
         }
         location /ps/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobpaymentapi-service:8125/ps/;
         }
         location /br/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobburs-service:8145/br/; 
         }
         location /mi/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobmposinterface-service:8155/mi/;
         }
         location /api/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
             proxy_pass http://bobburs-service:8145/api/;
         }
@@ -135,44 +122,38 @@ data:
         }
         location /wsTest/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobqueuemanager-service:8100/wsTest/;
         }
         location /limits/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobuserlimits-service:8165/limits/;
         }
         location /rp/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobreporting-service:8160/rp/;
         }
         location /ogo/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://bobonegov-service:8170/ogo/;
         }
         location /dashboard/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/dashboard/;
         }
         location /idType/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/idType/;
         }
         location /inAppNotification/ {
@@ -184,9 +165,8 @@ data:
         }
         location /makerChecker/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/makerChecker/;
         }
         location /urmNotification/ {
@@ -198,23 +178,20 @@ data:
         }
         location /limits/makerChecker/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/limits/makerChecker/;
         }
         location /profile/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/profile/;
         }
         location /notification/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
-            add_header 'Access-Control-Allow-Headers' 'InstnID,ChannelID,DeviceID,DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-SType,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
-            add_header 'Access-Control-Allow-Origin' '*' always;
             proxy_pass http://boburm-service:8110/notification/;
         }
       }
