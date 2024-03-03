@@ -8,9 +8,10 @@ spec:
   selector:
     app: keycloak
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.26
   ports:
   - port: 8085
-    targetPort: 8080
+    targetPort: 8443
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -30,7 +31,7 @@ spec:
           image: quay.io/keycloak/keycloak:21.0.2
           args: ["start-dev"]
           ports:
-            - containerPort: 8080
+            - containerPort: 8443
           env:
             - name: KEYCLOAK_ADMIN
               value: admin
@@ -40,12 +41,16 @@ spec:
               value: admin
             - name: KEYCLOAK_PASSWORD
               value: admin
-            - name: KEYCLOAK_IMPORT
-              value: /tmp/realm.json
+            - name: KC_HOSTNAME
+              value: keycloak.novusware.com.sg
+            - name: KC_HTTPS_CERTIFICATE_FILE
+              value: /etc/x509/https/tls.crt
+            - name: KC_HTTPS_CERTIFICATE_KEY_FILE
+              value: /etc/x509/https/tls.key
             - name: DB_VENDOR
               value: postgres
             - name: DB_ADDR
-              value: localhost:5432
+              value: postgres:5432
             - name: DB_DATABASE
               value: keycloak
             - name: DB_USER
@@ -54,12 +59,17 @@ spec:
               value: postgres
           volumeMounts:
             - name: keycloak-config
-              mountPath: /tmp/realm.json
-              subPath: realm.json
+              mountPath: /opt/keycloak/conf
             - name: keycloak-data
-              mountPath: /data/keycloak
+              mountPath: /opt/keycloak/data/h2
             - name: keycloak-log
               mountPath: /opt/keycloak/logs
+            - name: keycloak-config
+              mountPath: /etc/x509/https/tls.crt
+              subPath: fullchain.pem
+            - name: keycloak-config
+              mountPath: /etc/x509/https/tls.key
+              subPath: privkey.pem
         - name: postgres
           image: postgres:latest
           ports:

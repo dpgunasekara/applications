@@ -6,9 +6,10 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.24
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 8443
+    targetPort: 8443
   selector:
     app: nginx-api-gateway
 ---
@@ -32,12 +33,22 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8443
         volumeMounts:
         - name: nginx-config-volume
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
+        - name: nginx-api-gateway-data
+          mountPath: /etc/nginx/certs
+        - name: nginx-api-gateway-content
+          mountPath: /etc/nginx/html
       volumes:
       - name: nginx-config-volume
         configMap:
           name: nginx-config
+      - name: nginx-api-gateway-data
+        persistentVolumeClaim:
+          claimName: nginx-api-gateway-data
+      - name: nginx-api-gateway-content
+        persistentVolumeClaim:
+          claimName: nginx-api-gateway-content

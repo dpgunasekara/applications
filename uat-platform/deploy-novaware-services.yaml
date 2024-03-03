@@ -6,6 +6,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.27
   ports:
     - port: 8130
       targetPort: 8080
@@ -20,6 +21,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.33
   ports:
     - port: 8120
       targetPort: 8080
@@ -34,6 +36,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.12
   ports:
     - port: 8145
       targetPort: 8080
@@ -48,6 +51,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.13
   ports:
     - port: 8140
       targetPort: 8080
@@ -62,6 +66,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.14
   ports:
     - port: 80
       targetPort: 8080
@@ -76,6 +81,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.15
   ports:
     - port: 8155
       targetPort: 8080
@@ -90,6 +96,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.16
   ports:
     - port: 8135
       targetPort: 8080
@@ -104,6 +111,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.17
   ports:
     - port: 8170
       targetPort: 8080
@@ -118,6 +126,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.18
   ports:
     - port: 8125
       targetPort: 8080
@@ -132,6 +141,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.19
   ports:
     - port: 8100
       targetPort: 8080
@@ -146,6 +156,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.20
   ports:
     - port: 8095
       targetPort: 8080
@@ -160,6 +171,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.21
   ports:
     - port: 8160
       targetPort: 8080
@@ -174,6 +186,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.30
   ports:
     - port: 8110
       targetPort: 8080
@@ -188,6 +201,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.31
   ports:
     - port: 8165
       targetPort: 8080
@@ -197,11 +211,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bobr3portal-service
+  name: bobr3portal
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.25
   ports:
     - port: 3006
       targetPort: 3006
@@ -216,6 +231,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.210.5.28
   ports:
     - port: 8115
       targetPort: 8080
