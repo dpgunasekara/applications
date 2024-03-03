@@ -727,8 +727,6 @@ spec:
               value: "/app/config/certs/bobr3portal-fullchain.pem"
             - name: SSL_KEY_FILE
               value: "/app/config/certs/bobr3portal-privkey.pem"
-            - name: HTTPS
-              value: "true"
             - name: API_BASE_URL
               valueFrom:
                 configMapKeyRef:
