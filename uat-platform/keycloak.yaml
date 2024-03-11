@@ -28,10 +28,8 @@ spec:
     spec:
       containers:
         - name: keycloak
-          image: quay.io/keycloak/keycloak:21.0.2
-          args: ["start-dev"]
-          ports:
-            - containerPort: 8443
+          image: quay.io/keycloak/keycloak:latest
+          args: ["start"]
           env:
             - name: KEYCLOAK_ADMIN
               value: admin
@@ -47,21 +45,19 @@ spec:
               value: /etc/x509/https/tls.crt
             - name: KC_HTTPS_CERTIFICATE_KEY_FILE
               value: /etc/x509/https/tls.key
-            - name: DB_VENDOR
+            - name: KC_HOSTNAME_STRICT_HTTPS
+              value: "false"
+            - name: KC_DB
               value: postgres
-            - name: DB_ADDR
-              value: postgres:5432
-            - name: DB_DATABASE
-              value: keycloak
-            - name: DB_USER
-              value: postgres
-            - name: DB_PASSWORD
-              value: postgres
+            - name: KC_DB_URL
+              value: "jdbc:postgresql://postgres.novusware.com.sg:5432/keycloak?user=postgres&password=postgres"
+          ports:
+            - containerPort: 8443
           volumeMounts:
             - name: keycloak-config
               mountPath: /opt/keycloak/conf
-            - name: keycloak-data
-              mountPath: /opt/keycloak/data/h2
+#            - name: keycloak-data
+#              mountPath: /opt/keycloak/data/h2
             - name: keycloak-log
               mountPath: /opt/keycloak/logs
             - name: keycloak-config
@@ -70,22 +66,6 @@ spec:
             - name: keycloak-config
               mountPath: /etc/x509/https/tls.key
               subPath: privkey.pem
-        - name: postgres
-          image: postgres:latest
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_PASSWORD
-              value: postgres
-            - name: POSTGRES_DB
-              value: keycloak
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
-          volumeMounts:
-            - name: keycloak-postgres-data-01
-              mountPath: /var/lib/postgresql/data
       volumes:
         - name: keycloak-config
           persistentVolumeClaim:
@@ -96,6 +76,3 @@ spec:
         - name: keycloak-log
           persistentVolumeClaim:
             claimName: keycloak-log
-        - name: keycloak-postgres-data-01
-          persistentVolumeClaim:
-            claimName: keycloak-postgres-data-01
