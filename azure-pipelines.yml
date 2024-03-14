@@ -79,6 +79,10 @@ resources:
      type: github
      name: Novustech-SL/bob-MessagingService
      endpoint: Novustech-SL
+   - repository: switch-interface # Alias for the repository
+     type: github
+     name: Novustech-SL/switch-interface
+     endpoint: Novustech-SL
 #   - repository: NovatrackApp # Alias for the repository
 #     type: github
 #     name: Novustech-SL/NovatrackApp
@@ -105,7 +109,6 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'a4b4f95a-b9b0-4bb0-8dd8-f02126a20f3a'
-  imageRepository: 'bobagency'
   containerRegistry: 'cregdcrsuat01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'  
@@ -502,6 +505,31 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobmessaging'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_switch_interface
+    displayName: Build bobSwitchInterface
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: switch-interface
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'switchinterfacerpm/pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s switchinterfacerpm/settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobswitchinterface'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
