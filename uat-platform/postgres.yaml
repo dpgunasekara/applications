@@ -41,9 +41,53 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:
+            - name: keycloak-data
+              mountPath: /var/backups
             - name: keycloak-postgres-data-01
               mountPath: /var/lib/postgresql/data
       volumes:
+        - name: keycloak-data
+          persistentVolumeClaim:
+            claimName: keycloak-data
         - name: keycloak-postgres-data-01
           persistentVolumeClaim:
             claimName: keycloak-postgres-data-01
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pgpass
+data:
+#created with: echo "postgres.novusware.com.sg:5432:keycloak:postgres:postgres" | base64
+  pgpass: cG9zdGdyZXMubm92dXN3YXJlLmNvbS5zZzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+spec:
+  # Backup the database every day at 2AM
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgres-backup
+            image: postgres:latest
+            command: ["/bin/sh"]
+            args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.novusware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+            env:
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: pgpass
+                  key: pgpass
+            volumeMounts:
+              - name: keycloak-data
+                mountPath: /var/backups
+          restartPolicy: Never
+          volumes:
+            - name: keycloak-data
+              persistentVolumeClaim:
+                claimName: keycloak-data

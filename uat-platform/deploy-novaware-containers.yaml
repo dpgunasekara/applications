@@ -809,4 +809,54 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobmessaging-keystore
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobswitchinterface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobswitchinterface
+  template:
+    metadata:
+      labels:
+        app: bobswitchinterface
+    spec:
+      containers:
+        - name: bobswitchinterface
+          image: cregdcrsuat01.azurecr.io/bobswitchinterface:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+          volumeMounts:
+            - name: bobswitchinterface-config
+              mountPath: /app/config
+            - name: bobswitchinterface-data
+              mountPath: /app/data
+            - name: bobswitchinterface-log
+              mountPath: /app/log
+            - name: keystore-volume
+              mountPath: "/etc/ssl/certs/bobswitchinterface-service.p12"
+              subPath: "bobswitchinterface-service.p12"
+      volumes:
+        - name: bobswitchinterface-config
+          persistentVolumeClaim:
+            claimName: bobswitchinterface-config
+        - name: bobswitchinterface-data
+          persistentVolumeClaim:
+            claimName: bobswitchinterface-data
+        - name: bobswitchinterface-log
+          persistentVolumeClaim:
+            claimName: bobswitchinterface-log
+        - name: keystore-volume
+          secret:
+            secretName: bobswitchinterface-keystore
+
 
