@@ -248,7 +248,11 @@ spec:
   type: LoadBalancer
   loadBalancerIP: 10.210.5.36
   ports:
-    - port: 8175
+    - name: service
+      port: 8175
       targetPort: 8080
+    - name: listener
+      port: 5555
+      targetPort: 5555
   selector:
     app: bobswitchinterface
