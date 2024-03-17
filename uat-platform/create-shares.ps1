@@ -86,3 +86,6 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobswitchinterface-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobswitchinterface-log --enabled-protocols SMB
 
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobsignage-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobsignage-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobsignage-log --enabled-protocols SMB
