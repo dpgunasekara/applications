@@ -858,5 +858,85 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobswitchinterface-keystore
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobsignage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobsignage
+  template:
+    metadata:
+      labels:
+        app: bobsignage
+    spec:
+      containers:
+        - name: bobsignage
+          image: cregdcrsuat01.azurecr.io/bobsignage:latest
+          ports:
+            - containerPort: 3008
+          env:
+            - name: REACT_APP_BASE_URL
+              value: "https://bobqueuemanager-service.novusware.com.sg:8100/"
+            - name: REACT_APP_LOCATION_URL
+              value: "location/getLocations"
+            - name: REACT_APP_DEVICE_ID
+              value: "03"
+            - name: REACT_APP_CHANNEL_ID
+              value: "01"
+            - name: REACT_APP_INSTN_ID
+              value: "1"
+            - name: REACT_APP_AGENCY_CODE
+              value: "BOB"
+            - name: REACT_APP_DEFAULT_LOCATION_CODE
+              value: "GB"
+            - name: REACT_APP_TOPIC 
+              value: "/topic/receiveSignageAppNotification/"
+            - name: REACT_APP_BASE_SIGNAGE_URL
+              value: "wsSignageNotification"
+            - name: REACT_APP_RESET_LATEST_CHANGED_HIGHLIGHT_TIMEOUT
+              value: "60000"
+            - name: REACT_APP_DEFAULT_LOCATION
+              value: "Gaborone"
+            - name: REACT_APP_DEFAULT_LANGUAGE
+              value: "en"
+            - name: REACT_APP_SUPPORTED_LANGUAGES 
+              value: "'en','tn'"
+            - name: REACT_APP_MAP_KEY
+              value: "false"
+            - name: FAST_REFRESH
+              value: 
+            - name: ESLINT_NO_DEV_ERRORS
+              value: "true"
+            - name: DISABLE_ESLINT_PLUGIN
+              value: "true"
+            - name: PORT
+              value: "3008"
+            - name: HTTPS
+              value: "true"
+            - name: SSL_CRT_FILE
+              value: "/app/config/certs/bobsignage-fullchain.pem"
+            - name: SSL_KEY_FILE
+              value: "/app/config/certs/bobsignage-privkey.pem"
+          volumeMounts:
+            - name: bobsignage-config
+              mountPath: /app/config
+            - name: bobsignage-data
+              mountPath: /app/data
+            - name: bobsignage-log
+              mountPath: /app/log
+      volumes:
+        - name: bobsignage-config
+          persistentVolumeClaim:
+            claimName: bobsignage-config
+        - name: bobsignage-data
+          persistentVolumeClaim:
+            claimName: bobsignage-data
+        - name: bobsignage-log
+          persistentVolumeClaim:
+            claimName: bobsignage-log
 
 

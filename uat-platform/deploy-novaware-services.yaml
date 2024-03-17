@@ -256,3 +256,18 @@ spec:
       targetPort: 5555
   selector:
     app: bobswitchinterface
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bobsignage
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.210.5.37
+  ports:
+    - port: 3008
+      targetPort: 3008
+  selector:
+    app: bobsignage
