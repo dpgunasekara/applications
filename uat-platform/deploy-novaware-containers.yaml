@@ -113,7 +113,7 @@ spec:
     spec:
       containers:
         - name: bobburs
-          image: cregdcrsuat01.azurecr.io/bobburs:latest
+          image: cregdcrsuat01.azurecr.io/bobburs:465
           ports:
             - containerPort: 8080
           env:
