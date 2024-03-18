@@ -67,6 +67,10 @@ data:
             add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
             proxy_pass https://boburm-service.novusware.com.sg:8110/urmNotification;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
         }
         location /limits/makerChecker/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
@@ -115,6 +119,10 @@ data:
             add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
             proxy_pass https://bobqueuemanager-service.novusware.com.sg:8100/wsSignageNotification/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
         }
         location /wsTest/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
@@ -139,6 +147,20 @@ data:
             add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
             proxy_pass https://bobagency-service.novusware.com.sg:8130/inAppNotification;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
+        }
+        location /bobNotification/ {
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+            proxy_pass https://bobagency-service.novusware.com.sg:8130/bobNotification;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
         }
         location /oag/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';

@@ -688,82 +688,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: bobr3portal
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: bobr3portal
-  template:
-    metadata:
-      labels:
-        app: bobr3portal
-    spec:
-      containers:
-        - name: bobr3portal
-          image: cregdcrsuat01.azurecr.io/bobr3portal:latest
-          ports:
-            - containerPort: 3006
-          env:
-            - name: REACT_APP_BOB_NOTIFICATION_WEB_SOCKET_URL
-              value: https://bobagency-service.novusware.com.sg:8130/bobNotification
-            - name: REACT_APP_URM_NOTIFICATION_WEB_SOCKET_URL
-              value: https://boburm-service.novusware.com.sg:8110/urmNotification
-            - name: REACT_APP_QUEUE_NOTIFICATION_TEST_WEB_SOCKET_URL
-              value: https://bobqueuemanager-service.novusware.com.sg:8100/wsSignageNotification
-            - name: REACT_APP_MAP_KEY
-              value: "false"
-            - name: FAST_REFRESH
-              value: 
-            - name: ESLINT_NO_DEV_ERRORS
-              value: "true"
-            - name: DISABLE_ESLINT_PLUGIN
-              value: "true"
-            - name: PORT
-              value: "3006"
-            - name: HTTPS
-              value: "true"
-            - name: SSL_CRT_FILE
-              value: "/app/config/certs/bobr3portal-fullchain.pem"
-            - name: SSL_KEY_FILE
-              value: "/app/config/certs/bobr3portal-privkey.pem"
-            - name: API_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: bobr3portal-config
-                  key: BASE_URL
-            - name: KEY_STORE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: ssl-keystore-secret
-                  key: key-store-password
-          volumeMounts:
-            - name: bobr3portal-config
-              mountPath: /app/config
-            - name: bobr3portal-data
-              mountPath: /app/data
-            - name: bobr3portal-log
-              mountPath: /app/log
-            - name: keystore-volume
-              mountPath: "/etc/ssl/certs/bobr3portal.p12"
-              subPath: "bobr3portal.p12"
-      volumes:
-        - name: bobr3portal-config
-          persistentVolumeClaim:
-            claimName: bobr3portal-config
-        - name: bobr3portal-data
-          persistentVolumeClaim:
-            claimName: bobr3portal-data
-        - name: bobr3portal-log
-          persistentVolumeClaim:
-            claimName: bobr3portal-log
-        - name: keystore-volume
-          secret:
-            secretName: bobr3portal-keystore
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
   name: bobmessaging
 spec:
   replicas: 1
@@ -880,7 +804,8 @@ spec:
             - containerPort: 3008
           env:
             - name: REACT_APP_BASE_URL
-              value: "https://bobqueuemanager-service.novusware.com.sg:8100/"
+              #value: "https://bobqueuemanager-service.novusware.com.sg:8100/"
+              value: "https://nginx-api-service.novusware.com.sg:8443/"
             - name: REACT_APP_LOCATION_URL
               value: "location/getLocations"
             - name: REACT_APP_DEVICE_ID
@@ -904,7 +829,7 @@ spec:
             - name: REACT_APP_DEFAULT_LANGUAGE
               value: "en"
             - name: REACT_APP_SUPPORTED_LANGUAGES 
-              value: "'en','tn'"
+              value: "en,tn"
             - name: REACT_APP_MAP_KEY
               value: "false"
             - name: FAST_REFRESH
@@ -938,5 +863,66 @@ spec:
         - name: bobsignage-log
           persistentVolumeClaim:
             claimName: bobsignage-log
-
-
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bobr3portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobr3portal
+  template:
+    metadata:
+      labels:
+        app: bobr3portal
+    spec:
+      containers:
+        - name: bobr3portal
+          image: cregdcrsuat01.azurecr.io/bobr3portal:latest
+          ports:
+            - containerPort: 3006
+          env:
+            - name: REACT_APP_BOB_NOTIFICATION_WEB_SOCKET_URL
+              #value: https://bobagency-service.novusware.com.sg:8130/bobNotification
+              value: https://nginx-api-service.novusware.com.sg:8443/bobNotification
+            - name: REACT_APP_URM_NOTIFICATION_WEB_SOCKET_URL
+              #value: https://boburm-service.novusware.com.sg:8110/urmNotification
+              value: https://nginx-api-service.novusware.com.sg:8443/urmNotification
+            - name: REACT_APP_QUEUE_NOTIFICATION_TEST_WEB_SOCKET_URL
+              #value: https://bobqueuemanager-service.novusware.com.sg:8100/wsSignageNotification
+              value: https://nginx-api-service.novusware.com.sg:8443/wsSignageNotification
+            - name: REACT_APP_MAP_KEY
+              value: "false"
+            - name: FAST_REFRESH
+              value: 
+            - name: ESLINT_NO_DEV_ERRORS
+              value: "true"
+            - name: DISABLE_ESLINT_PLUGIN
+              value: "true"
+            - name: PORT
+              value: "3006"
+            - name: HTTPS
+              value: "true"
+            - name: SSL_CRT_FILE
+              value: "/app/config/certs/bobr3portal-fullchain.pem"
+            - name: SSL_KEY_FILE
+              value: "/app/config/certs/bobr3portal-privkey.pem"
+          volumeMounts:
+            - name: bobr3portal-config
+              mountPath: /app/config
+            - name: bobr3portal-data
+              mountPath: /app/data
+            - name: bobr3portal-log
+              mountPath: /root/.npm/_logs
+      volumes:
+        - name: bobr3portal-config
+          persistentVolumeClaim:
+            claimName: bobr3portal-config
+        - name: bobr3portal-data
+          persistentVolumeClaim:
+            claimName: bobr3portal-data
+        - name: bobr3portal-log
+          persistentVolumeClaim:
+            claimName: bobr3portal-log
