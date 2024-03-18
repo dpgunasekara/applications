@@ -36,7 +36,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.210.5.12
+  loadBalancerIP: 10.210.5.38
   ports:
     - port: 8145
       targetPort: 8080
