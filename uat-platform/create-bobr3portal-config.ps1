@@ -1,0 +1,1 @@
+kubectl create configmap bobr3portal-config --from-env-file=bobr3portal.env

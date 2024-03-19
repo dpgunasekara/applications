@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: bobr3portal-config
-data:
-  BASE_URL: "http://nginx-api-service.novusware.com.sg:8080/"
