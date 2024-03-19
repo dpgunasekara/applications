@@ -12,6 +12,7 @@ schedules:
     include:
     - main
     - master
+  always: true
 
 resources:
  repositories:
