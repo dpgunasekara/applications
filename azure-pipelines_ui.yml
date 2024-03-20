@@ -7,11 +7,12 @@ trigger:
 
 schedules:
 - cron: '0 1 * * *'
-  displayName: Daily midnight build
+  displayName: Daily 1AM build
   branches:
     include:
     - main
     - master
+  always: true
 
 resources:
  repositories:
@@ -23,7 +24,6 @@ resources:
      type: github
      name: Novustech-SL/bob-signage
      endpoint: Novustech-SL
-#   - repository: NovatrackApp # Alias for the repository
 
 variables:
   # Container registry service connection established during pipeline creation
