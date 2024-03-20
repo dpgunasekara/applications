@@ -84,7 +84,10 @@ resources:
      type: github
      name: Novustech-SL/BOBMPOS
      endpoint: Novustech-SL
-
+   - repository: bobMposLogger # Alias for the repository
+     type: github
+     name: Novustech-SL/mpos_logger
+     endpoint: Novustech-SL
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -519,6 +522,31 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobmpos'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_mposlogger
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobMposLogger
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'logger/logger/pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s logger/logger/settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmposlogger'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
