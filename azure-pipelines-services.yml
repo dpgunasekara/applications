@@ -80,6 +80,11 @@ resources:
      type: github
      name: Novustech-SL/switch-interface
      endpoint: Novustech-SL
+   - repository: bobMpos # Alias for the repository
+     type: github
+     name: Novustech-SL/BOBMPOS
+     endpoint: Novustech-SL
+
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -489,6 +494,31 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobswitchinterface'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_mpos
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobMpos
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'Mpos/pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s Mpos/settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmpos'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
