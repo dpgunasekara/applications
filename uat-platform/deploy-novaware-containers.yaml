@@ -835,6 +835,55 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: bobmposlogger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobmposlogger
+  template:
+    metadata:
+      labels:
+        app: bobmposlogger
+    spec:
+      containers:
+        - name: bobmposlogger
+          image: cregdcrsuat01.azurecr.io/bobmposlogger:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+          volumeMounts:
+            - name: bobmposlogger-config
+              mountPath: /app/config
+            - name: bobmposlogger-data
+              mountPath: /app/data
+            - name: bobmposlogger-log
+              mountPath: /app/log
+            - name: keystore-volume
+              mountPath: "/etc/ssl/certs/bobmposlogger-service.p12"
+              subPath: "bobmposlogger-service.p12"
+      volumes:
+        - name: bobmposlogger-config
+          persistentVolumeClaim:
+            claimName: bobmposlogger-config
+        - name: bobmposlogger-data
+          persistentVolumeClaim:
+            claimName: bobmposlogger-data
+        - name: bobmposlogger-log
+          persistentVolumeClaim:
+            claimName: bobmposlogger-log
+        - name: keystore-volume
+          secret:
+            secretName: bobmposlogger-keystore
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
   name: bobsignage
 spec:
   replicas: 1
