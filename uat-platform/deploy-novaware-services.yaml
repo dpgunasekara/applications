@@ -271,3 +271,33 @@ spec:
       targetPort: 3008
   selector:
     app: bobsignage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bobmpos-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.210.5.38
+  ports:
+    - port: 8120
+      targetPort: 8080
+  selector:
+    app: bobmpos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bobmposlogger-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.210.5.39
+  ports:
+    - port: 8150
+      targetPort: 8080
+  selector:
+    app: bobmposlogger

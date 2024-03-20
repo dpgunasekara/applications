@@ -733,3 +733,67 @@ spec:
     - cache=strict
     - nosharesock
     - actimeo=30    
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: bobmpos-log
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: bobmpos-log-01
+    volumeAttributes:
+      resourceGroup: rg-dcrs-uat-01
+      shareName: bobmpos-log
+    nodeStageSecretRef:
+      name: n0vdcrsuat03
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30    
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: bobmposlogger-log
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: bobmposlogger-log-01
+    volumeAttributes:
+      resourceGroup: rg-dcrs-uat-01
+      shareName: bobmposlogger-log
+    nodeStageSecretRef:
+      name: n0vdcrsuat03
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30    

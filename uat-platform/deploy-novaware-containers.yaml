@@ -786,6 +786,55 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: bobmpos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobmpos
+  template:
+    metadata:
+      labels:
+        app: bobmpos
+    spec:
+      containers:
+        - name: bobmpos
+          image: cregdcrsuat01.azurecr.io/bobmpos:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+          volumeMounts:
+            - name: bobmpos-config
+              mountPath: /app/config
+            - name: bobmpos-data
+              mountPath: /app/data
+            - name: bobmpos-log
+              mountPath: /app/log
+            - name: keystore-volume
+              mountPath: "/etc/ssl/certs/bobmpos-service.p12"
+              subPath: "bobmpos-service.p12"
+      volumes:
+        - name: bobmpos-config
+          persistentVolumeClaim:
+            claimName: bobmpos-config
+        - name: bobmpos-data
+          persistentVolumeClaim:
+            claimName: bobmpos-data
+        - name: bobmpos-log
+          persistentVolumeClaim:
+            claimName: bobmpos-log
+        - name: keystore-volume
+          secret:
+            secretName: bobmpos-keystore
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
   name: bobsignage
 spec:
   replicas: 1
