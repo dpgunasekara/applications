@@ -503,7 +503,7 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_mpos
-    displayName: Build
+    displayName: Build bobmpos
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -528,7 +528,7 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_mposlogger
-    displayName: Build
+    displayName: Build bobmposlogger
     pool:
       vmImage: $(vmImageName)
     steps:

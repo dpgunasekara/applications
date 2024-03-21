@@ -55,7 +55,7 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bob_signage
-    displayName: Build
+    displayName: Build bobsignage
     pool:
       vmImage: $(vmImageName)
     steps:
