@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+data:
+  server.yaml: |
+    server:
+      ssl:
+        key-store-type: PKCS12
+        key-store: /etc/ssl/certs/${SERVICE_NAME}-service.p12
+        key-store-password: ${KEY_STORE_PASSWORD}
+        key-store-alias: ${SERVICE_NAME}-service
+        enabled: true

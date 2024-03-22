@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: url-config
+data:
+  url.yaml: |
+    url:
+      alert:
+        changePwdPageName: drcs-force-change-password
+        sendmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
+        sendmailandsms: https://bobdevapp.novussl.com:8115/am/sendHtmlEmailAndSms
+        sendsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
+        uiurl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
+      bb:
+        getCommercialBankByBankId: https://bobagency-service.novusware.com.sg:8130/bob/getCommercialBankByBankId
+        getRevenueCodeByRevenueCode: https://bobagency-service.novusware.com.sg:8130/master/getRevenueCodeByRevenueCode
+        validateApiRequest: https://bobagency-service.novusware.com.sg:8130/bob/validateApiRequest
+        validateS3: https://bobagency-service.novusware.com.sg:8130/bob/validateS3
+      bob:
+        getCBSAccount: https://bobagency-service.novusware.com.sg:8130/master/getCbsAccountDetails
+        getLocation: https://bobagency-service.novusware.com.sg:8130/master/getLocation
+        getUserRevCodeGrpListUrl: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeByRevenueCodeGroupIdList
+      rf:
+        generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
+        generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
+      ps:
+        assignConsolidation: https://bobpaymentapi-service.novusware.com.sg:8125/ps/assignConsolidation    
+        cancelWithdrawalReference: https://bobpaymentapi-service.novusware.com.sg:8125/ps/cancelWithdrawalReference
+        dashBoardVlnBdleNotDeposit: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDshBrdViolationOfBdleNotDeposit
+        deleteBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/deleteBankingHallDepositAmount
+        expireWithdrawalReference: https://bobpaymentapi-service.novusware.com.sg:8125/ps/expireWithdrawalReference
+        getBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBankingHallDepositAmount
+        getBankingHallDepositTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBankingHallDepositTransactions
+        getBundleTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBundleTransactions
+        getCommercialBankUserTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getCommercialBankUserTransactions
+        getCollectionTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getCollectionTransactions
+        getConsoliadtionTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getConsoliadtionTransactions
+        getDashboardBobDistOverview: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDashboardBobDistOverview
+        getDashboardCashMovement: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDashboardCashMovement
+        getDshBoardRevenueCollDetailedView: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDshBoardRevenueCollDetailedView
+        getNextStage: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getNextStage
+        getListOfPaymentForComBankTxn: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getListOfPaymentForComBankTxn
+        getListOfPaymentForStaging: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getListOfPaymentForStaging
+        getPreviousStage: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getPreviousStage
+        getReceipt: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getReceipt
+        getStagedTransaction: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagedTransaction
+        getStagingDetails: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingDetails
+        getStagingDetailWithHistory: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingDetailWithHistory
+        getStagingSummary: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingSummary
+        getTodayTransactionAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getTodayTransactionAmount
+        getURNHistory: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getURNHistory
+        getUrnSummary: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUrnSummary
+        getUrnTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUrnTransactions
+        getUserTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUserTransactions
+        saveBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/saveBankingHallDepositAmount
+        searchS3: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3
+        searchS3FutureResult: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3FutureResult
+        searchS3History: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3History
+        urnSearch: https://bobpaymentapi-service.novusware.com.sg:8125/ps/urnSearch
+        validateComBankTxn: https://bobpaymentapi-service.novusware.com.sg:8125/ps/validateComBankTxn
+        validateStagingDataForUser: https://bobpaymentapi-service.novusware.com.sg:8125/ps/validateStagingDataForUser
+      qm:
+        changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
+        changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
+        getQueueDetails: https://bobqueuemanager-service.novusware.com.sg:8100/queue/validateQueueDetails
+        terminalFreeNotification: https://bobqueuemanager-service.novusware.com.sg:8100/queue/terminalfre
+        updateQueueStatus: https://bobqueuemanager-service.novusware.com.sg:8100/queue/updateQueueStatus
+      sw:
+        generateOtp: https://bobswitchinterface-service.novusware.com.sg:8175/sw/generateOtp
+      ul:
+        deleteLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/deleteLimits
+        depositAmountUrl : https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
+        getAllViolationDetails: https://bobuserlimits-service.novusware.com.sg:8165/limits/getAllViolationDetails
+        getLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/getLimits
+        insertStageTracking: https://bobuserlimits-service.novusware.com.sg:8165/limits/insertStageTracking
+        insertLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/insertLimits
+        revertUserLimitsUrl: https://bobuserlimits-service.novusware.com.sg:8165/limits/revertUserLimts
+        updateLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateLimits
+        updateUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateBulkUserLimits
+        validateUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/validateUserLimit
+      um:
+        getUser: https://boburm-service.novusware.com.sg:8110/user/view
+        getUserByUserCode: https://boburm-service.novusware.com.sg:8110/urm/getUser
+      urm:
+        addUserNotification: https://boburm-service.novusware.com.sg:8110/notification/addUserNotification
+        getusercodedetails : https://boburm-service.novusware.com.sg:8110/urm/getUser
+        getUserDetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
+        getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
+      cors:
+        allowedOrigins:
+        - https://10.210.25.23:3009
+        - https://10.210.5.25:3006
+        - https://bobr3portal.novusware.com.sg:3006
+        - https://bobr3portal.novusware.com.sg
+        - https://portal.novusware.com.sg:3006
+        - https://portal.novusware.com.sg
+        - https://portal.drcs.novusware.com.sg:443
+        - https://portal.drcs.novusware.com.sg
+        - https://signage.novusware.com.sg:3008
+        - https://signage.novusware.com.sg
+        - https://signage.drcs.novusware.com.sg:443
+        - https://signage.drcs.novusware.com.sg

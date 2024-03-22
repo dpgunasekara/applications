@@ -17,13 +17,23 @@ spec:
           image: cregdcrsuat01.azurecr.io/bobagency:latest
           ports:
             - containerPort: 8080
-            - containerPort: 8443
           env:
             - name: KEY_STORE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobagency
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: bb_db_dev
           volumeMounts:
             - name: bobagency-config
               mountPath: /app/config
@@ -34,6 +44,26 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobagency-service.p12"
               subPath: "bobagency-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobagency-config
           persistentVolumeClaim:
@@ -47,6 +77,36 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobagency-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml  
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml  
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml  
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml  
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml  
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -73,6 +133,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobauditservice
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: au_db_dev
           volumeMounts:
             - name: bobauditservice-config
               mountPath: /app/config
@@ -83,6 +154,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobauditservice-service.p12"
               subPath: "bobauditservice-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobauditservice-config
           persistentVolumeClaim:
@@ -96,6 +183,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobauditservice-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml  
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -122,6 +233,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobburs
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: bur_db_dev
           volumeMounts:
             - name: bobburs-config
               mountPath: /app/config
@@ -132,6 +254,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobburs-service.p12"
               subPath: "bobburs-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobburs-config
           persistentVolumeClaim:
@@ -145,6 +283,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobburs-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -171,6 +333,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobfileprocessing
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: fp_db_dev
           volumeMounts:
             - name: bobfileprocessing-config
               mountPath: /app/config
@@ -181,6 +354,26 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobfileprocessing-service.p12"
               subPath: "bobfileprocessing-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobfileprocessing-config
           persistentVolumeClaim:
@@ -194,6 +387,36 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobfileprocessing-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -220,6 +443,8 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: SERVICE_NAME
+              value: boblogger
           volumeMounts:
             - name: boblogger-config
               mountPath: /app/config
@@ -230,6 +455,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/boblogger-service.p12"
               subPath: "boblogger-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: boblogger-config
           persistentVolumeClaim:
@@ -243,6 +484,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: boblogger-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -269,6 +534,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobmposinterface
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: mi_db_dev
           volumeMounts:
             - name: bobmposinterface-config
               mountPath: /app/config
@@ -279,6 +555,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobmposinterface-service.p12"
               subPath: "bobmposinterface-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobmposinterface-config
           persistentVolumeClaim:
@@ -292,6 +584,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobmposinterface-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -318,6 +634,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: boboag
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: og_db_dev
           volumeMounts:
             - name: boboag-config
               mountPath: /app/config
@@ -328,6 +655,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/boboag-service.p12"
               subPath: "boboag-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: boboag-config
           persistentVolumeClaim:
@@ -341,6 +684,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: boboag-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -367,6 +734,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobonegov
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: ogo_db_dev
           volumeMounts:
             - name: bobonegov-config
               mountPath: /app/config
@@ -377,6 +755,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobonegov-service.p12"
               subPath: "bobonegov-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobonegov-config
           persistentVolumeClaim:
@@ -390,6 +784,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobonegov-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -416,6 +834,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobpaymentapi
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: ps_db_dev
           volumeMounts:
             - name: bobpaymentapi-config
               mountPath: /app/config
@@ -426,6 +855,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobpaymentapi-service.p12"
               subPath: "bobpaymentapi-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobpaymentapi-config
           persistentVolumeClaim:
@@ -439,6 +884,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobpaymentapi-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -465,6 +934,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobqueuemanager
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: qm_db_dev
           volumeMounts:
             - name: bobqueuemanager-config
               mountPath: /app/config
@@ -475,6 +955,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobqueuemanager-service.p12"
               subPath: "bobqueuemanager-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobqueuemanager-config
           persistentVolumeClaim:
@@ -488,6 +984,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobqueuemanager-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -514,6 +1034,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobreferencing
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: rf_db_dev
           volumeMounts:
             - name: bobreferencing-config
               mountPath: /app/config
@@ -524,6 +1055,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobreferencing-service.p12"
               subPath: "bobreferencing-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobreferencing-config
           persistentVolumeClaim:
@@ -537,6 +1084,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobreferencing-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -563,6 +1134,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobreporting
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: rp_db_dev
           volumeMounts:
             - name: bobreporting-config
               mountPath: /app/config
@@ -573,6 +1155,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobreporting-service.p12"
               subPath: "bobreporting-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobreporting-config
           persistentVolumeClaim:
@@ -586,6 +1184,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobreporting-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -612,6 +1234,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: boburm
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: urm_db_dev
           volumeMounts:
             - name: boburm-config
               mountPath: /app/config
@@ -622,6 +1255,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/boburm-service.p12"
               subPath: "boburm-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: boburm-config
           persistentVolumeClaim:
@@ -635,6 +1284,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: boburm-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -661,6 +1334,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobuserlimits
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: ul_db_dev
           volumeMounts:
             - name: bobuserlimits-config
               mountPath: /app/config
@@ -671,6 +1355,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobuserlimits-service.p12"
               subPath: "bobuserlimits-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobuserlimits-config
           persistentVolumeClaim:
@@ -684,6 +1384,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobuserlimits-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -710,6 +1434,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobmessaging
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: am_db_dev
           volumeMounts:
             - name: bobmessaging-config
               mountPath: /app/config
@@ -720,6 +1455,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobmessaging-service.p12"
               subPath: "bobmessaging-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobmessaging-config
           persistentVolumeClaim:
@@ -733,6 +1484,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobmessaging-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -759,6 +1534,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobswitchinterface
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: sw_db_dev
           volumeMounts:
             - name: bobswitchinterface-config
               mountPath: /app/config
@@ -769,6 +1555,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobswitchinterface-service.p12"
               subPath: "bobswitchinterface-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobswitchinterface-config
           persistentVolumeClaim:
@@ -782,6 +1584,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobswitchinterface-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -808,6 +1634,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobmpos
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: mpos_db_dev
           volumeMounts:
             - name: bobmpos-config
               mountPath: /app/config
@@ -818,6 +1655,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobmpos-service.p12"
               subPath: "bobmpos-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobmpos-config
           persistentVolumeClaim:
@@ -831,6 +1684,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobmpos-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -857,6 +1734,17 @@ spec:
                 secretKeyRef:
                   name: ssl-keystore-secret
                   key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: bobmposlogger
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: mposlogger_db_dev
           volumeMounts:
             - name: bobmposlogger-config
               mountPath: /app/config
@@ -867,6 +1755,22 @@ spec:
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/bobmposlogger-service.p12"
               subPath: "bobmposlogger-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
       volumes:
         - name: bobmposlogger-config
           persistentVolumeClaim:
@@ -880,6 +1784,30 @@ spec:
         - name: keystore-volume
           secret:
             secretName: bobmposlogger-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet

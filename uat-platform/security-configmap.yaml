@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: security-config
+data:
+  security.yaml: |
+    spring:
+      security:
+        oauth2:
+          resourceserver:
+           jwt:
+             issuer-uri: https://keycloak.novusware.com.sg:8085/realms/BobUrmRealm
+           opaquetoken:
+             introspection-uri: https://keycloak.novusware.com.sg:8085/realms/BobUrmRealm/protocol/openid-connect/token/introspect
+             client-id: bob-urm
+             client-secret: Ufpc23uQGvKGkf0oXsrrzgMgwiTDc8gV
