@@ -1,3 +1,4 @@
+{{- range .Values.containers }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -29,6 +30,19 @@ spec:
     - cache=strict
     - nosharesock
     - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-log
+  resources:
+    requests:
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -63,6 +77,19 @@ spec:
     - actimeo=30
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-data
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
@@ -93,3 +120,17 @@ spec:
     - cache=strict
     - nosharesock
     - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-config
+  resources:
+    requests:
+      storage: 5Gi
+{{- end }}

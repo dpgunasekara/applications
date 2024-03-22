@@ -1,0 +1,111 @@
+{{- range .Values.containers }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: cregdcrsuat01.azurecr.io/{{ .name }}:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: SERVICE_NAME
+              value: {{ .name }}
+            - name: DB_SERVER
+              value: dcrs-uat-dbs-01.novusware.com.sg:1433
+            - name: DB
+              value: {{ .database }}
+          volumeMounts:
+            - name: {{ .name }}-config
+              mountPath: /app/config
+            - name: {{ .name }}-data
+              mountPath: /app/data
+            - name: {{ .name }}-log
+              mountPath: /app/log
+            - name: keystore-volume
+              mountPath: "/etc/ssl/certs/{{ .name }}-service.p12"
+              subPath: "{{ .name }}-service.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
+      volumes:
+        - name: {{ .name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .name }}-config
+        - name: {{ .name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .name }}-data
+        - name: {{ .name }}-log
+          persistentVolumeClaim:
+            claimName: {{ .name }}-log
+        - name: keystore-volume
+          secret:
+            secretName: {{ .name }}-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml  
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml  
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml  
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml  
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml  
+{{- end }}

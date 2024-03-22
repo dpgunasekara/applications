@@ -270,6 +270,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobburs-config
           persistentVolumeClaim:
@@ -307,7 +311,13 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
----
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml  
+--- 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -671,6 +681,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: boboag-config
           persistentVolumeClaim:
@@ -708,6 +722,12 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -771,6 +791,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobonegov-config
           persistentVolumeClaim:
@@ -808,6 +832,13 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
+
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -971,6 +1002,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobqueuemanager-config
           persistentVolumeClaim:
@@ -1008,6 +1043,12 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -1271,6 +1312,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: boburm-config
           persistentVolumeClaim:
@@ -1308,6 +1353,12 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -1371,6 +1422,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobuserlimits-config
           persistentVolumeClaim:
@@ -1408,6 +1463,12 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -1571,6 +1632,10 @@ spec:
               mountPath: "/app/config/logging.yaml"
               subPath: "logging.yaml"
               readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
       volumes:
         - name: bobswitchinterface-config
           persistentVolumeClaim:
@@ -1608,6 +1673,12 @@ spec:
             items:
             - key: logging.yaml
               path: logging.yaml
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
