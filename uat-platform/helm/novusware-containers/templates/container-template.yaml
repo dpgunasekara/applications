@@ -1,4 +1,23 @@
 {{- range .Values.containers }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .loadBalancerIP }}
+  ports:
+    - name: service
+      port: {{ .port }}
+      targetPort: 8080
+    - name: listener
+      port: 5555
+      targetPort: 5555
+  selector:
+    app: {{ .name }}
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:

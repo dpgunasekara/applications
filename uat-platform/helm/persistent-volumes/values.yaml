@@ -1,35 +1,24 @@
 containers:
   - name: bobagency
-    database: bb_db_dev
   - name: bobauditservice
-    database: au_db_dev
   - name: bobburs
-    database: bur_db_dev
+  - name: bobagency
+  - name: bobauditservice
+  - name: bobburs
   - name: bobfileprocessing
-    database: fp_db_dev
+  - name: boblogger
   - name: bobmessaging
-    database: am_db_dev
   - name: bobmpos
-    database: mpos_db_dev
   - name: bobmposinterface
-    database: mi_db_dev
   - name: bobmposlogger
-    database: mposlogger_db_dev
   - name: boboag
-    database: og_db_dev
   - name: bobonegov
-    database: ogo_db_dev
   - name: bobpaymentapi
-    database: ps_db_dev
   - name: bobqueuemanager
-    database: qm_db_dev
+  - name: bobr3portal
   - name: bobreferencing
-    database: rf_db_dev
   - name: bobreporting
-    database: rp_db_dev
+  - name: bobsignage
   - name: bobswitchinterface
-    database: sw_db_dev
   - name: boburm
-    database: urm_db_dev
   - name: bobuserlimits
-    database: ul_db_dev
