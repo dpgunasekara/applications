@@ -2,72 +2,92 @@ containers:
   - name: bobagency
     database: bb_db_dev
     loadBalancerIP: 10.210.5.27
-    port: 8130
+    port_1: 8130
+    target_1: 8080
   - name: bobauditservice
     database: au_db_dev
     loadBalancerIP: 10.210.5.33
-    port: 8120
+    port_1: 8120
+    target_1: 8080
   - name: bobburs
     database: bur_db_dev
     loadBalancerIP: 10.210.5.38
-    port: 8145
+    port_1: 8145
+    target_1: 8080
   - name: bobfileprocessing
     database: fp_db_dev
     loadBalancerIP: 10.210.5.13
-    port: 8140
+    port_1: 8140
+    target_1: 8080
   - name: boblogger
     database: bl_db_dev
     loadBalancerIP: 10.210.5.14
-    port: 80
+    port_1: 80
+    target_1: 8080
   - name: bobmessaging
     database: am_db_dev
     loadBalancerIP: 10.210.5.28
-    port: 8115
+    port_1: 8115
+    target_1: 8080
   - name: bobmpos
     database: mpos_db_dev
     loadBalancerIP: 10.210.5.38
-    port: 8120
+    port_1: 8120
+    target_1: 8080
   - name: bobmposinterface
     database: mi_db_dev
     loadBalancerIP: 10.210.5.15
-    port: 8155
+    port_1: 8155
+    target_1: 8080
   - name: bobmposlogger
     database: mposlogger_db_dev
     loadBalancerIP: 10.210.5.39
-    port: 8150
+    port_1: 8150
+    target_1: 8080
   - name: boboag
     database: og_db_dev
     loadBalancerIP: 10.210.5.16
-    port: 8135
+    port_1: 8135
+    target_1: 8080
   - name: bobonegov
     database: ogo_db_dev
     loadBalancerIP: 10.210.5.17
-    port: 8170
+    port_1: 8170
+    target_1: 8080
   - name: bobpaymentapi
     database: ps_db_dev
     loadBalancerIP: 10.210.5.18
-    port: 8125
+    port_1: 8125
+    target_1: 8080
   - name: bobqueuemanager
     database: qm_db_dev
     loadBalancerIP: 10.210.5.19
-    port: 8095
+    port_1: 8100
+    target_1: 8080
   - name: bobreferencing
     database: rf_db_dev
     loadBalancerIP: 10.210.5.20
-    port: 8095
+    port_1: 8095
+    target_1: 8080
   - name: bobreporting
     database: rp_db_dev
     loadBalancerIP: 10.210.5.21
-    port: 8160
+    port_1: 8160
+    target_1: 8080
   - name: bobswitchinterface
     database: sw_db_dev
     loadBalancerIP: 10.210.5.36
-    port: 8175
+    port_1: 8175
+    target_1: 8080
+    port_2: 5555
+    target_2: 5555
   - name: boburm
     database: urm_db_dev
     loadBalancerIP: 10.210.5.30
-    port: 8110
+    port_1: 8110
+    target_1: 8080
   - name: bobuserlimits
     database: ul_db_dev
     loadBalancerIP: 10.210.5.31
-    port: 8165
+    port_1: 8165
+    target_1: 8080

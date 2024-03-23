@@ -1,0 +1,9 @@
+containers:
+  - name: bobr3portal
+    loadBalancerIP: 10.210.5.25
+    port_1: 3006
+    target_1: 3006
+  - name: bobsignage
+    loadBalancerIP: 10.210.5.37
+    port_1: 3008
+    target_1: 3008

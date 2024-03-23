@@ -10,11 +10,13 @@ spec:
   loadBalancerIP: {{ .loadBalancerIP }}
   ports:
     - name: service
-      port: {{ .port }}
-      targetPort: 8080
+      port: {{ .port_1 }}
+      targetPort: {{ .target_1 }}
+{{ if .port_2 }}
     - name: listener
-      port: 5555
-      targetPort: 5555
+      port: {{ .port_2 }}
+      targetPort: {{ .target_2 }}
+{{ end }}
   selector:
     app: {{ .name }}
 ---
@@ -36,7 +38,12 @@ spec:
         - name: {{ .name }}
           image: cregdcrsuat01.azurecr.io/{{ .name }}:latest
           ports:
-            - containerPort: 8080
+            - name: service
+              containerPort: {{ .target_1 }}
+{{ if .port_2 }}
+            - name: listener
+              containerPort: {{ .target_2 }}
+{{ end }}
           env:
             - name: KEY_STORE_PASSWORD
               valueFrom:
@@ -127,4 +134,5 @@ spec:
             items:
             - key: security.yaml
               path: security.yaml  
+---
 {{- end }}

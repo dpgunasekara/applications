@@ -1,7 +1,4 @@
-containers:
-  - name: bobagency
-  - name: bobauditservice
-  - name: bobburs
+volumes:
   - name: bobagency
   - name: bobauditservice
   - name: bobburs
@@ -15,10 +12,10 @@ containers:
   - name: bobonegov
   - name: bobpaymentapi
   - name: bobqueuemanager
-  - name: bobr3portal
   - name: bobreferencing
   - name: bobreporting
-  - name: bobsignage
   - name: bobswitchinterface
   - name: boburm
   - name: bobuserlimits
+  - name: bobsignage
+  - name: bobr3portal

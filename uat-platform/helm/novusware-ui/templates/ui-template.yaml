@@ -1,0 +1,57 @@
+{{- range .Values.containers }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .loadBalancerIP }}
+  ports:
+    - port: {{ .port_1 }}
+      targetPort: {{ .target_1 }}
+  selector:
+    app: {{ .name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: cregdcrsuat01.azurecr.io/{{ .name }}:latest
+          ports:
+            - containerPort: {{ .target_1 }}
+          envFrom:
+            - configMapRef:
+                name: {{ .name }}-config
+          volumeMounts:
+            - name: {{ .name }}-config
+              mountPath: /app/config
+            - name: {{ .name }}-data
+              mountPath: /app/data
+            - name: {{ .name }}-log
+              mountPath: /app/log
+      volumes:
+        - name: {{ .name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .name }}-config
+        - name: {{ .name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .name }}-data
+        - name: {{ .name }}-log
+          persistentVolumeClaim:
+            claimName: {{ .name }}-log
+---
+{{- end }}

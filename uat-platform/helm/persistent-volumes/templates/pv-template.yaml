@@ -1,4 +1,4 @@
-{{- range .Values.containers }}
+{{- range .Values.volumes }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -133,4 +133,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
 {{- end }}

@@ -1,1 +1,1 @@
-kubectl create configmap signage-config --from-env-file=signage.env
+kubectl create configmap bobsignage-config --from-env-file=signage.env
