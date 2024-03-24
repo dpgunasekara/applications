@@ -1,5 +1,141 @@
 {{- range .Values.containers }}
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-log
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-log-01
+    volumeAttributes:
+      resourceGroup: rg-dcrs-uat-01
+      shareName: {{ .name }}-log
+    nodeStageSecretRef:
+      name: n0vdcrsuat03
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-log
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-data-01
+    volumeAttributes:
+      resourceGroup: rg-dcrs-data-01
+      shareName: {{ .name }}-data
+    nodeStageSecretRef:
+      name: n0vdcrsuat02
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-data
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-config
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-config-01
+    volumeAttributes:
+      resourceGroup: rg-dcrs-config-01
+      shareName: {{ .name }}-config
+    nodeStageSecretRef:
+      name: n0vdcrsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-config
+  resources:
+    requests:
+      storage: 5Gi
+---
+{{if eq .type "maven" }}
+apiVersion: v1
 kind: Service
 metadata:
   name: {{ .name }}-service
@@ -135,4 +271,62 @@ spec:
             - key: security.yaml
               path: security.yaml  
 ---
+{{ end }}
+{{if eq .type "react" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .loadBalancerIP }}
+  ports:
+    - port: {{ .port_1 }}
+      targetPort: {{ .target_1 }}
+  selector:
+    app: {{ .name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: cregdcrsuat01.azurecr.io/{{ .name }}:latest
+          ports:
+            - containerPort: {{ .target_1 }}
+          envFrom:
+            - configMapRef:
+                name: {{ .name }}-config
+          volumeMounts:
+            - name: {{ .name }}-config
+              mountPath: /app/config
+            - name: {{ .name }}-data
+              mountPath: /app/data
+            - name: {{ .name }}-log
+              mountPath: /app/log
+      volumes:
+        - name: {{ .name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .name }}-config
+        - name: {{ .name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .name }}-data
+        - name: {{ .name }}-log
+          persistentVolumeClaim:
+            claimName: {{ .name }}-log
+---
+{{ end }}
 {{- end }}
