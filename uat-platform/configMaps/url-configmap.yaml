@@ -7,15 +7,16 @@ data:
     url:
       alert:
         changePwdPageName: drcs-force-change-password
+        sendhtmlmailandsms: https://bobmessaging-service.novusware.com.sg:8115
         sendmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
-        sendmailandsms: https://bobdevapp.novussl.com:8115/am/sendHtmlEmailAndSms
+        sendmailandsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmailAndSms
         sendsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         sendSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         uiurl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
       am:
         sendSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         sendEmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
-        sendEmailAndSms: https://bobdevapp.novussl.com:8115/am/sendHtmlEmailAndSms
+        sendEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
       bb:
         getCommercialBankByBankId: https://bobagency-service.novusware.com.sg:8130/bob/getCommercialBankByBankId
         getRevenueCodeByRevenueCode: https://bobagency-service.novusware.com.sg:8130/master/getRevenueCodeByRevenueCode
