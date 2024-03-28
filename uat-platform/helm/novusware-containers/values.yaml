@@ -89,14 +89,14 @@ containers:
     port_1: 8160
     target_1: 8080
     type: maven
-  - name: bobswitchinterface
-    database: sw_db_dev
-    loadBalancerIP: 10.210.5.36
-    port_1: 8175
-    target_1: 8080
-    port_2: 6666
-    target_2: 6666
-    type: maven
+#  - name: bobswitchinterface
+#    database: sw_db_dev
+#    loadBalancerIP: 10.210.5.36
+#    port_1: 8175
+#    target_1: 8080
+#    port_2: 6666
+#    target_2: 6666
+#    type: maven
   - name: boburm
     database: urm_db_dev
     loadBalancerIP: 10.210.5.30

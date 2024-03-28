@@ -69,13 +69,13 @@ data:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
         getQueueDetails: https://bobqueuemanager-service.novusware.com.sg:8100/queue/validateQueueDetails
-        terminalFreeNotification: https://bobqueuemanager-service.novusware.com.sg:8100/queue/terminalfre
+        terminalFreeNotification: https://bobqueuemanager-service.novusware.com.sg:8100/queue/terminalfreeNotification
         updateQueueStatus: https://bobqueuemanager-service.novusware.com.sg:8100/queue/updateQueueStatus
       sw:
         generateOtp: https://bobswitchinterface-service.novusware.com.sg:8175/sw/generateOtp
       ul:
         deleteLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/deleteLimits
-        depositAmountUrl : https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
+        depositAmountUrl: https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
         getAllViolationDetails: https://bobuserlimits-service.novusware.com.sg:8165/limits/getAllViolationDetails
         getLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/getLimits
         insertStageTracking: https://bobuserlimits-service.novusware.com.sg:8165/limits/insertStageTracking
@@ -89,7 +89,7 @@ data:
         getUserByUserCode: https://boburm-service.novusware.com.sg:8110/urm/getUser
       urm:
         addUserNotification: https://boburm-service.novusware.com.sg:8110/notification/addUserNotification
-        getusercodedetails : https://boburm-service.novusware.com.sg:8110/urm/getUser
+        getusercodedetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
         getUserDetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
         getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
       cors:
