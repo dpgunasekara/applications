@@ -18,7 +18,7 @@ resources:
      name: 'BOB - Digital Revenue Collection System/bobburs'
    - repository: bobfileprocessing
      type: git
-     name: 'BOB - Digital Revenue Collection System/fileprocessing'
+     name: 'BOB - Digital Revenue Collection System/bobfileprocessing'
    - repository: bobonegov
      type: git
      name: 'BOB - Digital Revenue Collection System/bobonegov'
