@@ -20,7 +20,7 @@ variables:
   containerRegistry: 'cregsdlc01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-  vmImageName: 'ubuntu-latest''
+  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
