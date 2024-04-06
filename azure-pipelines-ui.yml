@@ -16,8 +16,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
-  containerRegistry: 'cregsdlc01.azurecr.io'
+  # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
+  dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
+  # containerRegistry: 'cregsdlc01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   vmImageName: 'ubuntu-latest'
