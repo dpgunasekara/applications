@@ -3,42 +3,30 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-schedules:
-- cron: '0 1 * * *'
-  displayName: Daily 1AM build
-  branches:
-    include:
-    - main
-    - master
-  always: true
+- main
 
 resources:
  repositories:
-   - repository: bobR3portal # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-r3portal
-     endpoint: Novustech-SL
-   - repository: bobSignage # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-signage
-     endpoint: Novustech-SL
+   - repository: bobr3portal
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobr3portal'
+   - repository: bobsignage
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobsignage'
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'a4b4f95a-b9b0-4bb0-8dd8-f02126a20f3a'
-  containerRegistry: 'cregdcrsuat01.azurecr.io'
+  dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
+  containerRegistry: 'cregsdlc01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'  
-  # Agent VM image name
+  tag: '$(Build.BuildId)'
   vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: Build_bobR3portal
+  - job: Build_bobr3portal
     displayName: Build bobR3portal
     pool:
       vmImage: $(vmImageName)
@@ -54,12 +42,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bob_signage
+  - job: Build_bobsignage
     displayName: Build bobsignage
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobSignage
+    - checkout: bobsignage
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
