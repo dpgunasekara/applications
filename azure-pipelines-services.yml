@@ -3,111 +3,83 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-schedules:
-- cron: '0 0 * * *'
-  displayName: Daily midnight build
-  branches:
-    include:
-    - main
-    - master
-  always: true
+- main
 
 resources:
  repositories:
-   - repository: bobAgency # Alias for the repository
-     type: github
-     name: Novustech-SL/BOB-Agency
-     endpoint: Novustech-SL
-   - repository: bobLogger # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-Logger
-     endpoint: Novustech-SL
-   - repository: bobBurs # Alias for the repository
-     type: github
-     name: Novustech-SL/BOBBURS
-     endpoint: Novustech-SL
-   - repository: bobFileProcessing # Alias for the repository
-     type: github
-     name: Novustech-SL/BOB-FileProcessing
-     endpoint: Novustech-SL
-   - repository: bobOneGov # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-onegov
-     endpoint: Novustech-SL
-   - repository: bobReporting # Alias for the repository
-     type: github
-     name: Novustech-SL/BOB-Reporting
-     endpoint: Novustech-SL
-   - repository: bobUserLimits # Alias for the repository
-     type: github
-     name: Novustech-SL/BOB-userlimits
-     endpoint: Novustech-SL
-   - repository: bobMposInterface # Alias for the repository
-     type: github
-     name: Novustech-SL/bob_mpos_interface
-     endpoint: Novustech-SL
-   - repository: bobQueueManager # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-queue-manager
-     endpoint: Novustech-SL
-   - repository: bobReferencing # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-referencing
-     endpoint: Novustech-SL
-   - repository: bobPaymentApi # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-payment-api
-     endpoint: Novustech-SL
-   - repository: bobOag # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-oag
-     endpoint: Novustech-SL
-   - repository: bobAuditService # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-AuditService
-     endpoint: Novustech-SL
-   - repository: bobUrm # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-urm
-     endpoint: Novustech-SL
-   - repository: bobMessagingService # Alias for the repository
-     type: github
-     name: Novustech-SL/bob-MessagingService
-     endpoint: Novustech-SL
-   - repository: switch-interface # Alias for the repository
-     type: github
-     name: Novustech-SL/switch-interface
-     endpoint: Novustech-SL
-   - repository: bobMpos # Alias for the repository
-     type: github
-     name: Novustech-SL/BOBMPOS
-     endpoint: Novustech-SL
-   - repository: bobMposLogger # Alias for the repository
-     type: github
-     name: Novustech-SL/mpos_logger
-     endpoint: Novustech-SL
+   - repository: bobagency
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobagency'
+   - repository: boblogger
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boblogger'
+   - repository: bobburs
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobburs'
+   - repository: bobfileprocessing
+     type: git
+     name: 'BOB - Digital Revenue Collection System/fileprocessing'
+   - repository: bobonegov
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobonegov'
+   - repository: bobreporting
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobreporting'
+   - repository: bobuserlimits
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobuserlimits'
+   - repository: bobmposinterface
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmposinterface'
+   - repository: bobqueuemanager
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobqueuemanager'
+   - repository: bobreferencing
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobreferencing'
+   - repository: bobpayment
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobpayment'
+   - repository: boboag
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boboag'
+   - repository: bobaudit
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobaudit'
+   - repository: boburm
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boburm'
+   - repository: bobmessaging
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmessaging'
+   - repository: bobswitchinterface
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobswitchinterface'
+   - repository: bobmpos
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmpos'
+   - repository: bobmposlogger
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmposlogger'
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'a4b4f95a-b9b0-4bb0-8dd8-f02126a20f3a'
-  containerRegistry: 'cregdcrsuat01.azurecr.io'
+  dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
+  containerRegistry: 'cregsdlc01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'  
-  # Agent VM image name
+  tag: '$(Build.BuildId)'
   vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: Build_bobAgency
-    displayName: Build bobAgency
+  - job: Build_bobagency
+    displayName: Build bobagency
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobAgency
+    - checkout: bobagency
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -127,17 +99,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobLogger
-    displayName: Build bobLogger
+  - job: Build_boblogger
+    displayName: Build boblogger
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobLogger
+    - checkout: boblogger
     - task: Maven@3
       inputs:
-        mavenPomFile: 'bob-logger/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s bob-logger/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -152,12 +124,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobBurs
-    displayName: Build bobBurs
+  - job: Build_bobburs
+    displayName: Build bobburs
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobBurs
+    - checkout: bobburs
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -177,12 +149,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobFileProcessing
-    displayName: Build bobFileProcessing
+  - job: Build_bobfileprocessing
+    displayName: Build bobfileprocessing
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobFileProcessing
+    - checkout: bobfileprocessing
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -202,12 +174,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobOneGov
-    displayName: Build bobOneGov
+  - job: Build_bobonegov
+    displayName: Build bobonegov
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobOneGov
+    - checkout: bobonegov
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -228,11 +200,11 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobReporting
-    displayName: Build bobReporting
+    displayName: Build bobreporting
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobReporting
+    - checkout: bobreporting
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -252,17 +224,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobUserLimits
-    displayName: Build bobUserLimits
+  - job: Build_bobuserlimits
+    displayName: Build bobuserlimits
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobUserLimits
+    - checkout: bobuserlimits
     - task: Maven@3
       inputs:
-        mavenPomFile: 'bob-userlimits/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s bob-userlimits/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -277,17 +249,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobMposInterface
-    displayName: Build bobMposInterface
+  - job: Build_bobmposinterface
+    displayName: Build bobmposinterface
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobMposInterface
+    - checkout: bobmposinterface
     - task: Maven@3
       inputs:
-        mavenPomFile: 'bob-mpos-interface/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s bob-mpos-interface/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -302,12 +274,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobQueueManager
-    displayName: Build bobQueueManager
+  - job: Build_bobqueuemanager
+    displayName: Build bobqueuemanager
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobQueueManager
+    - checkout: bobqueuemanager
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -327,12 +299,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobReferencing
-    displayName: Build bobReferencing
+  - job: Build_bobreferencing
+    displayName: Build bobreferencing
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobReferencing
+    - checkout: bobreferencing
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -352,12 +324,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobPaymentAPI
-    displayName: Build bobPaymentAPI
+  - job: Build_bobpayment
+    displayName: Build bobpayment
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobPaymentAPI
+    - checkout: bobpayment
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -371,18 +343,18 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobpaymentapi'
+        repository: 'bobpayment'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobOag
-    displayName: Build bobOag
+  - job: Build_boboag
+    displayName: Build boboag
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobOag
+    - checkout: boboag
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -402,12 +374,12 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobAuditService
-    displayName: Build bobAuditService
+  - job: Build_bobaudit
+    displayName: Build bobaudit
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobAuditService
+    - checkout: bobaudit
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -421,18 +393,18 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobauditservice'
+        repository: 'bobaudit'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobUrm
-    displayName: Build bobUrm
+  - job: Build_boburm
+    displayName: Build boburm
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobUrm
+    - checkout: boburm
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -452,17 +424,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobMessagingService
-    displayName: Build bobMessagingService
+  - job: Build_bobmessaging
+    displayName: Build bobmessaging
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobMessagingService
+    - checkout: bobmessaging
     - task: Maven@3
       inputs:
-        mavenPomFile: 'drcs_alert_system/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s drcs_alert_system/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -477,17 +449,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_switch_interface
-    displayName: Build bobSwitchInterface
+  - job: Build_bobswitchinterface
+    displayName: Build bobswitchinterface
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: switch-interface
+    - checkout: bobswitchinterface
     - task: Maven@3
       inputs:
-        mavenPomFile: 'switchinterfacerpm/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s switchinterfacerpm/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -507,12 +479,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobMpos
+    - checkout: bobmpos
     - task: Maven@3
       inputs:
-        mavenPomFile: 'Mpos/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s Mpos/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
@@ -532,12 +504,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobMposLogger
+    - checkout: bobmposlogger
     - task: Maven@3
       inputs:
-        mavenPomFile: 'logger/logger/pom.xml' # Adjust path if needed
+        mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s logger/logger/settings.xml'
+        options: '-Dmaven.test.skip=true -s settings.xml'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
