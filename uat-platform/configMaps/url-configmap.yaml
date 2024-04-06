@@ -30,41 +30,41 @@ data:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
       ps:
-        assignConsolidation: https://bobpaymentapi-service.novusware.com.sg:8125/ps/assignConsolidation    
-        cancelWithdrawalReference: https://bobpaymentapi-service.novusware.com.sg:8125/ps/cancelWithdrawalReference
-        dashBoardVlnBdleNotDeposit: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDshBrdViolationOfBdleNotDeposit
-        deleteBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/deleteBankingHallDepositAmount
-        expireWithdrawalReference: https://bobpaymentapi-service.novusware.com.sg:8125/ps/expireWithdrawalReference
-        getBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBankingHallDepositAmount
-        getBankingHallDepositTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBankingHallDepositTransactions
-        getBundleTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getBundleTransactions
-        getCommercialBankUserTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getCommercialBankUserTransactions
-        getCollectionTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getCollectionTransactions
-        getConsoliadtionTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getConsoliadtionTransactions
-        getDashboardBobDistOverview: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDashboardBobDistOverview
-        getDashboardCashMovement: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDashboardCashMovement
-        getDshBoardRevenueCollDetailedView: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getDshBoardRevenueCollDetailedView
-        getNextStage: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getNextStage
-        getListOfPaymentForComBankTxn: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getListOfPaymentForComBankTxn
-        getListOfPaymentForStaging: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getListOfPaymentForStaging
-        getPreviousStage: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getPreviousStage
-        getReceipt: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getReceipt
-        getStagedTransaction: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagedTransaction
-        getStagingDetails: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingDetails
-        getStagingDetailWithHistory: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingDetailWithHistory
-        getStagingSummary: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getStagingSummary
-        getTodayTransactionAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getTodayTransactionAmount
-        getURNHistory: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getURNHistory
-        getUrnSummary: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUrnSummary
-        getUrnTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUrnTransactions
-        getUserTransactions: https://bobpaymentapi-service.novusware.com.sg:8125/ps/getUserTransactions
-        saveBankingHallDepositAmount: https://bobpaymentapi-service.novusware.com.sg:8125/ps/saveBankingHallDepositAmount
-        searchS3: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3
-        searchS3FutureResult: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3FutureResult
-        searchS3History: https://bobpaymentapi-service.novusware.com.sg:8125/ps/searchS3History
-        urnSearch: https://bobpaymentapi-service.novusware.com.sg:8125/ps/urnSearch
-        validateComBankTxn: https://bobpaymentapi-service.novusware.com.sg:8125/ps/validateComBankTxn
-        validateStagingDataForUser: https://bobpaymentapi-service.novusware.com.sg:8125/ps/validateStagingDataForUser
+        assignConsolidation: https://bobpayment-service.novusware.com.sg:8125/ps/assignConsolidation    
+        cancelWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/cancelWithdrawalReference
+        dashBoardVlnBdleNotDeposit: https://bobpayment-service.novusware.com.sg:8125/ps/getDshBrdViolationOfBdleNotDeposit
+        deleteBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/deleteBankingHallDepositAmount
+        expireWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/expireWithdrawalReference
+        getBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallDepositAmount
+        getBankingHallDepositTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallDepositTransactions
+        getBundleTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBundleTransactions
+        getCommercialBankUserTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getCommercialBankUserTransactions
+        getCollectionTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getCollectionTransactions
+        getConsoliadtionTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getConsoliadtionTransactions
+        getDashboardBobDistOverview: https://bobpayment-service.novusware.com.sg:8125/ps/getDashboardBobDistOverview
+        getDashboardCashMovement: https://bobpayment-service.novusware.com.sg:8125/ps/getDashboardCashMovement
+        getDshBoardRevenueCollDetailedView: https://bobpayment-service.novusware.com.sg:8125/ps/getDshBoardRevenueCollDetailedView
+        getNextStage: https://bobpayment-service.novusware.com.sg:8125/ps/getNextStage
+        getListOfPaymentForComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/getListOfPaymentForComBankTxn
+        getListOfPaymentForStaging: https://bobpayment-service.novusware.com.sg:8125/ps/getListOfPaymentForStaging
+        getPreviousStage: https://bobpayment-service.novusware.com.sg:8125/ps/getPreviousStage
+        getReceipt: https://bobpayment-service.novusware.com.sg:8125/ps/getReceipt
+        getStagedTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/getStagedTransaction
+        getStagingDetails: https://bobpayment-service.novusware.com.sg:8125/ps/getStagingDetails
+        getStagingDetailWithHistory: https://bobpayment-service.novusware.com.sg:8125/ps/getStagingDetailWithHistory
+        getStagingSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getStagingSummary
+        getTodayTransactionAmount: https://bobpayment-service.novusware.com.sg:8125/ps/getTodayTransactionAmount
+        getURNHistory: https://bobpayment-service.novusware.com.sg:8125/ps/getURNHistory
+        getUrnSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getUrnSummary
+        getUrnTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getUrnTransactions
+        getUserTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getUserTransactions
+        saveBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/saveBankingHallDepositAmount
+        searchS3: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3
+        searchS3FutureResult: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3FutureResult
+        searchS3History: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3History
+        urnSearch: https://bobpayment-service.novusware.com.sg:8125/ps/urnSearch
+        validateComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/validateComBankTxn
+        validateStagingDataForUser: https://bobpayment-service.novusware.com.sg:8125/ps/validateStagingDataForUser
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
