@@ -11,3 +11,14 @@ data:
         key-store-password: ${KEY_STORE_PASSWORD}
         key-store-alias: ${SERVICE_NAME}-service
         enabled: true
+    management:
+      endpoint:
+        health:
+          show-details: always
+          probes:
+            enabled: true
+      health:
+        livenessState:
+          enabled: true
+        readinessState:
+          enabled: true
