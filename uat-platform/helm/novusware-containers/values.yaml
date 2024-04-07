@@ -5,7 +5,7 @@ containers:
     port_1: 8130
     target_1: 8080
     type: maven
-  - name: bobauditservice
+  - name: bobaudit
     database: au_db_dev
     loadBalancerIP: 10.210.5.33
     port_1: 8120
@@ -65,7 +65,7 @@ containers:
     port_1: 8170
     target_1: 8080
     type: maven
-  - name: bobpaymentapi
+  - name: bobpayment
     database: ps_db_dev
     loadBalancerIP: 10.210.5.18
     port_1: 8125
