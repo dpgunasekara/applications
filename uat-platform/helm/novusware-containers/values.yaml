@@ -19,7 +19,7 @@ containers:
     type: maven
   - name: bobfileprocessing
     database: fp_db_dev
-    loadBalancerIP: 10.210.5.13
+    loadBalancerIP: 10.210.5.38
     port_1: 8140
     target_1: 8080
     type: maven

@@ -8,11 +8,13 @@ data:
       alert:
         changePwdPageName: drcs-force-change-password
         sendhtmlmailandsms: https://bobmessaging-service.novusware.com.sg:8115
-        sendmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
+        sendmail: https://bobmessaging-service.novusware.com.sg:8115/am/endHtmlEmail
         sendmailandsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmailAndSms
         sendsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         sendSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         uiurl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
+        sendhtmlreceiptmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailWithReceipt
+        sendhtmlmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmail
       am:
         sendSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         sendEmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
