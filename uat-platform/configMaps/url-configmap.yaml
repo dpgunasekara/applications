@@ -95,6 +95,7 @@ data:
         getusercodedetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
         getUserDetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
         getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
+        removeRevenueCodeGroup: https://boburm-service.novusware.com.sg:8110/user/removeRevenueCodeGroup
       cors:
         allowedOrigins:
         - https://10.200.25.23:3009
