@@ -64,10 +64,10 @@ spec:
               mountPath: /opt/keycloak/logs
             - name: keycloak-config
               mountPath: /etc/x509/https/tls.crt
-              subPath: fullchain.pem
+              subPath: keycloak-fullchain.pem
             - name: keycloak-config
               mountPath: /etc/x509/https/tls.key
-              subPath: privkey.pem
+              subPath: keycloak-privkey.pem
       volumes:
         - name: keycloak-config
           persistentVolumeClaim:
