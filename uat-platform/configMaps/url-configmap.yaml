@@ -19,12 +19,16 @@ data:
         sendSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
         sendEmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendEmail
         sendEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
-        sendHtmlEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
+        sendHtmlEmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmail
+        sendHtmlEmailWithReceipt: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailWithReceipt
+        sendHtmlEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms        
       bb:
+        getAllRevenueCodeByRevenueCodeGroupIdList: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeByRevenueCodeGroupIdList
         getCommercialBankByBankId: https://bobagency-service.novusware.com.sg:8130/bob/getCommercialBankByBankId
         getRevenueCodeByRevenueCode: https://bobagency-service.novusware.com.sg:8130/master/getRevenueCodeByRevenueCode
         validateApiRequest: https://bobagency-service.novusware.com.sg:8130/bob/validateApiRequest
         validateS3: https://bobagency-service.novusware.com.sg:8130/bob/validateS3
+        validateStagingReference: https://bobagency-service.novusware.com.sg:8130/bob/validateStagingReference
       bob:
         getCBSAccount: https://bobagency-service.novusware.com.sg:8130/master/getCbsAccountDetails
         getLocation: https://bobagency-service.novusware.com.sg:8130/master/getLocation
@@ -78,18 +82,22 @@ data:
         generateOtp: https://bobswitchinterface-service.novusware.com.sg:8175/sw/generateOtp
       ul:
         deleteLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/deleteLimits
+        depositAmt: https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
         depositAmountUrl: https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
         getAllViolationDetails: https://bobuserlimits-service.novusware.com.sg:8165/limits/getAllViolationDetails
         getLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/getLimits
         insertStageTracking: https://bobuserlimits-service.novusware.com.sg:8165/limits/insertStageTracking
         insertLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/insertLimits
-        revertUserLimitsUrl: https://bobuserlimits-service.novusware.com.sg:8165/limits/revertUserLimts
+        revertUserLimit: https://bobuserlimits-service.novusware.com.sg:8165/limits/revertUserLimit
         updateLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateLimits
+        updateBulkUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateBulkUserLimits
         updateUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateBulkUserLimits
-        validateUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/validateUserLimit
+        validateUserLimit: https://bobuserlimits-service.novusware.com.sg:8165/limits/validateUserLimit
       um:
+        getAllIdentityType:  https://boburm-service.novusware.com.sg:8110/idType/getAllIdentityType
         getUser: https://boburm-service.novusware.com.sg:8110/user/view
         getUserByUserCode: https://boburm-service.novusware.com.sg:8110/urm/getUser
+        view: https://boburm-service.novusware.com.sg:8110/user/view
       urm:
         addUserNotification: https://boburm-service.novusware.com.sg:8110/notification/addUserNotification
         getusercodedetails: https://boburm-service.novusware.com.sg:8110/urm/getUser
