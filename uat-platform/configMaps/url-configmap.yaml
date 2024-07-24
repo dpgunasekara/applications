@@ -92,9 +92,6 @@ data:
         addUserNotification: https://boburm-service.novusware.com.sg:8110/notification/addUserNotification
         getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
         removeRevenueCodeGroup: https://boburm-service.novusware.com.sg:8110/user/removeRevenueCodeGroup
-      drcs:
-        importUserFileRowLimit: 100
-        importUserFileSizeLimit: 5
       cors:
         allowedOrigins:
         - https://10.200.25.23:3009
