@@ -17,7 +17,7 @@ data:
         changePwdPage: drcs-force-change-password
       bb:
         getAllLocation: https://bobagency-service.novusware.com.sg:8130/master/getAllLocation
-        getAllRevenueCodeGroup:https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeGroup
+        getAllRevenueCodeGroup: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeGroup
         getAllRevenueCodeByRevenueCodeGroupIdList: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeByRevenueCodeGroupIdList
         getCommercialBankByBankId: https://bobagency-service.novusware.com.sg:8130/bob/getCommercialBankByBankId
         getParentCommercialBankCode: https://bobagency-service.novusware.com.sg:8130/bob/getParentCommercialBankCode
