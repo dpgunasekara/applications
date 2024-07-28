@@ -25,6 +25,7 @@ data:
         getRevenueCodeByRevenueCode: https://bobagency-service.novusware.com.sg:8130/master/getRevenueCodeByRevenueCode
         validateApiRequest: https://bobagency-service.novusware.com.sg:8130/bob/validateApiRequest
         validateStagingReference: https://bobagency-service.novusware.com.sg:8130/bob/validateStagingReference
+        validateImportUserList: https://bobagency-service.novusware.com.sg:8130/bob/validateImportUserList
         getLocation: https://bobagency-service.novusware.com.sg:8130/master/getLocation
         getCbsAccountDetails: https://bobagency-service.novusware.com.sg:8130/master/getCbsAccountDetails
       rf:
