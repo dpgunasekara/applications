@@ -64,6 +64,7 @@ data:
         searchS3: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3
         searchS3FutureResult: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3FutureResult
         searchS3History: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3History
+        updateComBankTxnValidation: https://bobpayment-service.novusware.com.sg:8125/ps/updateComBankTxnValidation
         updateStagingValidation: https://bobpayment-service.novusware.com.sg:8125/ps/updateStagingValidation
         urnSearch: https://bobpayment-service.novusware.com.sg:8125/ps/urnSearch
         validateComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/validateComBankTxn
