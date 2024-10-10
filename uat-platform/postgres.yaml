@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:latest
+          image: postgres:16
           ports:
             - containerPort: 5432
           env:
@@ -74,7 +74,7 @@ spec:
         spec:
           containers:
           - name: postgres-backup
-            image: postgres:latest
+            image: postgres:16
             command: ["/bin/sh"]
             args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.novusware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
             env:
