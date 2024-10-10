@@ -40,19 +40,19 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobsignage
-    displayName: Build bobsignage
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobsignage
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobsignage'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
+#  - job: Build_bobsignage
+#    displayName: Build bobsignage
+#    pool:
+#      vmImage: $(vmImageName)
+#    steps:
+#    - checkout: bobsignage
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: 'bobsignage'
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          latest
+#          $(Build.BuildId)
