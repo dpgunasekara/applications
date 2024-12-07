@@ -79,7 +79,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobagency
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -104,7 +104,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boblogger
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -129,7 +129,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobburs
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -154,7 +154,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobfileprocessing
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -179,7 +179,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobonegov
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -204,7 +204,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreporting
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -229,7 +229,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobuserlimits
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -254,7 +254,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposinterface
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -279,7 +279,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobqueuemanager
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -304,7 +304,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreferencing
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -329,7 +329,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobpayment
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -354,7 +354,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boboag
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -379,7 +379,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobaudit
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -404,7 +404,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boburm
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -429,7 +429,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmessaging
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -454,7 +454,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobswitchinterface
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -479,7 +479,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmpos
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
@@ -504,7 +504,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposlogger
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
         goals: 'clean package'
