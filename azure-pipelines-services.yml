@@ -68,6 +68,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   vmImageName: 'ubuntu-latest'
+  environmentName: 'uat'    
 
 stages:
 - stage: Build
@@ -79,6 +80,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobagency
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -104,6 +108,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boblogger
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -129,6 +136,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobburs
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -154,6 +164,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobfileprocessing
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -179,6 +192,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobonegov
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -204,6 +220,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreporting
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -229,6 +248,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobuserlimits
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -254,6 +276,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposinterface
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -279,6 +304,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobqueuemanager
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -304,6 +332,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreferencing
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -329,6 +360,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobpayment
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -354,6 +388,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boboag
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -379,6 +416,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobaudit
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -404,6 +444,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boburm
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -429,6 +472,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmessaging
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -454,6 +500,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobswitchinterface
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -479,6 +528,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmpos
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
@@ -504,6 +556,9 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposlogger
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml' # Adjust path if needed
