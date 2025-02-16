@@ -77,6 +77,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobagency
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -105,6 +106,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boblogger
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -133,6 +135,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobburs
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -161,6 +164,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobfileprocessing
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -189,6 +193,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobonegov
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -217,6 +222,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreporting
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -245,6 +251,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobuserlimits
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -273,6 +280,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposinterface
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -301,6 +309,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobqueuemanager
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -329,6 +338,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobreferencing
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -357,6 +367,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobpayment
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -385,6 +396,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boboag
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -413,6 +425,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobaudit
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -441,6 +454,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: boburm
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -469,6 +483,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmessaging
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -497,6 +512,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobswitchinterface
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -525,6 +541,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmpos
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -553,6 +570,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobmposlogger
+      ref: refs/heads/release
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
