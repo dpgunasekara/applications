@@ -1,0 +1,580 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+
+resources:
+ repositories:
+   - repository: bobagency
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobagency'
+   - repository: boblogger
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boblogger'
+   - repository: bobburs
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobburs'
+   - repository: bobfileprocessing
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobfileprocessing'
+   - repository: bobonegov
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobonegov'
+   - repository: bobreporting
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobreporting'
+   - repository: bobuserlimits
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobuserlimits'
+   - repository: bobmposinterface
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmposinterface'
+   - repository: bobqueuemanager
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobqueuemanager'
+   - repository: bobreferencing
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobreferencing'
+   - repository: bobpayment
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobpayment'
+   - repository: boboag
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boboag'
+   - repository: bobaudit
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobaudit'
+   - repository: boburm
+     type: git
+     name: 'BOB - Digital Revenue Collection System/boburm'
+   - repository: bobmessaging
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmessaging'
+   - repository: bobswitchinterface
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobswitchinterface'
+   - repository: bobmpos
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmpos'
+   - repository: bobmposlogger
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmposlogger'
+
+variables:
+  # Container registry service connection established during pipeline creation
+  # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
+  dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
+  # containerRegistry: 'cregsdlc01.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+  vmImageName: 'ubuntu-latest'
+  environmentName: 'uat'    
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build_bobagency
+    displayName: Build bobagency
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobagency
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobagency'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_boblogger
+    displayName: Build boblogger
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: boblogger
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'boblogger'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobburs
+    displayName: Build bobburs
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobburs
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobburs'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobfileprocessing
+    displayName: Build bobfileprocessing
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobfileprocessing
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobfileprocessing'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobonegov
+    displayName: Build bobonegov
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobonegov
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobonegov'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobReporting
+    displayName: Build bobreporting
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobreporting
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobreporting'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobuserlimits
+    displayName: Build bobuserlimits
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobuserlimits
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobuserlimits'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobmposinterface
+    displayName: Build bobmposinterface
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobmposinterface
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmposinterface'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobqueuemanager
+    displayName: Build bobqueuemanager
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobqueuemanager
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobqueuemanager'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobreferencing
+    displayName: Build bobreferencing
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobreferencing
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobreferencing'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobpayment
+    displayName: Build bobpayment
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobpayment
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobpayment'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_boboag
+    displayName: Build boboag
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: boboag
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'boboag'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobaudit
+    displayName: Build bobaudit
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobaudit
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobaudit'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_boburm
+    displayName: Build boburm
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: boburm
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'boburm'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobmessaging
+    displayName: Build bobmessaging
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobmessaging
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmessaging'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobswitchinterface
+    displayName: Build bobswitchinterface
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobswitchinterface
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobswitchinterface'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_mpos
+    displayName: Build bobmpos
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobmpos
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmpos'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_mposlogger
+    displayName: Build bobmposlogger
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobmposlogger
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmposlogger'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
