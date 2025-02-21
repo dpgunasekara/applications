@@ -7,19 +7,19 @@ resources:
    - repository: bobr3portal
      type: git
      name: 'BOB - Digital Revenue Collection System/bobr3portal'
+     ref: refs/heads/release
    - repository: bobsignage
      type: git
      name: 'BOB - Digital Revenue Collection System/bobsignage'
+     ref: refs/heads/release
 
 variables:
   # Container registry service connection established during pipeline creation
-  # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
-  dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
-  # containerRegistry: 'cregsdlc01.azurecr.io'
+  dockerRegistryServiceConnection: 'db9b844b-fbd5-4c4b-9e0f-41e21cd3087f'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   vmImageName: 'ubuntu-latest'
-  environmentName: 'uat' 
+  environmentName: 'prd' 
 
 stages:
 - stage: Build
@@ -32,7 +32,7 @@ stages:
     steps:
     - checkout: bobR3portal
     - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName).json $(Build.SourcesDirectory)/.env
+        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
       displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -51,7 +51,7 @@ stages:
     steps:
     - checkout: bobsignage
     - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName).json $(Build.SourcesDirectory)/.env
+        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
       displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
