@@ -101,9 +101,9 @@ data:
         getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
         removeRevenueCodeGroup: https://boburm-service.novusware.com.sg:8110/user/removeRevenueCodeGroup
       extapp:
-        savemerchant : https://bobnovatrackextapp,novusware.com.sg:8180/bobnovatrack/nova/merchant/save
+        savemerchant : https://bobnovatrackextapp-service.novusware.com.sg:8180/bobnovatrack/nova/merchant/save
       mpos:
-        savemerchant : https://bobmpos-service.novusware.com:8080/mpos/onboard/save. 
+        savemerchant : https://bobmpos-service.novusware.com:8080/mpos/onboard/save 
       cors:
         allowedOrigins:
         - https://10.200.25.23:3009
