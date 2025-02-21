@@ -66,21 +66,8 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobmessaging-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobmessaging-log --enabled-protocols SMB
 
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name novatrackkeycloak-config --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name novatrackkeycloak-data --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name novatrackkeycloak-log --enabled-protocols SMB
-
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name novatrackmessaging-config --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name novatrackmessaging-data --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name novatrackmessaging-log --enabled-protocols SMB
-
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name novatrackauditservice-config --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name novatrackauditservice-data --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name novatrackauditservice-log --enabled-protocols SMB
-
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name nginx-api-gateway-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name nginx-api-gateway-content --enabled-protocols SMB
-
 
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobswitchinterface-config --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobswitchinterface-data --enabled-protocols SMB
@@ -97,3 +84,24 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobmposlogger-config --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobmposlogger-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobmposlogger-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobmerchantmate-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobmerchantmate-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobmerchantmate-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobnovatrackintportal-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackintportal-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackintportal-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobnovatrackintapp-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackintapp-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackintapp-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobnovatrackextportal-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackextportal-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackextportal-log --enabled-protocols SMB
+
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobnovatrackextapp-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackextapp-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackextapp-log --enabled-protocols SMB
+
