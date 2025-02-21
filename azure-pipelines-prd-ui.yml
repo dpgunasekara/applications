@@ -12,6 +12,15 @@ resources:
      type: git
      name: 'BOB - Digital Revenue Collection System/bobsignage'
      ref: refs/heads/release
+   - repository: bobnovatrackintportal
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackintportal'
+     ref: refs/heads/release     
+   - repository: bobnovatrackextportal
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackextportal'
+     ref: refs/heads/release     
+
 
 variables:
   # Container registry service connection established during pipeline creation
