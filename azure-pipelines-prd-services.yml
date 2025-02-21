@@ -77,6 +77,18 @@ resources:
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmposlogger'
      ref: refs/heads/release
+   - repository: bobmerchantmate
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobmerchantmate'
+     ref: refs/heads/release     
+   - repository: bobnovatrackextapp
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackextapp'
+     ref: refs/heads/release     
+   - repository: bobnovatrackintapp
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackintapp'
+     ref: refs/heads/release     
 
 variables:
   dockerRegistryServiceConnection: 'db9b844b-fbd5-4c4b-9e0f-41e21cd3087f'
@@ -588,6 +600,90 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobmposlogger'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobmerchantmate
+    displayName: Build bobmerchantmate
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobmerchantmate
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobmerchantmate'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobnovatrackintapp
+    displayName: Build bobnovatrackintapp
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobnovatrackintapp
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackintapp'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobnovatrackextapp
+    displayName: Build bobnovatrackextapp
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobnovatrackextapp
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackextapp'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |

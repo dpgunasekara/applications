@@ -12,6 +12,15 @@ resources:
      type: git
      name: 'BOB - Digital Revenue Collection System/bobsignage'
      ref: refs/heads/release
+   - repository: bobnovatrackintportal
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackintportal'
+     ref: refs/heads/release     
+   - repository: bobnovatrackextportal
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobnovatrackextportal'
+     ref: refs/heads/release     
+
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -63,3 +72,41 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+  - job: Build_bobnovatrackintportal
+    displayName: Build bobnovatrackintportal
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobnovatrackintportal
+    - script: |
+        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
+      displayName: "Use environment-specific .env"    
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackintportal'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobnovatrackextportal
+    displayName: Build bobsignage
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobnovatrackextportal
+    - script: |
+        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
+      displayName: "Use environment-specific .env"    
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackextportal'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)                    
