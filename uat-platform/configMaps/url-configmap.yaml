@@ -110,6 +110,16 @@ data:
         viewMerchantStatus: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/viewStatus
         disputeAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/chargeback/downloadFile
         serviceAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/request/downloadFile
+      extApp:
+        createUser: https://bobnovatrackextapp-service.novusware.com.sg:8084/novatrack/nova/merchant/createURM
+        setTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/setTerminalPswdInt
+        changeTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/changeTerminalPswdInt
+        resetTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/resetTerminalPswdInt
+        resetMerchantPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/authentication/resetPassword
+        changeMidStatus: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/updateUserStatus
+        viewMerchantStatus: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/viewStatus
+        disputeAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/chargeback/downloadFile
+        serviceAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/request/downloadFile
       intApp:
         getDisputeAttchments: https://bobnovatrackintapp-service.novusware.com.sg:8086/bobnovatrack-internal/disputeChargeback/getDisputeAttachment
       mpos:
@@ -117,6 +127,23 @@ data:
         updateAmountMaster: https://bobmpos-service.novusware.com.sg:8120/mpos/updateAmountMaster    
         updateTerminal: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTerminal
         updateTransactionStatusBatch: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTransactionStatusBatch
+      urm:
+        createUser: https://boburm-service.novusware.com.sg:8110/user/add
+        updateStatus: https://boburm-service.novusware.com.sg:8110/user/updateStatus
+        viewStatus: https://boburm-service.novusware.com.sg:8110/user/viewStatus
+        updateMidTidAndSerialNo: https://boburm-service.novusware.com.sg:8110/userTerminal/updateMidTidAndSerialNo
+        updateTerminalSerialNoByMidAndTid: https://boburm-service.novusware.com.sg:8110/userTerminal/updateTerminalSerialNoByMidAndTid
+        updateUserForUnLinkMid: https://boburm-service.novusware.com.sg:8110/userTerminal/updateUserForUnLinkMid
+        resetMerchantPwd: https://boburm-service.novusware.com.sg:8110/authentication/resetPassword
+      alert:
+        sendmailandsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
+        sendmail: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmail
+        sendmailHtml: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmail
+        sendsms: https://bobmessaging-service.novusware.com.sg:8115/am/sendSms
+      intUrm:
+        createUser: https://boburm-service.novusware.com.sg:8110/internal/urm/user/add
+        updateNotificationDetails: https://boburm-service.novusware.com.sg:8110/internal/urm/notification/updateUserNotifications
+        configureAdminUserDetails: https://boburm-service.novusware.com.sg:8110/internal/urm/user/configureAdminUserDetails
       cors:
         allowedOrigins:
         - https://bobr3portal.novusware.com.sg:3006
