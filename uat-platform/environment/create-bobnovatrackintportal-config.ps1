@@ -1,0 +1,1 @@
+kubectl create configmap bobnovatrackintportal-config --from-env-file=bobnovatrackintportal.env
