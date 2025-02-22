@@ -101,13 +101,24 @@ data:
         getUserDetailsByPermissionId: https://boburm-service.novusware.com.sg:8110/urm/getUserDetailsByPermissionId
         removeRevenueCodeGroup: https://boburm-service.novusware.com.sg:8110/user/removeRevenueCodeGroup
       extapp:
-        savemerchant : https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/save
+        createUser: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/createURM
+        savemerchant: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/save
+        setTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/setTerminalPswdInt
+        changeTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/changeTerminalPswdInt
+        resetTerminalPwd: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/resetTerminalPswdInt
+        changeMidStatus: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/updateUserStatus
+        viewMerchantStatus: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/nova/merchant/viewStatus
+        disputeAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/chargeback/downloadFile
+        serviceAttchment: https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/mportal/request/downloadFile
+      intApp:
+        getDisputeAttchments: https://bobnovatrackintapp-service.novusware.com.sg:8086/bobnovatrack-internal/disputeChargeback/getDisputeAttachment
       mpos:
-        savemerchant : https://bobmpos-service.novusware.com:8120/mpos/onboard/save 
+        savemerchant: https://bobmpos-service.novusware.com.sg:8120/mpos/onboard/save
+        updateAmountMaster: https://bobmpos-service.novusware.com.sg:8120/mpos/updateAmountMaster    
+        updateTerminal: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTerminal
+        updateTransactionStatusBatch: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTransactionStatusBatch
       cors:
         allowedOrigins:
-        - https://10.200.25.23:3009
-        - https://10.210.5.25:3006
         - https://bobr3portal.novusware.com.sg:3006
         - https://bobr3portal.novusware.com.sg
         - https://portal.novusware.com.sg:3006
@@ -118,4 +129,7 @@ data:
         - https://signage.novusware.com.sg
         - https://signage.drcs.novusware.com.sg
         - https://signage.drcs.novusware.com.sg:443
-
+        - https://bobnovatrackintportal.novusware.com.sg:3005
+        - https://bobnovatrackintportal.novusware.com.sg
+        - https://bobnovatrackextportal.novusware.com.sg:3007
+        - https://bobnovatrackextportal.novusware.com.sg

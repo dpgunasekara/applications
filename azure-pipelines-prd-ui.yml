@@ -92,7 +92,7 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobnovatrackextportal
-    displayName: Build bobsignage
+    displayName: Build bobnovatrackintportal
     pool:
       vmImage: $(vmImageName)
     steps:

@@ -226,5 +226,17 @@ data:
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
             proxy_pass https://bobfileprocessing-service.novusware.com.sg:8140/fp/;
         }
+        location /bobnovatrack/ {
+            proxy_pass https://bobnovatrackextapp-service.novusware.com.sg:8084/bobnovatrack/;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        }
+        location /bobnovatrack-internal/ {
+            proxy_pass https://bobnovatrackintapp-service.novusware.com.sg:8086/bobnovatrack-internal/;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';        
+        }
       }
     }
