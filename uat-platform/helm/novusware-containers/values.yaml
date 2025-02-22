@@ -112,7 +112,7 @@ containers:
   - name: bobmerchantmate
     database: bobmerchantmate_db_dev
     loadBalancerIP: 10.210.5.90
-    port_1: 8080
+    port_1: 8085
     target_1: 8080
     type: maven
   - name: bobnovatrackintapp
@@ -139,11 +139,11 @@ containers:
     type: react
   - name: bobnovatrackintportal
     loadBalancerIP: 10.210.5.93
-    port_1: 3006
-    target_1: 3006
+    port_1: 3005
+    target_1: 3005
     type: react
   - name: bobnovatrackextportal
     loadBalancerIP: 10.210.5.94
-    port_1: 3006
-    target_1: 3006
+    port_1: 3007
+    target_1: 3007
     type: react
