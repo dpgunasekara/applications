@@ -22,7 +22,8 @@ $services = @(
     "bobuserlimits",
     "bobmerchantmate",
     "bobnovatrackintapp",
-    "bobnovatrackextapp"
+    "bobnovatrackextapp",
+    "bobcoindeposit"
 )
 
 # Iterate over each service and execute the kubectl command
