@@ -89,6 +89,10 @@ resources:
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackintapp'
      ref: refs/heads/release     
+   - repository: bobcoindeposit
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobcoindeposit'
+     ref: refs/heads/release     
 
 variables:
   dockerRegistryServiceConnection: 'db9b844b-fbd5-4c4b-9e0f-41e21cd3087f'
@@ -684,6 +688,34 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackextapp'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: Build_bobcoindeposit
+    displayName: Build bobcoindeposit
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: bobcoindeposit
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: 'bobcoindeposit'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
