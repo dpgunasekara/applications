@@ -101,7 +101,7 @@ az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0v
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackextportal-data --enabled-protocols SMB
 az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackextportal-log --enabled-protocols SMB
 
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobnovatrackextapp-config --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobnovatrackextapp-data --enabled-protocols SMB
-az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobnovatrackextapp-log --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat01 --name bobcoindeposit-config --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat02 --name bobcoindeposit-data --enabled-protocols SMB
+az storage share-rm create --resource-group rg-dcrs-uat-01 --storage-account n0vdcrsuat03 --name bobcoindeposit-log --enabled-protocols SMB
 
