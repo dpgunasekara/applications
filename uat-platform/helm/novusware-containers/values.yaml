@@ -127,6 +127,12 @@ containers:
     port_1: 8084
     target_1: 8080
     type: maven
+  - name: bobcoindeposit
+    database: cs_db_dev
+    loadBalancerIP: 10.210.5.94
+    port_1: 8200
+    target_1: 8080
+    type: maven    
   - name: bobr3portal
     loadBalancerIP: 10.210.5.25
     port_1: 3006
