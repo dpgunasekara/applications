@@ -28,8 +28,8 @@ data:
         validateImportUserList: https://bobagency-service.novusware.com.sg:8130/bob/validateImportUserList
         getLocation: https://bobagency-service.novusware.com.sg:8130/master/getLocation
         getCbsAccountDetails: https://bobagency-service.novusware.com.sg:8130/master/getCbsAccountDetails
-        validateMerchantSecret: http://bobdevapp.novussl.com:8130/master/validateMerchantSecret
-        bankingHallTransactionNotification: http://bobdevapp.novussl.com:8130/bob/bankingHallTransactionNotification
+        validateMerchantSecret: https://bobagency-service.novusware.com.sg:8130/master/validateMerchantSecret
+        bankingHallTransactionNotification: https://bobagency-service.novusware.com.sg:8130/bob/bankingHallTransactionNotification
       rf:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
@@ -71,7 +71,7 @@ data:
         urnSearch: https://bobpayment-service.novusware.com.sg:8125/ps/urnSearch
         validateComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/validateComBankTxn
         validateStagingDataForUser: https://bobpayment-service.novusware.com.sg:8125/ps/validateStagingDataForUser
-        validateBankingHallDepositAmount: http://bobdevapp.novussl.com:8125/ps/validateBankingHallDepositAmount
+        validateBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/validateBankingHallDepositAmount
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
@@ -80,8 +80,8 @@ data:
         updateQueueStatus: https://bobqueuemanager-service.novusware.com.sg:8100/queue/updateQueueStatus
       sw:
         generateOtp: https://bobswitchinterface-service.novusware.com.sg:8175/sw/generateOtp
-        processS3ValidationRequest: http://bobdevapp.novussl.com:8175/processS3ValidationRequest
-        processTxnNotificationRequest: http://bobdevapp.novussl.com:8175/processTxnNotificationRequest
+        processS3ValidationRequest: https://bobswitchinterface-service.novusware.com.sg:8175/processS3ValidationRequest
+        processTxnNotificationRequest: https://bobswitchinterface-service.novusware.com.sg:8175/processTxnNotificationRequest
       ul:
         deleteLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/deleteLimits
         depositAmt: https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
