@@ -30,6 +30,7 @@ data:
         getCbsAccountDetails: https://bobagency-service.novusware.com.sg:8130/master/getCbsAccountDetails
         validateMerchantSecret: https://bobagency-service.novusware.com.sg:8130/master/validateMerchantSecret
         bankingHallTransactionNotification: https://bobagency-service.novusware.com.sg:8130/bob/bankingHallTransactionNotification
+        getAllAgencyCode: https://bobagency-service.novusware.com.sg:8130/bob/getAllAgencyCode
       rf:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
@@ -72,6 +73,7 @@ data:
         validateComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/validateComBankTxn
         validateStagingDataForUser: https://bobpayment-service.novusware.com.sg:8125/ps/validateStagingDataForUser
         validateBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/validateBankingHallDepositAmount
+        updateBankingHallTxn: https://bobpayment-service.novusware.com.sg:8125/ps/updateBankingHallTxn
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
