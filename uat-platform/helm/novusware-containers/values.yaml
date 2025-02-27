@@ -36,7 +36,7 @@ containers:
     target_1: 8080
     type: maven
   - name: bobmpos
-    database: mpos_db_dev
+    database: bobmpos_db_dev
     loadBalancerIP: 10.210.5.38
     port_1: 8120
     target_1: 8080
