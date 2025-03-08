@@ -74,12 +74,12 @@ spec:
               value: "yes"
             - name: KAFKA_CFG_LISTENERS
               value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
-            - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: "INTERNAL://$${POD_NAME}.kafka-headless.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:9092"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:9092"
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
