@@ -75,7 +75,7 @@ spec:
             - name: KAFKA_CFG_LISTENERS
               value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:9092"
+              value: "INTERNAL://$${POD_NAME}.kafka-headless.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:9092"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
