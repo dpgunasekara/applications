@@ -5,9 +5,6 @@ metadata:
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
-  type: ExternalName
-  externalName: kafka.novusware.com.sg    
-spec:
   selector:
     app: kafka
   ports:
@@ -55,6 +52,7 @@ spec:
             cpu: "1"             
         ports:
          - containerPort: 9092
+         - containerPort: 8444
         volumeMounts:
         - name: data
           mountPath: /bitnami
@@ -66,13 +64,13 @@ spec:
         - name: ALLOW_PLAINTEXT_LISTENER
           value: "yes"
         - name: KAFKA_CFG_LISTENERS
-          value: "PLAINTEXT://0.0.0.0:8444,EXTERNAL://0.0.0.0:8444"
+          value: "INTERNAL1://0.0.0.0:9092,INTERNAL2://0.0.0.0:8444,EXTERNAL1://0.0.0.0:9092,EXTERNAL2://0.0.0.0:8444"
         - name: KAFKA_CFG_ADVERTISED_LISTENERS
-          value: "PLAINTEXT://kafka.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:8444"
+          value: "INTERNAL1://kafka.default.svc.cluster.local:9092,INTERNAL2://kafka.default.svc.cluster.local:8444,EXTERNAL1://kafka.novusware.com.sg:9092,EXTERNAL2://kafka.novusware.com.sg:8444"
         - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
-          value: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
+          value: "INTERNAL1:PLAINTEXT,INTERNAL2:PLAINTEXT,EXTERNAL1:PLAINTEXT,EXTERNAL2:PLAINTEXT"
         - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
-          value: "PLAINTEXT"           
+          value: "INTERNAL1"          
   volumeClaimTemplates:
   - metadata:
       name: data
