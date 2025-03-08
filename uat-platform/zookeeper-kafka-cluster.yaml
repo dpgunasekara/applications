@@ -5,13 +5,22 @@ metadata:
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
+  type: ExternalName
+  externalName: kafka.novusware.com.sg    
+spec:
   selector:
     app: kafka
   ports:
-  - name: service
+  - name: internal-8444
     port: 8444
+    targetPort: 8444
+  - name: internal-9092
+    port: 9092
     targetPort: 9092
-  - name: external
+  - name: external-8444
+    port: 8444
+    targetPort: 8444
+  - name: external-9092
     port: 9092
     targetPort: 9092
   type: LoadBalancer
@@ -55,7 +64,15 @@ spec:
           value: zookeeper.default.svc.cluster.local:2181
 #          value: zookeeper-0.zookeeper.default.svc.cluster.local:2181
         - name: ALLOW_PLAINTEXT_LISTENER
-          value: "yes" 
+          value: "yes"
+        - name: KAFKA_CFG_LISTENERS
+          value: "PLAINTEXT://0.0.0.0:8444,EXTERNAL://0.0.0.0:8444"
+        - name: KAFKA_CFG_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://kafka.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:8444"
+        - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
+        - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+          value: "PLAINTEXT"           
   volumeClaimTemplates:
   - metadata:
       name: data
