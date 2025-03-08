@@ -55,13 +55,13 @@ spec:
         - name: ALLOW_PLAINTEXT_LISTENER
           value: "yes"
         - name: KAFKA_CFG_LISTENERS
-          value: "INTERNAL1://0.0.0.0:8444,EXTERNAL1://0.0.0.0:8444"
+          value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:8444"
         - name: KAFKA_CFG_ADVERTISED_LISTENERS
-          value: "INTERNAL1://kafka.default.svc.cluster.local:8444,EXTERNAL1://kafka.novusware.com.sg:8444"
+          value: "INTERNAL://kafka.default.svc.cluster.local:8444,EXTERNAL://kafka.novusware.com.sg:8444"
         - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
-          value: "INTERNAL1:PLAINTEXT,EXTERNAL1:PLAINTEXT"
+          value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
         - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
-          value: "INTERNAL1"          
+          value: "INTERNAL"         
   volumeClaimTemplates:
   - metadata:
       name: data
