@@ -8,10 +8,16 @@ spec:
   selector:
     app: kafka
   ports:
-  - name: service
+  - name: internal-8444
     port: 8444
     targetPort: 9092
-  - name: external
+  - name: internal-9092
+    port: 9092
+    targetPort: 9092
+  - name: external-8444
+    port: 8444
+    targetPort: 9092
+  - name: external-9092
     port: 9092
     targetPort: 9092
   type: LoadBalancer
@@ -46,6 +52,7 @@ spec:
             cpu: "1"             
         ports:
          - containerPort: 9092
+         - containerPort: 8444
         volumeMounts:
         - name: data
           mountPath: /bitnami
@@ -55,7 +62,15 @@ spec:
           value: zookeeper.default.svc.cluster.local:2181
 #          value: zookeeper-0.zookeeper.default.svc.cluster.local:2181
         - name: ALLOW_PLAINTEXT_LISTENER
-          value: "yes" 
+          value: "yes"
+        - name: KAFKA_CFG_LISTENERS
+          value: "INTERNAL1://0.0.0.0:9092,INTERNAL2://0.0.0.0:8444,EXTERNAL1://0.0.0.0:9092,EXTERNAL2://0.0.0.0:8444"
+        - name: KAFKA_CFG_ADVERTISED_LISTENERS
+          value: "INTERNAL1://kafka.default.svc.cluster.local:9092,INTERNAL2://kafka.default.svc.cluster.local:8444,EXTERNAL1://kafka.novusware.com.sg:9092,EXTERNAL2://kafka.novusware.com.sg:8444"
+        - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "INTERNAL1:PLAINTEXT,INTERNAL2:PLAINTEXT,EXTERNAL1:PLAINTEXT,EXTERNAL2:PLAINTEXT"
+        - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+          value: "INTERNAL1"          
   volumeClaimTemplates:
   - metadata:
       name: data

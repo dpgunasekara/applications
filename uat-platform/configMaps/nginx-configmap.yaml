@@ -244,5 +244,29 @@ data:
             add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
             add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';        
         }
+        location /sw/ {
+            proxy_pass https://bobswitchinterface-service.novusware.com.sg:8175/sw/;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        }
+        location /processS3ValidationRequest {
+            proxy_pass https://bobswitchinterface-service.novusware.com.sg:8175/processS3ValidationRequest;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        }
+        location /processOTPValidationRequest {
+            proxy_pass https://bobswitchinterface-service.novusware.com.sg:8175/processOTPValidationRequest;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        }
+        location /processTxnNotificationRequest {
+            proxy_pass https://bobswitchinterface-service.novusware.com.sg:8175/processTxnNotificationRequest;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST';
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        }
       }
     }
