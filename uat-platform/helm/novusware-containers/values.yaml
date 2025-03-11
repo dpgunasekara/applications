@@ -153,3 +153,8 @@ containers:
     port_1: 3007
     target_1: 3007
     type: react
+    - name: bobburssimulator
+    loadBalancerIP: 10.210.5.95
+    port_1: 3009
+    target_1: 3009
+    type: react
