@@ -16,7 +16,9 @@ resources:
    - repository: bobnovatrackextportal
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackextportal'
-
+   - repository: bobburssimulator
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobburssimulator'
 
 variables:
   # Container registry service connection established during pipeline creation
