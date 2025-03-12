@@ -165,5 +165,7 @@ data:
         - https://bobnovatrackextportal.novusware.com.sg:3007
         - https://bobnovatrackextportal.novusware.com.sg
         - https://10.200.25.23:3009
-#        - https://bobburssimulator.novusware.com.sg:3009
-#        - https://bobburssimulator.novusware.com.sg
+        - https://bobburssimulator.novusware.com.sg:3009
+        - https://bobburssimulator.novusware.com.sg
+        - https://bobburssimulator.drcs.novusware.com.sg
+        - https://bobburssimulator.drcs.novusware.com.sg:443
