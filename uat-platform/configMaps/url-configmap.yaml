@@ -76,7 +76,6 @@ data:
         updateBankingHallTxn: https://bobpayment-service.novusware.com.sg:8125/ps/updateBankingHallTxn
         getPartialStagingJourney: https://bobpayment-service.novusware.com.sg:8125/ps/getPartialStagingJourney
         reconcileCardPayment: https://bobpayment-service.novusware.com.sg:8125/ps/reconcileCardPayment
-
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
