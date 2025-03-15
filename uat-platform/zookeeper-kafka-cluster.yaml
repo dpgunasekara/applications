@@ -68,6 +68,8 @@ spec:
             - name: data
               mountPath: /bitnami
           env:
+            - name: KAFKA_HEAP_OPTS
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"          
             - name: KAFKA_CFG_ZOOKEEPER_CONNECT
               value: zookeeper.default.svc.cluster.local:2181
             - name: ALLOW_PLAINTEXT_LISTENER
