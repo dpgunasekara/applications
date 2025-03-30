@@ -31,6 +31,9 @@ data:
         validateMerchantSecret: https://bobagency-service.novusware.com.sg:8130/master/validateMerchantSecret
         bankingHallTransactionNotification: https://bobagency-service.novusware.com.sg:8130/bob/bankingHallTransactionNotification
         getAllAgencyCode: https://bobagency-service.novusware.com.sg:8130/bob/getAllAgencyCode
+        getAllTransactionTypes: https://bobagency-service.novusware.com.sg:8130/master/getAllTransactionTypes
+        getAppConfigs: https://bobagency-service.novusware.com.sg:8130/master/getAppConfigs
+        getCustomerContact: https://bobagency-service.novusware.com.sg:8130/bob/getCustomerContact
       rf:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
@@ -75,7 +78,8 @@ data:
         validateBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/validateBankingHallDepositAmount
         updateBankingHallTxn: https://bobpayment-service.novusware.com.sg:8125/ps/updateBankingHallTxn
         getPartialStagingJourney: https://bobpayment-service.novusware.com.sg:8125/ps/getPartialStagingJourney
-
+        reconcileCardPayment: https://bobpayment-service.novusware.com.sg:8125/ps/reconcileCardPayment
+        getPOSCollectionSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getPOSCollectionSummary
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
