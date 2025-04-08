@@ -63,7 +63,7 @@ metadata:
   name: kafka-0
 spec:
   capacity:
-    storage: 5Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -82,7 +82,7 @@ metadata:
   name: kafka-1
 spec:
   capacity:
-    storage: 5Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -101,7 +101,7 @@ metadata:
   name: kafka-2
 spec:
   capacity:
-    storage: 5Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
