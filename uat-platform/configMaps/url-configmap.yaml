@@ -80,6 +80,7 @@ data:
         getPartialStagingJourney: https://bobpayment-service.novusware.com.sg:8125/ps/getPartialStagingJourney
         reconcileCardPayment: https://bobpayment-service.novusware.com.sg:8125/ps/reconcileCardPayment
         getPOSCollectionSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getPOSCollectionSummary
+        processRfPayment: https://bobpayment-service.novusware.com.sg:8125/ps/processRfPayment
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.novusware.com.sg:8100/queue/changeOperatingstatusTerminal
