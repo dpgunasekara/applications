@@ -109,7 +109,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-drcs-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-01
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/RG-DRCS-NONPROD-LDZN-CIN-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-0
     volumeAttributes:
       fsType: ext4
 
