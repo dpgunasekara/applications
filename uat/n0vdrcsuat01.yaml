@@ -4,23 +4,23 @@ metadata:
   name: n0vdrcsuat01
 spec:
   provider: azure
-  secretObjects:                                  
-  - secretName: n0vdrcsuat01
-    type: Opaque
-    data:
-    - objectName: n0vdrcsuat01
-      key: secret
+  secretObjects:
+    - secretName: n0vdrcsuat01
+      type: Opaque
+      data:
+        - objectName: n0vdrcsuat01
+          key: secret
   parameters:
     usePodIdentity: "false"
     userAssignedIdentityID: "8b3a80d0-b33d-4802-a5d9-28b2014fcbbd"
     keyvaultName: "keyvdrcsuat01"
-    cloudName: ""                                       
+    cloudName: ""  # Optional: Leave empty for Azure Global; or set to AzureChinaCloud, AzureUSGovernment, etc.
     objects: |
       array:
         - |
           objectName: n0vdrcsuat01
-          objectType: secret                              
-          objectVersion: ""
+          objectType: secret
+          objectVersion: ""  # Optional: "" = latest
     resourceGroup: "rg-drcs-nonprod-ldzn-cin-01"
     subscriptionId: "b6b8b5ca-22e7-4919-bc86-9d21a9b5f640"
     tenantId: "c3178d1e-789d-4aee-bb10-ad5ee4cee2c9"
