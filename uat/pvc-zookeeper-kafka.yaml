@@ -4,7 +4,7 @@ metadata:
   name: data-zookeeper-0
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: zookeeper-0
   resources:
@@ -17,7 +17,7 @@ metadata:
   name: data-zookeeper-1
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: zookeeper-1
   resources:
@@ -30,7 +30,7 @@ metadata:
   name: data-zookeeper-2
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: zookeeper-2
   resources:
@@ -43,7 +43,7 @@ metadata:
   name: data-kafka-0
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: kafka-0
   resources:
@@ -56,7 +56,7 @@ metadata:
   name: data-kafka-1
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: kafka-1
   resources:
@@ -69,7 +69,7 @@ metadata:
   name: data-kafka-2
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: kafka-2
   resources:
