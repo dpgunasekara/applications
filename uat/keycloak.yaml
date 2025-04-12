@@ -44,7 +44,7 @@ spec:
             - name: KC_HOSTNAME
               value: keycloak.uat.novaware.com.sg
             - name: KC_HTTPS_KEY_STORE_FILE
-              value: /etc/x509/https/keycloak.p12
+              value: /etc/x509/https/uat.novaware.p12
             - name: KC_HTTPS_KEY_STORE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -81,4 +81,4 @@ spec:
             claimName: keycloak-log
         - name: keycloak-keystore
           secret:
-            secretName: keycloak-keystore
+            secretName: uat.novaware-keystore
