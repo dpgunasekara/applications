@@ -1,0 +1,1 @@
+kubectl create configmap bobburssimulator-config --from-env-file=bobburssimulator.env --namespace drcs-uat-01
