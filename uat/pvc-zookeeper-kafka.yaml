@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: zookeeper-0
   resources:
     requests:
@@ -18,7 +18,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: zookeeper-1
   resources:
     requests:
@@ -31,7 +31,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: zookeeper-2
   resources:
     requests:
@@ -44,7 +44,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: kafka-0
   resources:
     requests:
@@ -57,7 +57,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: kafka-1
   resources:
     requests:
@@ -70,7 +70,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   volumeName: kafka-2
   resources:
     requests:
