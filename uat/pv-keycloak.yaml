@@ -19,7 +19,7 @@ spec:
       shareName: config
     nodeStageSecretRef:
       name: n0vdrcsuat01
-      namespace: default
+      namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -51,7 +51,7 @@ spec:
       shareName: data
     nodeStageSecretRef:
       name: n0vdrcsuat01
-      namespace: default
+      namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -83,7 +83,7 @@ spec:
       shareName: log
     nodeStageSecretRef:
       name: n0vdrcsuat01
-      namespace: default
+      namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
