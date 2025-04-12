@@ -1,0 +1,160 @@
+containers:
+  - name: bobagency
+    database: bb_db_uat
+    loadBalancerIP: 10.207.10.120
+    port_1: 8130
+    target_1: 8080
+    type: maven
+  - name: bobaudit
+    database: au_db_uat
+    loadBalancerIP: 10.207.10.121
+    port_1: 8120
+    target_1: 8080
+    type: maven
+  - name: bobburs
+    database: bur_db_uat
+    loadBalancerIP: 10.207.10.122
+    port_1: 8145
+    target_1: 8080
+    type: maven
+  - name: bobfileprocessing
+    database: fp_db_uat
+    loadBalancerIP: 10.207.10.123
+    port_1: 8140
+    target_1: 8080
+    type: maven
+  - name: boblogger
+    database: bl_db_uat
+    loadBalancerIP: 10.207.10.124
+    port_1: 80
+    target_1: 8080
+    type: maven
+  - name: bobmessaging
+    database: am_db_uat
+    loadBalancerIP: 10.207.10.125
+    port_1: 8115
+    target_1: 8080
+    type: maven
+  - name: bobmpos
+    database: bobmpos_db_uat
+    loadBalancerIP: 10.207.10.126
+    port_1: 8120
+    target_1: 8080
+    type: maven
+  - name: bobmposinterface
+    database: mi_db_uat
+    loadBalancerIP: 10.207.10.127
+    port_1: 8155
+    target_1: 8080
+    type: maven
+  - name: bobmposlogger
+    database: bobmposlogger_db_uat
+    loadBalancerIP: 10.207.10.128
+    port_1: 8150
+    target_1: 8080
+    type: maven
+  - name: boboag
+    database: og_db_uat
+    loadBalancerIP: 10.207.10.129
+    port_1: 8135
+    target_1: 8080
+    type: maven
+  - name: bobonegov
+    database: ogo_db_uat
+    loadBalancerIP: 10.207.10.130
+    port_1: 8170
+    target_1: 8080
+    type: maven
+  - name: bobpayment
+    database: ps_db_uat
+    loadBalancerIP: 10.207.10.131
+    port_1: 8125
+    target_1: 8080
+    type: maven
+  - name: bobqueuemanager
+    database: qm_db_uat
+    loadBalancerIP: 10.207.10.132
+    port_1: 8100
+    target_1: 8080
+    type: maven
+  - name: bobreferencing
+    database: rf_db_uat
+    loadBalancerIP: 10.207.10.133
+    port_1: 8095
+    target_1: 8080
+    type: maven
+  - name: bobreporting
+    database: rp_db_uat
+    loadBalancerIP: 10.207.10.134
+    port_1: 8160
+    target_1: 8080
+    type: maven
+#  - name: bobswitchinterface
+#    database: sw_db_uat
+#    loadBalancerIP: 10.207.10.36
+#    port_1: 8175
+#    target_1: 8080
+#    port_2: 6666
+#    target_2: 6666
+#    type: maven
+  - name: boburm
+    database: urm_db_uat
+    loadBalancerIP: 10.207.10.135
+    port_1: 8110
+    target_1: 8080
+    type: maven
+  - name: bobuserlimits
+    database: ul_db_uat
+    loadBalancerIP: 10.207.10.136
+    port_1: 8165
+    target_1: 8080
+    type: maven
+  - name: bobmerchantmate
+    database: bobmerchantmate_db_uat
+    loadBalancerIP: 10.207.10.137
+    port_1: 8085
+    target_1: 8080
+    type: maven
+  - name: bobnovatrackintapp
+    database: bobnovatrack_db_uat
+    loadBalancerIP: 10.207.10.138
+    port_1: 8086
+    target_1: 8080
+    type: maven
+  - name: bobnovatrackextapp
+    database: bobnovatrack_db_uat
+    loadBalancerIP: 10.207.10.139
+    port_1: 8084
+    target_1: 8080
+    type: maven
+  - name: bobcoindeposit
+    database: cs_db_uat
+    loadBalancerIP: 10.207.10.140
+    port_1: 8200
+    target_1: 8080
+    type: maven    
+  - name: bobr3portal
+    loadBalancerIP: 10.207.10.141
+    port_1: 3006
+    target_1: 3006
+    type: react
+  - name: bobsignage
+    loadBalancerIP: 10.207.10.142
+    port_1: 3008
+    target_1: 3008
+    type: react
+  - name: bobnovatrackintportal
+    loadBalancerIP: 10.207.10.143
+    port_1: 3005
+    target_1: 3005
+    type: react
+  - name: bobnovatrackextportal
+    loadBalancerIP: 10.207.10.144
+    port_1: 3007
+    target_1: 3007
+    type: react
+  - name: bobburssimulator
+    loadBalancerIP: 10.207.10.145
+    port_1: 3009
+    target_1: 3009
+    type: react
