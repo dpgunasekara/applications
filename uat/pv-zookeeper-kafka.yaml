@@ -13,7 +13,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/zookeeper-data-0
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-0
     volumeAttributes:
       fsType: ext4
 ---
@@ -32,7 +32,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/zookeeper-data-1
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-1
     volumeAttributes:
       fsType: ext4
 ---
@@ -51,7 +51,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/zookeeper-data-2
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-2
     volumeAttributes:
       fsType: ext4
 ---
@@ -70,7 +70,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/kafka-data-0
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-0
     volumeAttributes:
       fsType: ext4
 ---
@@ -89,7 +89,7 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/kafka-data-1
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-1
     volumeAttributes:
       fsType: ext4
 ---
@@ -108,6 +108,6 @@ spec:
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/kafka-data-2
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-2
     volumeAttributes:
       fsType: ext4
