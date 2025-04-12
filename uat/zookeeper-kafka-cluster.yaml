@@ -9,6 +9,7 @@ spec:
   selector:
     app: kafka
   type: LoadBalancer
+  loadBalancerIP: 10.207.10.102
   ports:
     - name: internal-8444
       port: 8444
@@ -25,7 +26,7 @@ kind: Service
 metadata:
   name: kafka-headless
 spec:
-  clusterIP: None  # Headless service for Kafka brokers to communicate
+  clusterIP: None
   selector:
     app: kafka
   ports:
@@ -38,27 +39,25 @@ spec:
     - name: external-9093
       port: 9093
       targetPort: 9093
-
 ---
+# StatefulSet for Kafka Broker 0
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: kafka
+  name: kafka-0
 spec:
-  replicas: 3
-  serviceName: kafka-headless  # Use headless service for internal broker discovery
+  replicas: 1
+  serviceName: kafka-headless
   selector:
     matchLabels:
       app: kafka
+      broker-id: "0"
   template:
     metadata:
       labels:
         app: kafka
+        broker-id: "0"
     spec:
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
       containers:
         - name: kafka
           image: bitnami/kafka:3.9.0
@@ -67,7 +66,7 @@ spec:
           resources:
             requests:
               memory: "1G"
-              cpu: "1"             
+              cpu: "1"
           ports:
             - containerPort: 9093
             - containerPort: 9092
@@ -77,7 +76,7 @@ spec:
               mountPath: /bitnami
           env:
             - name: KAFKA_HEAP_OPTS
-              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"          
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
             - name: KAFKA_CFG_ZOOKEEPER_CONNECT
               value: zookeeper.default.svc.cluster.local:2181
             - name: ALLOW_PLAINTEXT_LISTENER
@@ -89,18 +88,128 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.novusware.com.sg:9092"
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.uat.novaware.com.sg:9092"
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
               value: "INTERNAL"
-
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "managed-csi"
-        resources:
-          requests:
-            storage: 5Gi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-kafka-0
+---
+# Repeat for Broker 1
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka-1
+spec:
+  replicas: 1
+  serviceName: kafka-headless
+  selector:
+    matchLabels:
+      app: kafka
+      broker-id: "1"
+  template:
+    metadata:
+      labels:
+        app: kafka
+        broker-id: "1"
+    spec:
+      containers:
+        - name: kafka
+          image: bitnami/kafka:3.9.0
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              memory: "1G"
+              cpu: "1"
+          ports:
+            - containerPort: 9093
+            - containerPort: 9092
+            - containerPort: 8444
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami
+          env:
+            - name: KAFKA_HEAP_OPTS
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
+            - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+              value: zookeeper.default.svc.cluster.local:2181
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+            - name: KAFKA_CFG_LISTENERS
+              value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.uat.novaware.com.sg:9092"
+            - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+              value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+            - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+              value: "INTERNAL"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-kafka-1
+---
+# Repeat for Broker 2
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka-2
+spec:
+  replicas: 1
+  serviceName: kafka-headless
+  selector:
+    matchLabels:
+      app: kafka
+      broker-id: "2"
+  template:
+    metadata:
+      labels:
+        app: kafka
+        broker-id: "2"
+    spec:
+      containers:
+        - name: kafka
+          image: bitnami/kafka:3.9.0
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              memory: "1G"
+              cpu: "1"
+          ports:
+            - containerPort: 9093
+            - containerPort: 9092
+            - containerPort: 8444
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami
+          env:
+            - name: KAFKA_HEAP_OPTS
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
+            - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+              value: zookeeper.default.svc.cluster.local:2181
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+            - name: KAFKA_CFG_LISTENERS
+              value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.uat.novaware.com.sg:9092"
+            - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+              value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+            - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+              value: "INTERNAL"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-kafka-2
