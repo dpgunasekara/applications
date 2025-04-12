@@ -8,7 +8,7 @@ spec:
   selector:
     app: keycloak
   type: LoadBalancer
-  loadBalancerIP: 10.210.5.26
+  loadBalancerIP: 10.207.10.101
   ports:
   - port: 8085
     targetPort: 8443
@@ -42,7 +42,7 @@ spec:
             - name: KEYCLOAK_PASSWORD
               value: admin
             - name: KC_HOSTNAME
-              value: keycloak.novusware.com.sg
+              value: keycloak.uat.novaware.com.sg
             - name: KC_HTTPS_CERTIFICATE_FILE
               value: /etc/x509/https/tls.crt
             - name: KC_HTTPS_CERTIFICATE_KEY_FILE
@@ -52,7 +52,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL
-              value: "jdbc:postgresql://postgres.novusware.com.sg:5432/keycloak?user=postgres&password=postgres"
+              value: "jdbc:postgresql://postgres.uat.novaware.com.sg:5432/keycloak?user=postgres&password=postgres"
           ports:
             - containerPort: 8443
           volumeMounts:

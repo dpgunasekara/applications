@@ -8,7 +8,7 @@ spec:
   selector:
     app: postgres
   type: LoadBalancer
-  loadBalancerIP: 10.210.5.35
+  loadBalancerIP: 10.207.10.100
   ports:
   - port: 5432
     targetPort: 5432
