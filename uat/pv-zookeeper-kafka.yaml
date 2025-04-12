@@ -2,112 +2,190 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: zookeeper-0
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-0
+    driver: file.csi.azure.com
+    volumeHandle: zookeeper-0
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: zookeeper-0
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: zookeeper-1
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-1
+    driver: file.csi.azure.com
+    volumeHandle: zookeeper-1
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: zookeeper-1
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: zookeeper-2
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-2
+    driver: file.csi.azure.com
+    volumeHandle: zookeeper-2
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: zookeeper-2
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: kafka-0
 spec:
   capacity:
-    storage: 8Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-0
+    driver: file.csi.azure.com
+    volumeHandle: kafka-0
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: kafka-0
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: kafka-1
 spec:
   capacity:
-    storage: 8Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-1
+    driver: file.csi.azure.com
+    volumeHandle: kafka-1
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: kafka-1
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    pv.kubernetes.io/provisioned-by: disk.csi.azure.com
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: kafka-2
 spec:
   capacity:
-    storage: 8Gi
+    storage: 16Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: managed-csi
+  storageClassName: azurefile-csi
   csi:
-    driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-2
+    driver: file.csi.azure.com
+    volumeHandle: kafka-2
     volumeAttributes:
-      fsType: ext4
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: kafka-2
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
