@@ -18,7 +18,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: zookeeper-0
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -50,7 +50,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: zookeeper-1
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -82,7 +82,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: zookeeper-2
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -114,7 +114,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: kafka-0
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -146,7 +146,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: kafka-1
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -178,7 +178,7 @@ spec:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: kafka-2
     nodeStageSecretRef:
-      name: n0vdrcsuat01
+      name: n0vakscuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
