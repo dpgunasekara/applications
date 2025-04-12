@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-config
+data:
+  data.yaml: |
+    spring:
+      datasource:
+        url: jdbc:sqlserver://${DB_SERVER};database=${DB};${DB_CRED};encrypt=false;trustserverCertificate=true;
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
