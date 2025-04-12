@@ -6,7 +6,7 @@ metadata:
   name: keycloak-config
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -15,10 +15,10 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: keycloak-config-01
     volumeAttributes:
-      resourceGroup: rg-dcrs-uat-01
-      shareName: keycloak-config
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: config
     nodeStageSecretRef:
-      name: n0vdcrsuat01
+      name: n0vdrcsuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -38,7 +38,7 @@ metadata:
   name: keycloak-data
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -47,10 +47,10 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: keycloak-data-01
     volumeAttributes:
-      resourceGroup: rg-dcrs-uat-01
-      shareName: keycloak-data
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: data
     nodeStageSecretRef:
-      name: n0vdcrsuat02
+      name: n0vdrcsuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -70,7 +70,7 @@ metadata:
   name: keycloak-log
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -79,10 +79,10 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: keycloak-log-01
     volumeAttributes:
-      resourceGroup: rg-dcrs-uat-01
-      shareName: keycloak-log
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: log
     nodeStageSecretRef:
-      name: n0vdcrsuat03
+      name: n0vdrcsuat01
       namespace: default
   mountOptions:
     - dir_mode=0777
@@ -102,14 +102,14 @@ metadata:
   name: keycloak-postgres-data-01
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: managed-csi
   csi:
     driver: disk.csi.azure.com
-    volumeHandle: /subscriptions/995190d1-8339-4bcd-b572-24c0e7b6e44e/resourceGroups/rg-dcrs-uat-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-01
+    volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourceGroups/rg-drcs-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-01
     volumeAttributes:
       fsType: ext4
 
