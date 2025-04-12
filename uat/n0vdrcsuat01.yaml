@@ -5,22 +5,22 @@ metadata:
 spec:
   provider: azure
   secretObjects:                                  
-  - secretName: n0vdcrsuat01
+  - secretName: n0vdrcsuat01
     type: Opaque
     data:
-    - objectName: n0vdcrsuat01
+    - objectName: n0vdrcsuat01
       key: secret
   parameters:
     usePodIdentity: "false"
-    userAssignedIdentityID: "8fc16e37-05a6-4b55-b614-fac220152b19"
-    keyvaultName: "keyvdcrsuat01"
+    userAssignedIdentityID: "8b3a80d0-b33d-4802-a5d9-28b2014fcbbd"
+    keyvaultName: "keyvdrcsuat01"
     cloudName: ""                                       
     objects: |
       array:
         - |
-          objectName: n0vdcrsuat01
+          objectName: n0vdrcsuat01
           objectType: secret                              
           objectVersion: ""
-    resourceGroup: "rg-dcrs-uat-01"
-    subscriptionId: "995190d1-8339-4bcd-b572-24c0e7b6e44e"
-    tenantId: "08331475-c8d1-4854-973c-d26e6d454309"
+    resourceGroup: "rg-drcs-nonprod-ldzn-cin-01"
+    subscriptionId: "b6b8b5ca-22e7-4919-bc86-9d21a9b5f640"
+    tenantId: "c3178d1e-789d-4aee-bb10-ad5ee4cee2c9"
