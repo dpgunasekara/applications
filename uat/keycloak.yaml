@@ -43,10 +43,15 @@ spec:
               value: admin
             - name: KC_HOSTNAME
               value: keycloak.uat.novaware.com.sg
-            - name: KC_HTTPS_CERTIFICATE_FILE
-              value: /etc/x509/https/tls.crt
-            - name: KC_HTTPS_CERTIFICATE_KEY_FILE
-              value: /etc/x509/https/tls.key
+            - name: KC_HTTPS_KEY_STORE_FILE
+              value: /etc/x509/https/keycloak.p12
+            - name: KC_HTTPS_KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+            - name: KC_HTTPS_KEY_STORE_TYPE
+              value: PKCS12
             - name: KC_HOSTNAME_STRICT_HTTPS
               value: "false"
             - name: KC_DB
@@ -58,16 +63,12 @@ spec:
           volumeMounts:
             - name: keycloak-config
               mountPath: /opt/keycloak/conf
+            - name: keycloak-keystore
+              mountPath: /etc/x509/https
 #            - name: keycloak-data
 #              mountPath: /opt/keycloak/data/h2
             - name: keycloak-log
               mountPath: /opt/keycloak/logs
-            - name: keycloak-config
-              mountPath: /etc/x509/https/tls.crt
-              subPath: keycloak-fullchain.pem
-            - name: keycloak-config
-              mountPath: /etc/x509/https/tls.key
-              subPath: keycloak-privkey.pem
       volumes:
         - name: keycloak-config
           persistentVolumeClaim:
@@ -78,3 +79,6 @@ spec:
         - name: keycloak-log
           persistentVolumeClaim:
             claimName: keycloak-log
+        - name: keycloak-keystore
+          secret:
+            secretName: keycloak-keystore
