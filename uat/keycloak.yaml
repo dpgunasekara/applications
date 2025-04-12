@@ -63,7 +63,7 @@ spec:
           volumeMounts:
             - name: keycloak-config
               mountPath: /opt/keycloak/conf
-            - name: uat.novaware-keystore
+            - name: keystore
               mountPath: /etc/x509/https
 #            - name: keycloak-data
 #              mountPath: /opt/keycloak/data/h2
@@ -79,6 +79,6 @@ spec:
         - name: keycloak-log
           persistentVolumeClaim:
             claimName: keycloak-log
-        - name: uat.novaware-keystore
+        - name: keystore
           secret:
             secretName: uat.novaware-keystore
