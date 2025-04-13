@@ -23,11 +23,11 @@ resources:
 variables:
   - name: dockerfilePath
     value: '$(Build.SourcesDirectory)/Dockerfile'
-  - name tag:
+  - name: tag
     value: '$(Build.BuildId)'
-  - name vmImageName
+  - name: vmImageName
     value: 'ubuntu-latest'
-  - name environmentName
+  - name: environmentName
     value: 'uat' 
   - group: build-variables        
 
