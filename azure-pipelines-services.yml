@@ -5,7 +5,7 @@
   
 resources:
  repositories:
-   - repository: bobagency
+   - repository: bobagency 
      type: git
      name: 'BOB - Digital Revenue Collection System/bobagency'
    - repository: boblogger
@@ -678,7 +678,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobqueuemanager
-    dependsOn: setVar_bobqueuemanager
     variables:
       imageRepository: bobqueuemanager 
     displayName: Build bobqueuemanager
@@ -825,7 +824,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobpayment
-    dependsOn: setVar_bobpayment
     variables:
       imageRepository: bobpayment
     displayName: Build bobpayment
@@ -1118,7 +1116,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobmessaging
-    dependsOn: setVar_bobmessaging
     variables:
       imageRepository: bobmessaging
     displayName: Build bobmessaging
@@ -1192,7 +1189,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobswitchinterface
-    dependsOn: setVar_bobswitchinterface
     variables:
       imageRepository: bobswitchinterface
     displayName: Build bobswitchinterface
@@ -1266,7 +1262,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobmpos
-    dependsOn: setVar_bobmpos
     variables:
       imageRepository: bobmpos
     displayName: Build bobmpos
@@ -1340,7 +1335,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobmposlogger
-    dependsOn: setVar_bobmposlogger
     variables:
       imageRepository: bobmposlogger
     displayName: Build bobmposlogger
@@ -1487,7 +1481,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobnovatrackintapp
-    dependsOn: setVar_bobnovatrackintapp
     variables:
       imageRepository: bobnovatrackintapp
     displayName: Build bobnovatrackintapp
@@ -1561,7 +1554,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobnovatrackextapp
-    dependsOn: setVar_bobnovatrackextapp
     variables:
       imageRepository: bobnovatrackextapp
     displayName: Build bobnovatrackextapp
@@ -1635,7 +1627,6 @@ stages:
           latest
           $(Build.BuildId)
   - job: Build_bobcoindeposit
-    dependsOn: setVar_bobcoindeposit
     variables:
       imageRepository: bobcoindeposit
     displayName: Build bobcoindeposit
