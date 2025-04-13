@@ -2,7 +2,7 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-
+  
 resources:
  repositories:
    - repository: bobagency
@@ -81,22 +81,25 @@ variables:
   - name: vmImageName
     value: 'ubuntu-latest'
   - name: environmentName
-    value: 'uat'    
-  - group: build-variables    
+    value: 'uat'
+  - name: imageRepository
+    value: 'empty'
+  - group: build-variables
 
 stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: setVar
+  - job: setVar_bobagency
+    steps:
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobagency"  
-  - job: Build $(imageRepository)
+  - job: Build_bobagency
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobagency
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -162,15 +165,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_boblogger
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boblogger"  
-  - job: Build $(imageRepository)
+  - job: Build_boblogger
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: boblogger
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -236,15 +240,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobburs
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobburs"  
-  - job: Build $(imageRepository)
+  - job: Build_bobburs
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobburs
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -311,15 +316,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobfileprocessing
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobfileprocessing"  
-  - job: Build $(imageRepository)
+  - job: Build_bobfileprocessing
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobfileprocessing
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -386,15 +392,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobonegov
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobonegov"  
-  - job: Build $(imageRepository)
+  - job: Build_bobonegov
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobonegov
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -460,15 +467,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobreporting
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreporting"  
-  - job: Build $(imageRepository)
+  - job: Build_bobreporting
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobreporting
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -534,15 +542,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobuserlimits
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobuserlimits"  
-  - job: Build $(imageRepository)
+  - job: Build_bobuserlimits
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobuserlimits
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -608,15 +617,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobmposinterface
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposinterface"  
-  - job: Build $(imageRepository)
+  - job: Build_bobmposinterface
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobmposinterface
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -682,15 +692,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobqueuemanager
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobqueuemanager"  
-  - job: Build $(imageRepository)
+  - job: Build_bobqueuemanager
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobqueuemanager
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -756,15 +767,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobreferencing
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreferencing"  
-  - job: Build $(imageRepository)
+  - job: Build_bobreferencing
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobreferencing
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -830,15 +842,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobpayment
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobpayment"  
-  - job: Build $(imageRepository)
+  - job: Build_bobpayment
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobpayment
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -904,15 +917,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_boboag
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boboag"  
-  - job: Build $(imageRepository)
+  - job: Build_boboag
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: boboag
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -978,15 +992,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobaudit
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobaudit"  
-  - job: Build $(imageRepository)
+  - job: Build_bobaudit
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobaudit
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1052,15 +1067,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_boburm
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boburm"  
-  - job: Build $(imageRepository)
+  - job: Build_boburm
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: boburm
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1126,15 +1142,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobmessaging
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmessaging"  
-  - job: Build $(imageRepository)
+  - job: Build_bobmessaging
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobmessaging
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1200,15 +1217,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobswitchinterface
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobswitchinterface"  
-  - job: Build $(imageRepository)
+  - job: Build_bobswitchinterface
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobswitchinterface
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1274,15 +1292,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobmpos
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmpos"  
-  - job: Build $(imageRepository)
+  - job: Build_bobmpos
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobmpos
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1348,15 +1367,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobmposlogger
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposlogger"  
-  - job: Build $(imageRepository)
+  - job: Build_bobmposlogger
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobmposlogger
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1422,15 +1442,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobmerchantmate
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmerchantmate"  
-  - job: Build $(imageRepository)
+  - job: Build_bobmerchantmate
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobmerchantmate
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1496,15 +1517,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobnovatrackintapp
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackintapp"  
-  - job: Build $(imageRepository)
+  - job: Build_bobnovatrackintapp
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobnovatrackintapp
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1570,15 +1592,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobnovatrackextapp
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackextapp"  
-  - job: Build $(imageRepository)
+  - job: Build_bobnovatrackextapp
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobnovatrackextapp
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -1644,15 +1667,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar
+  - job: setVar_bobcoindeposit
+    steps:  
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobcoindeposit"  
-  - job: Build $(imageRepository)
+  - job: Build_bobcoindeposit
     displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: $(imageRepository)
+    - checkout: bobcoindeposit
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
