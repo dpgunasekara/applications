@@ -200,13 +200,13 @@ spec:
           volumeMounts:
             - name: {{ .name }}-config
               mountPath: /app/config
-              subPath: config/{{ .name }}
+              subPath: {{ .name }}
             - name: {{ .name }}-data
               mountPath: /app/data
-              subPath: data/{{ .name }}
+              subPath: {{ .name }}
             - name: {{ .name }}-log
               mountPath: /app/log
-              subPath: log/{{ .name }}
+              subPath: {{ .name }}
             - name: keystore-volume
               mountPath: "/etc/ssl/certs/uat.novaware.p12"
               subPath: "uat.novaware.p12"
@@ -316,13 +316,13 @@ spec:
           volumeMounts:
             - name: {{ .name }}-config
               mountPath: /app/config
-              subPath: config/{{ .name }}
+              subPath: {{ .name }}
             - name: {{ .name }}-data
               mountPath: /app/data
-              subPath: data/{{ .name }}
+              subPath: {{ .name }}
             - name: {{ .name }}-log
               mountPath: /app/log
-              subPath: log/{{ .name }}
+              subPath: {{ .name }}
             - name: keystore-volume-fullchain
               mountPath: "/app/config/uat.novaware-fullchain.pem"
               subPath: "uat.novaware-fullchain.pem"
