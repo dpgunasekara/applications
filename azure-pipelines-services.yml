@@ -77,6 +77,7 @@ variables:
   # Container registry service connection established during pipeline creation
   # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
   dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
+  dockerRegistryServiceConnection2: '5e6cd41b-9114-436d-84fb-cf186ce43cfa'
   # containerRegistry: 'cregsdlc01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
@@ -115,6 +116,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobagency'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_boblogger
     displayName: Build boblogger
     pool:
@@ -140,6 +151,16 @@ stages:
         repository: 'boblogger'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'boblogger'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -171,6 +192,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobburs'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_bobfileprocessing
     displayName: Build bobfileprocessing
     pool:
@@ -196,6 +227,16 @@ stages:
         repository: 'bobfileprocessing'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobfileprocessing'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -227,6 +268,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobonegov'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_bobReporting
     displayName: Build bobreporting
     pool:
@@ -252,6 +303,16 @@ stages:
         repository: 'bobreporting'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobreporting'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -283,6 +344,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobuserlimits'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_bobmposinterface
     displayName: Build bobmposinterface
     pool:
@@ -308,6 +379,16 @@ stages:
         repository: 'bobmposinterface'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobmposinterface'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -339,6 +420,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobqueuemanager'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_bobreferencing
     displayName: Build bobreferencing
     pool:
@@ -364,6 +455,16 @@ stages:
         repository: 'bobreferencing'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobreferencing'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -395,6 +496,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobpayment'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_boboag
     displayName: Build boboag
     pool:
@@ -420,6 +532,16 @@ stages:
         repository: 'boboag'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'boboag'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -451,6 +573,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobaudit'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_boburm
     displayName: Build boburm
     pool:
@@ -476,6 +608,16 @@ stages:
         repository: 'boburm'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'boburm'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -507,6 +649,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobmessaging'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_bobswitchinterface
     displayName: Build bobswitchinterface
     pool:
@@ -532,6 +685,16 @@ stages:
         repository: 'bobswitchinterface'
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobswitchinterface'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
@@ -563,6 +726,16 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobmpos'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
   - job: Build_mposlogger
     displayName: Build bobmposlogger
     pool:
@@ -591,6 +764,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobmposlogger'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_bobmerchantmate
     displayName: Build bobmerchantmate
     pool:
@@ -619,6 +803,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobmerchantmate'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_bobnovatrackintapp
     displayName: Build bobnovatrackintapp
     pool:
@@ -647,6 +842,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackintapp'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_bobnovatrackextapp
     displayName: Build bobnovatrackextapp
     pool:
@@ -675,6 +881,17 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobnovatrackextapp'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
   - job: Build_bobcoindeposit
     displayName: Build bobcoindeposit
     pool:
@@ -703,3 +920,14 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: 'bobcoindeposit'
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+
