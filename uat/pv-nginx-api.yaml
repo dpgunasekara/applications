@@ -38,7 +38,7 @@ metadata:
   name: nginx-api-gateway-content
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain

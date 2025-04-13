@@ -9,7 +9,7 @@ spec:
   volumeName: nginx-api-gateway-data
   resources:
     requests:
-      storage: 5Gi
+      storage: 16Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -22,4 +22,4 @@ spec:
   volumeName: nginx-api-gateway-content
   resources:
     requests:
-      storage: 5Gi
+      storage: 16Gi
