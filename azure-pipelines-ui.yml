@@ -21,15 +21,15 @@ resources:
      name: 'BOB - Digital Revenue Collection System/bobburssimulator'
 
 variables:
-  # Container registry service connection established during pipeline creation
-  # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
-  dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
-  dockerRegistryServiceConnection2: '5e6cd41b-9114-436d-84fb-cf186ce43cfa'
-  # containerRegistry: 'cregsdlc01.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-  vmImageName: 'ubuntu-latest'
-  environmentName: 'uat' 
+  - name: dockerfilePath
+    value: '$(Build.SourcesDirectory)/Dockerfile'
+  - name tag:
+    value: '$(Build.BuildId)'
+  - name vmImageName
+    value: 'ubuntu-latest'
+  - name environmentName
+    value: 'uat' 
+  - group: build-variables        
 
 stages:
 - stage: Build
