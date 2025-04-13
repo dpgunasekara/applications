@@ -6,7 +6,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.210.5.24
+  loadBalancerIP: 10.207.10.146
   ports:
   - port: 8443
     targetPort: 8443
@@ -38,17 +38,30 @@ spec:
         - name: nginx-config-volume
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
-        - name: nginx-api-gateway-data
-          mountPath: /etc/nginx/certs
+        - name: keystore-volume-fullchain
+          mountPath: "/etc/nginx/certs/uat.novaware-fullchain.pem"
+          subPath: "uat.novaware-fullchain.pem"
+          readOnly: true 
+        - name: keystore-volume-privkey
+          mountPath: "/etc/nginx/certs/uat.novaware-privkey.pem"
+          subPath: "uat.novaware-privkey.pem"
+          readOnly: true 
         - name: nginx-api-gateway-content
           mountPath: /etc/nginx/html
       volumes:
       - name: nginx-config-volume
         configMap:
           name: nginx-config
-      - name: nginx-api-gateway-data
-        persistentVolumeClaim:
-          claimName: nginx-api-gateway-data
       - name: nginx-api-gateway-content
         persistentVolumeClaim:
           claimName: nginx-api-gateway-content
+      - name: keystore-volume-fullchain
+        secret:
+          secretName: fullchain-uat.novaware-keystore
+      - name: keystore-volume-privkey
+        secret:
+          secretName: privkey-uat.novaware-keystore
+
+
+
+
