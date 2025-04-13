@@ -124,14 +124,14 @@ stages:
         inlineScript: |
           echo $(imageRepository)
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)"" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
             --path "$(imageRepository)/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
-      displayName: 'Copy application-$(environmentName).yml'
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName), $(imageRepository)'
 
     - task: AzureCLI@2
       inputs:
@@ -203,13 +203,13 @@ stages:
         inlineScript: |
           az storage file upload \
             --account-name $(configStorageAccountName) \
-            --account-key "$(configstorageAccountKey)" \
+            --account-key $(configstorageAccountKey) \
             --share-name $(configFileShareName) \
-            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --source $(Build.SourcesDirectory)/app/config/application-$(environmentName).yml \
+            --path $(imageRepository)/application-$(environmentName).yml \
             --auth-mode key \
             --enable-file-backup-request-intent
-      displayName: 'Copy application-$(environmentName).yml'
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName), $(imageRepository)'
 
     - task: AzureCLI@2
       inputs:
@@ -282,10 +282,10 @@ stages:
         inlineScript: |
           az storage file upload \
             --account-name $(configStorageAccountName) \
-            --account-key "$(configstorageAccountKey)" \
+            --account-key $(configstorageAccountKey) \
             --share-name $(configFileShareName) \
-            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --source $(Build.SourcesDirectory)/app/config/application-$(environmentName).yml \
+            --path $(imageRepository)/application-$(environmentName).yml \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
