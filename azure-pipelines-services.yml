@@ -74,26 +74,29 @@ resources:
 
 
 variables:
-  # Container registry service connection established during pipeline creation
-  # dockerRegistryServiceConnection: '2284f7c1-3c4b-49dd-8b84-5b94f4f36c9b'
-  dockerRegistryServiceConnection: 'f3955c1f-5b68-4980-ab72-fa212e12ff98'
-  dockerRegistryServiceConnection2: '5e6cd41b-9114-436d-84fb-cf186ce43cfa'
-  # containerRegistry: 'cregsdlc01.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-  vmImageName: 'ubuntu-latest'
-  environmentName: 'uat'    
+  - name: dockerfilePath
+    value: '$(Build.SourcesDirectory)/Dockerfile'
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+  - name: environmentName
+    value: 'uat'    
+  - group: build-variables    
 
 stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: Build_bobagency
-    displayName: Build bobagency
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobagency"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobagency
+    - checkout: $(imageRepository)
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -106,681 +109,68 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobagency'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobagency'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_boblogger
-    displayName: Build boblogger
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: boblogger
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'boblogger'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'boblogger'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobburs
-    displayName: Build bobburs
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobburs
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobburs'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobburs'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobfileprocessing
-    displayName: Build bobfileprocessing
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobfileprocessing
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobfileprocessing'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobfileprocessing'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobonegov
-    displayName: Build bobonegov
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobonegov
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobonegov'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobonegov'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobReporting
-    displayName: Build bobreporting
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobreporting
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobreporting'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobreporting'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobuserlimits
-    displayName: Build bobuserlimits
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobuserlimits
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobuserlimits'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobuserlimits'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobmposinterface
-    displayName: Build bobmposinterface
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobmposinterface
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobmposinterface'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobmposinterface'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobqueuemanager
-    displayName: Build bobqueuemanager
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobqueuemanager
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobqueuemanager'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobqueuemanager'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobreferencing
-    displayName: Build bobreferencing
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobreferencing
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobreferencing'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobreferencing'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobpayment
-    displayName: Build bobpayment
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobpayment
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobpayment'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobpayment'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
 
-  - job: Build_boboag
-    displayName: Build boboag
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: boboag
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
+    - task: AzureCLI@2
       inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'boboag'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'boboag'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobaudit
-    displayName: Build bobaudit
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobaudit
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobaudit'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobaudit'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_boburm
-    displayName: Build boburm
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: boburm
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'boburm'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'boburm'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_bobmessaging
-    displayName: Build bobmessaging
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobmessaging
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobmessaging'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobmessaging'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
 
-  - job: Build_bobswitchinterface
-    displayName: Build bobswitchinterface
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobswitchinterface
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
+    - task: AzureCLI@2
       inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobswitchinterface'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobswitchinterface'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_mpos
-    displayName: Build bobmpos
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobmpos
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobmpos'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobmpos'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
-  - job: Build_mposlogger
-    displayName: Build bobmposlogger
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - checkout: bobmposlogger
-    - script: |
-        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
-      displayName: "Use environment-specific applicationinsights.json"
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml' # Adjust path if needed
-        goals: 'clean package'
-        options: '-Dmaven.test.skip=true -s settings.xml'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenAuthenticateFeed: true
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: 'bobmposlogger'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest
-          $(Build.BuildId)
-    - task: Docker@2
-      displayName: Build and push an image to container registry 2
-      inputs:
-        command: buildAndPush
-        repository: 'bobmposlogger'
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection2)
-        tags: |
-          latest
-          $(Build.BuildId)
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
 
-  - job: Build_bobmerchantmate
-    displayName: Build bobmerchantmate
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boblogger"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobmerchantmate
+    - checkout: $(imageRepository)
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -793,11 +183,44 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobmerchantmate'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -807,19 +230,21 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: 'bobmerchantmate'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
-
-  - job: Build_bobnovatrackintapp
-    displayName: Build bobnovatrackintapp
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobburs"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobnovatrackintapp
+    - checkout: $(imageRepository)
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -832,11 +257,45 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackintapp'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -846,19 +305,21 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackintapp'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
-
-  - job: Build_bobnovatrackextapp
-    displayName: Build bobnovatrackextapp
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobfileprocessing"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobnovatrackextapp
+    - checkout: $(imageRepository)
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -871,11 +332,45 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackextapp'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -885,19 +380,21 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackextapp'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
-
-  - job: Build_bobcoindeposit
-    displayName: Build bobcoindeposit
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobonegov"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
     pool:
       vmImage: $(vmImageName)
     steps:
-    - checkout: bobcoindeposit
+    - checkout: $(imageRepository)
     - script: |
         cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
       displayName: "Use environment-specific applicationinsights.json"
@@ -910,11 +407,44 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: 'bobcoindeposit'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -924,10 +454,1267 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: 'bobcoindeposit'
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
           $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreporting"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
 
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobuserlimits"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposinterface"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobqueuemanager"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreferencing"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobpayment"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boboag"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobaudit"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boburm"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmessaging"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobswitchinterface"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmpos"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposlogger"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmerchantmate"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackintapp"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackextapp"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
+  - job: setVar
+    - script: |
+        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobcoindeposit"  
+  - job: Build $(imageRepository)
+    displayName: Build $(imageRepository)
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: $(imageRepository)
+    - script: |
+        cp $(Build.SourcesDirectory)/src/main/resources/applicationinsights-$(environmentName).json $(Build.SourcesDirectory)/src/main/resources/applicationinsights.json
+      displayName: "Use environment-specific applicationinsights.json"
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml' # Adjust path if needed
+        goals: 'clean package'
+        options: '-Dmaven.test.skip=true -s settings.xml'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name $(configStorageAccountName) \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name $(configFileShareName) \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "$(imageRepository)/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $(Build.BuildId)
+    - task: Docker@2
+      displayName: Build and push an image to container registry 2
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection2)
+        tags: |
+          latest
+          $(Build.BuildId)
