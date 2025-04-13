@@ -90,14 +90,9 @@ stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: setVar_bobagency
-    steps:
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobagency"  
   - job: Build_bobagency
-    dependsOn: setVar_bobagency
     variables:
-      imageRepository: $[ dependencies.setVar_bobagency.outputs['setVar_bobagency.imageRepository'] ]  
+      imageRepository: bobagency
     displayName: Build bobagency
     pool:
       vmImage: $(vmImageName)
@@ -126,12 +121,12 @@ stages:
           az storage file upload \
             --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name "$(configFileShareName)"" \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobagency/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
-      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName), $(imageRepository)'
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
 
     - task: AzureCLI@2
       inputs:
@@ -140,11 +135,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobagency/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -169,14 +164,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_boblogger
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boblogger"  
   - job: Build_boblogger
-    dependsOn: setVar_boblogger
     variables:
-      imageRepository: $[ dependencies.setVar_boblogger.outputs['setVar_boblogger.imageRepository'] ]  
+      imageRepository: boblogger
     displayName: Build boblogger
     pool:
       vmImage: $(vmImageName)
@@ -202,14 +192,14 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
-            --account-key $(configstorageAccountKey) \
-            --share-name $(configFileShareName) \
-            --source $(Build.SourcesDirectory)/app/config/application-$(environmentName).yml \
-            --path $(imageRepository)/application-$(environmentName).yml \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "boblogger/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
-      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName), $(imageRepository)'
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
 
     - task: AzureCLI@2
       inputs:
@@ -218,11 +208,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "boblogger/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -247,14 +237,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobburs
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobburs"  
   - job: Build_bobburs
-    dependsOn: setVar_bobburs
     variables:
-      imageRepository: $[ dependencies.setVar_bobburs.outputs['setVar_bobburs.imageRepository'] ]  
+      imageRepository: bobburs  
     displayName: Build bobburs
     pool:
       vmImage: $(vmImageName)
@@ -281,11 +266,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
-            --account-key $(configstorageAccountKey) \
-            --share-name $(configFileShareName) \
-            --source $(Build.SourcesDirectory)/app/config/application-$(environmentName).yml \
-            --path $(imageRepository)/application-$(environmentName).yml \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobburs/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -297,11 +282,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobburs/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -326,14 +311,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobfileprocessing
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobfileprocessing"  
   - job: Build_bobfileprocessing
-    dependsOn: setVar_bobfileprocessing
     variables:
-      imageRepository: $[ dependencies.setVar_bobfileprocessing.outputs['setVar_bobfileprocessing.imageRepository'] ]  
+      imageRepository: bobfileprocessing  
     displayName: Build bobfileprocessing
     pool:
       vmImage: $(vmImageName)
@@ -360,11 +340,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobfileprocessing/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -376,11 +356,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobfileprocessing)/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -405,14 +385,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobonegov
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobonegov"  
   - job: Build_bobonegov
-    dependsOn: setVar_bobonegov
     variables:
-      imageRepository: $[ dependencies.setVar_bobonegov.outputs['setVar_bobonegov.imageRepository'] ]  
+      imageRepository: bobonegov 
     displayName: Build $(imageRepository)      
     pool:
       vmImage: $(vmImageName)
@@ -438,11 +413,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobonegov/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -454,11 +429,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobonegov/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -483,14 +458,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobreporting
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreporting"  
   - job: Build_bobreporting
-    dependsOn: setVar_bobreporting
     variables:
-      imageRepository: $[ dependencies.setVar_bobreporting.outputs['setVar_bobreporting.imageRepository'] ]  
+      imageRepository: bobreporting
     displayName: Build bobreporting
     pool:
       vmImage: $(vmImageName)
@@ -516,11 +486,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobreporting/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -532,11 +502,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobreporting/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -561,14 +531,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobuserlimits
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobuserlimits"  
   - job: Build_bobuserlimits
-    dependsOn: setVar_bobuserlimits
     variables:
-      imageRepository: $[ dependencies.setVar_bobuserlimits.outputs['setVar_bobuserlimits.imageRepository'] ]  
+      imageRepository: bobuserlimits  
     displayName: Build bobuserlimits
     pool:
       vmImage: $(vmImageName)
@@ -594,11 +559,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobuserlimits/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -610,11 +575,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobuserlimits/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -639,14 +604,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobmposinterface
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposinterface"  
   - job: Build_bobmposinterface
-    dependsOn: setVar_bobmposinterface
     variables:
-      imageRepository: $[ dependencies.setVar_bobmposinterface.outputs['setVar_bobmposinterface.imageRepository'] ]  
+      imageRepository: bobmposinterface 
     displayName: Build bobmposinterface
     pool:
       vmImage: $(vmImageName)
@@ -672,11 +632,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobmposinterface/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -688,11 +648,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobmposinterface/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -717,14 +677,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobqueuemanager
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobqueuemanager"  
   - job: Build_bobqueuemanager
     dependsOn: setVar_bobqueuemanager
     variables:
-      imageRepository: $[ dependencies.setVar_bobqueuemanager.outputs['setVar_bobqueuemanager.imageRepository'] ]  
+      imageRepository: bobqueuemanager 
     displayName: Build bobqueuemanager
     pool:
       vmImage: $(vmImageName)
@@ -750,11 +706,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobqueuemanager/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -766,11 +722,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobqueuemanager/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -795,14 +751,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobreferencing
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobreferencing"  
   - job: Build_bobreferencing
-    dependsOn: setVar_bobreferencing
     variables:
-      imageRepository: $[ dependencies.setVar_bobreferencing.outputs['setVar_bobreferencing.imageRepository'] ]  
+      imageRepository: bobreferencing
     displayName: Build bobreferencing
     pool:
       vmImage: $(vmImageName)
@@ -828,11 +779,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobreferencing/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -844,11 +795,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobreferencing/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -873,14 +824,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobpayment
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobpayment"  
   - job: Build_bobpayment
     dependsOn: setVar_bobpayment
     variables:
-      imageRepository: $[ dependencies.setVar_bobpayment.outputs['setVar_bobpayment.imageRepository'] ]  
+      imageRepository: bobpayment
     displayName: Build bobpayment
     pool:
       vmImage: $(vmImageName)
@@ -906,11 +853,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobpayment/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -922,11 +869,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobpayment/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -951,14 +898,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_boboag
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boboag"  
   - job: Build_boboag
-    dependsOn: setVar_boboag
     variables:
-      imageRepository: $[ dependencies.setVar_boboag.outputs['setVar_boboag.imageRepository'] ]  
+      imageRepository: boboag
     displayName: Build boboag
     pool:
       vmImage: $(vmImageName)
@@ -984,11 +926,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "boboag/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1000,11 +942,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "boboag/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1029,14 +971,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobaudit
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobaudit"  
   - job: Build_bobaudit
-    dependsOn: setVar_bobaudit
     variables:
-      imageRepository: $[ dependencies.setVar_bobaudit.outputs['setVar_bobaudit.imageRepository'] ]  
+      imageRepository: bobaudit
     displayName: Build bobaudit
     pool:
       vmImage: $(vmImageName)
@@ -1062,11 +999,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobaudit/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1078,11 +1015,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobaudit/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1107,14 +1044,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_boburm
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]boburm"  
   - job: Build_boburm
-    dependsOn: setVar_boburm
     variables:
-      imageRepository: $[ dependencies.setVar_boburm.outputs['setVar_boburm.imageRepository'] ]  
+      imageRepository: boburm
     displayName: Build boburm
     pool:
       vmImage: $(vmImageName)
@@ -1140,11 +1072,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "boburm/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1156,11 +1088,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "boburm/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1185,14 +1117,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobmessaging
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmessaging"  
   - job: Build_bobmessaging
     dependsOn: setVar_bobmessaging
     variables:
-      imageRepository: $[ dependencies.setVar_bobmessaging.outputs['setVar_bobmessaging.imageRepository'] ]  
+      imageRepository: bobmessaging
     displayName: Build bobmessaging
     pool:
       vmImage: $(vmImageName)
@@ -1218,11 +1146,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobmessaging/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1234,11 +1162,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobmessaging/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1263,14 +1191,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobswitchinterface
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobswitchinterface"  
   - job: Build_bobswitchinterface
     dependsOn: setVar_bobswitchinterface
     variables:
-      imageRepository: $[ dependencies.setVar_bobswitchinterface.outputs['setVar_bobswitchinterface.imageRepository'] ]  
+      imageRepository: bobswitchinterface
     displayName: Build bobswitchinterface
     pool:
       vmImage: $(vmImageName)
@@ -1296,11 +1220,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobswitchinterface/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1312,11 +1236,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobswitchinterface/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1341,14 +1265,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobmpos
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmpos"  
   - job: Build_bobmpos
     dependsOn: setVar_bobmpos
     variables:
-      imageRepository: $[ dependencies.setVar_bobmpos.outputs['setVar_bobmpos.imageRepository'] ]  
+      imageRepository: bobmpos
     displayName: Build bobmpos
     pool:
       vmImage: $(vmImageName)
@@ -1374,11 +1294,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobmpos/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1390,11 +1310,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobmpos/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1419,14 +1339,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobmposlogger
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmposlogger"  
   - job: Build_bobmposlogger
     dependsOn: setVar_bobmposlogger
     variables:
-      imageRepository: $[ dependencies.setVar_bobmposlogger.outputs['setVar_bobmposlogger.imageRepository'] ]  
+      imageRepository: bobmposlogger
     displayName: Build bobmposlogger
     pool:
       vmImage: $(vmImageName)
@@ -1452,11 +1368,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobmposlogger/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1468,11 +1384,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobmposlogger/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1497,14 +1413,9 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobmerchantmate
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobmerchantmate"  
   - job: Build_bobmerchantmate
-    dependsOn: setVar_bobmerchantmate
     variables:
-      imageRepository: $[ dependencies.setVar_bobmerchantmate.outputs['setVar_bobmerchantmate.imageRepository'] ]  
+      imageRepository: bobmerchantmate
     displayName: Build bobmerchantmate
     pool:
       vmImage: $(vmImageName)
@@ -1530,11 +1441,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobmerchantmate/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1546,11 +1457,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobmerchantmate/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1575,14 +1486,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobnovatrackintapp
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackintapp"  
   - job: Build_bobnovatrackintapp
     dependsOn: setVar_bobnovatrackintapp
     variables:
-      imageRepository: $[ dependencies.setVar_bobnovatrackintapp.outputs['setVar_bobnovatrackintapp.imageRepository'] ]  
+      imageRepository: bobnovatrackintapp
     displayName: Build bobnovatrackintapp
     pool:
       vmImage: $(vmImageName)
@@ -1608,11 +1515,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobnovatrackintapp/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1624,11 +1531,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobnovatrackintapp/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1653,14 +1560,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobnovatrackextapp
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobnovatrackextapp"  
   - job: Build_bobnovatrackextapp
     dependsOn: setVar_bobnovatrackextapp
     variables:
-      imageRepository: $[ dependencies.setVar_bobnovatrackextapp.outputs['setVar_bobnovatrackextapp.imageRepository'] ]  
+      imageRepository: bobnovatrackextapp
     displayName: Build bobnovatrackextapp
     pool:
       vmImage: $(vmImageName)
@@ -1686,11 +1589,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobnovatrackextapp/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1702,11 +1605,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobnovatrackextapp/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -1731,14 +1634,10 @@ stages:
         tags: |
           latest
           $(Build.BuildId)
-  - job: setVar_bobcoindeposit
-    steps:  
-    - script: |
-        echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobcoindeposit"  
   - job: Build_bobcoindeposit
     dependsOn: setVar_bobcoindeposit
     variables:
-      imageRepository: $[ dependencies.setVar_bobcoindeposit.outputs['setVar_bobcoindeposit.imageRepository'] ]  
+      imageRepository: bobcoindeposit
     displayName: Build bobcoindeposit
     pool:
       vmImage: $(vmImageName)
@@ -1764,11 +1663,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "$(imageRepository)/application-$(environmentName).yml" \
+            --path "bobcoindeposit/application-$(environmentName).yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application-$(environmentName).yml'
@@ -1780,11 +1679,11 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage file upload \
-            --account-name $(configStorageAccountName) \
+            --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
-            --share-name $(configFileShareName) \
+            --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "$(imageRepository)/application.yml" \
+            --path "bobcoindeposit/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
