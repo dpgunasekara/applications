@@ -1033,7 +1033,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $bobaudit
+        repository: bobaudit
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
