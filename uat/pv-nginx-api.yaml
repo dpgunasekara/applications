@@ -6,7 +6,7 @@ metadata:
   name: nginx-api-gateway-data
 spec:
   capacity:
-    storage: 5Gi
+    storage: 16Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -15,11 +15,11 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: nginx-api-gateway-data-01
     volumeAttributes:
-      resourceGroup: rg-dcrs-uat-01
-      shareName: nginx-api-gateway-data
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: data
     nodeStageSecretRef:
-      name: n0vdcrsuat02
-      namespace: default
+      name: n0vdrcsuat01
+      namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -47,11 +47,11 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: nginx-api-gateway-content-01
     volumeAttributes:
-      resourceGroup: rg-dcrs-uat-01
-      shareName: nginx-api-gateway-content
+      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      shareName: config
     nodeStageSecretRef:
-      name: n0vdcrsuat02
-      namespace: default
+      name: n0vdrcsuat01
+      namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
