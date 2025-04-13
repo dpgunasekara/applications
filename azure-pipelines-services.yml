@@ -98,7 +98,7 @@ stages:
     dependsOn: setVar_bobagency
     variables:
       imageRepository: $[ dependencies.setVar_bobagency.outputs['setVar_bobagency.imageRepository'] ]  
-    displayName: Build $(imageRepository)
+    displayName: Build bobagency
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -122,6 +122,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
+          echo $(imageRepository)
           az storage file upload \
             --account-name $(configStorageAccountName) \
             --account-key "$(configstorageAccountKey)" \
@@ -176,7 +177,7 @@ stages:
     dependsOn: setVar_boblogger
     variables:
       imageRepository: $[ dependencies.setVar_boblogger.outputs['setVar_boblogger.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build boblogger
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -254,7 +255,7 @@ stages:
     dependsOn: setVar_bobburs
     variables:
       imageRepository: $[ dependencies.setVar_bobburs.outputs['setVar_bobburs.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobburs
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -333,7 +334,7 @@ stages:
     dependsOn: setVar_bobfileprocessing
     variables:
       imageRepository: $[ dependencies.setVar_bobfileprocessing.outputs['setVar_bobfileprocessing.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobfileprocessing
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -490,7 +491,7 @@ stages:
     dependsOn: setVar_bobreporting
     variables:
       imageRepository: $[ dependencies.setVar_bobreporting.outputs['setVar_bobreporting.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobreporting
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -565,10 +566,10 @@ stages:
     - script: |
         echo "##vso[task.setvariable variable=imageRepository;isOutput=true]bobuserlimits"  
   - job: Build_bobuserlimits
-    dependsOn: setVar_bobreporting
+    dependsOn: setVar_bobuserlimits
     variables:
       imageRepository: $[ dependencies.setVar_bobuserlimits.outputs['setVar_bobuserlimits.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobuserlimits
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -646,7 +647,7 @@ stages:
     dependsOn: setVar_bobmposinterface
     variables:
       imageRepository: $[ dependencies.setVar_bobmposinterface.outputs['setVar_bobmposinterface.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobmposinterface
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -724,7 +725,7 @@ stages:
     dependsOn: setVar_bobqueuemanager
     variables:
       imageRepository: $[ dependencies.setVar_bobqueuemanager.outputs['setVar_bobqueuemanager.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobqueuemanager
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -802,7 +803,7 @@ stages:
     dependsOn: setVar_bobreferencing
     variables:
       imageRepository: $[ dependencies.setVar_bobreferencing.outputs['setVar_bobreferencing.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobreferencing
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -880,7 +881,7 @@ stages:
     dependsOn: setVar_bobpayment
     variables:
       imageRepository: $[ dependencies.setVar_bobpayment.outputs['setVar_bobpayment.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobpayment
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -958,7 +959,7 @@ stages:
     dependsOn: setVar_boboag
     variables:
       imageRepository: $[ dependencies.setVar_boboag.outputs['setVar_boboag.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build boboag
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1036,7 +1037,7 @@ stages:
     dependsOn: setVar_bobaudit
     variables:
       imageRepository: $[ dependencies.setVar_bobaudit.outputs['setVar_bobaudit.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobaudit
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1114,7 +1115,7 @@ stages:
     dependsOn: setVar_boburm
     variables:
       imageRepository: $[ dependencies.setVar_boburm.outputs['setVar_boburm.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build boburm
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1192,7 +1193,7 @@ stages:
     dependsOn: setVar_bobmessaging
     variables:
       imageRepository: $[ dependencies.setVar_bobmessaging.outputs['setVar_bobmessaging.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobmessaging
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1270,7 +1271,7 @@ stages:
     dependsOn: setVar_bobswitchinterface
     variables:
       imageRepository: $[ dependencies.setVar_bobswitchinterface.outputs['setVar_bobswitchinterface.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobswitchinterface
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1348,7 +1349,7 @@ stages:
     dependsOn: setVar_bobmpos
     variables:
       imageRepository: $[ dependencies.setVar_bobmpos.outputs['setVar_bobmpos.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobmpos
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1426,7 +1427,7 @@ stages:
     dependsOn: setVar_bobmposlogger
     variables:
       imageRepository: $[ dependencies.setVar_bobmposlogger.outputs['setVar_bobmposlogger.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobmposlogger
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1504,7 +1505,7 @@ stages:
     dependsOn: setVar_bobmerchantmate
     variables:
       imageRepository: $[ dependencies.setVar_bobmerchantmate.outputs['setVar_bobmerchantmate.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobmerchantmate
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1582,7 +1583,7 @@ stages:
     dependsOn: setVar_bobnovatrackintapp
     variables:
       imageRepository: $[ dependencies.setVar_bobnovatrackintapp.outputs['setVar_bobnovatrackintapp.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobnovatrackintapp
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1660,7 +1661,7 @@ stages:
     dependsOn: setVar_bobnovatrackextapp
     variables:
       imageRepository: $[ dependencies.setVar_bobnovatrackextapp.outputs['setVar_bobnovatrackextapp.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobnovatrackextapp
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -1738,7 +1739,7 @@ stages:
     dependsOn: setVar_bobcoindeposit
     variables:
       imageRepository: $[ dependencies.setVar_bobcoindeposit.outputs['setVar_bobcoindeposit.imageRepository'] ]  
-    displayName: Build $(imageRepository)      
+    displayName: Build bobcoindeposit
     pool:
       vmImage: $(vmImageName)
     steps:
