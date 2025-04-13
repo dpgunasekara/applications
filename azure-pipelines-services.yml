@@ -82,8 +82,6 @@ variables:
     value: 'ubuntu-latest'
   - name: environmentName
     value: 'uat'
-  - name: imageRepository
-    value: 'empty'
   - group: build-variables
 
 stages:
@@ -117,7 +115,6 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          echo $(imageRepository)
           az storage file upload \
             --account-name "$(configStorageAccountName)" \
             --account-key "$(configstorageAccountKey)" \
@@ -148,7 +145,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobagency
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -158,7 +155,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobagency
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -221,7 +218,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boblogger
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -231,7 +228,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boblogger
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -295,7 +292,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobburs
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -305,7 +302,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobburs
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -360,7 +357,7 @@ stages:
             --account-key "$(configstorageAccountKey)" \
             --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application.yml" \
-            --path "bobfileprocessing)/application.yml" \
+            --path "bobfileprocessing/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
@@ -369,7 +366,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobfileprocessing
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -379,7 +376,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobfileprocessing
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -388,7 +385,7 @@ stages:
   - job: Build_bobonegov
     variables:
       imageRepository: bobonegov 
-    displayName: Build $(imageRepository)      
+    displayName: Build bobonegov      
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -442,7 +439,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobonegov
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -452,7 +449,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobonegov
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -515,7 +512,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobreporting
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -525,7 +522,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobreporting
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -588,7 +585,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobuserlimits
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -598,7 +595,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobuserlimits
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -661,7 +658,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmposinterface
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -671,7 +668,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmposinterface
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -734,7 +731,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobqueuemanager
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -744,7 +741,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobqueuemanager
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -807,7 +804,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobreferencing
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -817,7 +814,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobreferencing
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -880,7 +877,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobpayment
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -890,7 +887,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobpayment
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -953,7 +950,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boboag
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -963,7 +960,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boboag
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1026,7 +1023,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobaudit
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1036,7 +1033,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: $bobaudit
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1099,7 +1096,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boburm
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1109,7 +1106,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: boburm
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1172,7 +1169,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmessaging
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1182,7 +1179,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmessaging
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1245,7 +1242,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobswitchinterface
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1255,7 +1252,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobswitchinterface
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1318,7 +1315,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmpos
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1328,7 +1325,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmpos
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1391,7 +1388,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmposlogger
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1401,7 +1398,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmposlogger
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1464,7 +1461,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmerchantmate
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1474,7 +1471,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobmerchantmate
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1537,7 +1534,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobnovatrackintapp
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1547,7 +1544,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobnovatrackintapp
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1610,7 +1607,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobnovatrackextapp
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1620,7 +1617,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobnovatrackextapp
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
@@ -1683,7 +1680,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobcoindeposit
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -1693,7 +1690,7 @@ stages:
       displayName: Build and push an image to container registry 2
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: bobcoindeposit
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
