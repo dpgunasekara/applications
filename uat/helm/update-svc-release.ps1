@@ -1,3 +1,8 @@
-cd "%USERPROFILE%\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat\helm\novusware-containers"
+# Navigate to the Helm chart directory
+Set-Location "$env:USERPROFILE\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat\helm\novusware-containers"
+
+# Upgrade the Helm release
 helm upgrade svc-release .
-cd "%USERPROFILE%\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat"
+
+# Navigate back to the previous directory
+Set-Location "$env:USERPROFILE\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat"
