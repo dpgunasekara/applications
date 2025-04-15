@@ -83,19 +83,11 @@ spec:
             - name: postgres-backup
               image: postgres:16
               command: ["/bin/sh"]
-              args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.novusware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+              args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.uat.novaware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
               env:
               - name: PGPASS
                 valueFrom:
                   secretKeyRef:
                     name: pgpass
                     key: pgpass
-              volumeMounts:
-                - name: postgres-data
-                  mountPath: /var/backups
-                  subPath: postgres-backup
           restartPolicy: Never
-          volumes:
-            - name: postgres-data
-              persistentVolumeClaim:
-              claimName: postgres-data
