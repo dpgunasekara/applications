@@ -119,6 +119,6 @@ spec:
             - key: topology.kubernetes.io/zone
               operator: In
               values:
-                - centralindia
+                - centralindia-1
 
 
