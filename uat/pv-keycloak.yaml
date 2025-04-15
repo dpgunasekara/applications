@@ -97,9 +97,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: keycloak-postgres-data-01
   annotations:
     pv.kubernetes.io/provisioned-by: disk.csi.azure.com
-  name: keycloak-postgres-data-01
 spec:
   capacity:
     storage: 16Gi
@@ -112,4 +112,13 @@ spec:
     volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-drcs-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/keycloak-postgres-data-01
     volumeAttributes:
       fsType: ext4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+                - centralindia
+
 
