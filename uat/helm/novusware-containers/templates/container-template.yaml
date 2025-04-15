@@ -16,7 +16,7 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: {{ .name }}-log-01
     volumeAttributes:
-      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
       shareName: log
     nodeStageSecretRef:
       name: n0vdrcsuat01
@@ -61,7 +61,7 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: {{ .name }}-data-01
     volumeAttributes:
-      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
       shareName: data
     nodeStageSecretRef:
       name: n0vdrcsuat01
@@ -106,7 +106,7 @@ spec:
     driver: file.csi.azure.com
     volumeHandle: {{ .name }}-config-01
     volumeAttributes:
-      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
       shareName: config
     nodeStageSecretRef:
       name: n0vdrcsuat01

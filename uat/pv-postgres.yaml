@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: keycloak-config
+  name: postgres-config
 spec:
   capacity:
     storage: 16Gi
@@ -13,7 +13,7 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: keycloak-config-01
+    volumeHandle: postgres-config-01
     volumeAttributes:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: config
@@ -35,7 +35,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: keycloak-data
+  name: postgres-data
 spec:
   capacity:
     storage: 16Gi
@@ -45,7 +45,7 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: keycloak-data-01
+    volumeHandle: postgres-data-01
     volumeAttributes:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: data
@@ -67,7 +67,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: keycloak-log
+  name: postgres-log
 spec:
   capacity:
     storage: 16Gi
@@ -77,7 +77,7 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: keycloak-log-01
+    volumeHandle: postgres-log-01
     volumeAttributes:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
       shareName: log
