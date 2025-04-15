@@ -26,6 +26,15 @@ spec:
       labels:
         app: postgres
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                - centralindia-1
       containers:
         - name: postgres
           image: postgres:16
@@ -43,6 +52,7 @@ spec:
           volumeMounts:
             - name: keycloak-data
               mountPath: /var/backups
+              subPath: keycloak/postgres-backup
             - name: keycloak-postgres-data-01
               mountPath: /var/lib/postgresql/data
       volumes:
@@ -72,6 +82,16 @@ spec:
     spec:
       template:
         spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values:
+                    - centralindia-1
+
           containers:
           - name: postgres-backup
             image: postgres:16
