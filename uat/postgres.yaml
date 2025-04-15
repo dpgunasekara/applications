@@ -41,24 +41,17 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-            - name: postgres-data
+            - name: keycloak-data
               mountPath: /var/backups
-              subPath: backup
-            - name: postgres-data
+            - name: keycloak-postgres-data-01
               mountPath: /var/lib/postgresql/data
-              subPath: data
-            - name: postgres-config
-              mountPath: /opt/keycloak/conf
       volumes:
-        - name: postgres-config
+        - name: keycloak-data
           persistentVolumeClaim:
-            claimName: postgres-config
-        - name: postgres-data
+            claimName: keycloak-data
+        - name: keycloak-postgres-data-01
           persistentVolumeClaim:
-            claimName: postgres-data
-        - name: postgres-log
-          persistentVolumeClaim:
-            claimName: postgres-log
+            claimName: keycloak-postgres-data-01
 ---
 apiVersion: v1
 kind: Secret
@@ -80,14 +73,22 @@ spec:
       template:
         spec:
           containers:
-            - name: postgres-backup
-              image: postgres:16
-              command: ["/bin/sh"]
-              args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.uat.novaware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
-              env:
-              - name: PGPASS
-                valueFrom:
-                  secretKeyRef:
-                    name: pgpass
-                    key: pgpass
+          - name: postgres-backup
+            image: postgres:16
+            command: ["/bin/sh"]
+            args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres.uat.novaware.com.sg keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+            env:
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: pgpass
+                  key: pgpass
+            volumeMounts:
+              - name: keycloak-data
+                mountPath: /var/backups
+                subPath: keycloak/postgres-backup
           restartPolicy: Never
+          volumes:
+            - name: keycloak-data
+              persistentVolumeClaim:
+                claimName: keycloak-data
