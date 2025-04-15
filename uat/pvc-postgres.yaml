@@ -36,16 +36,3 @@ spec:
   resources:
     requests:
       storage: 16Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-postgres-data-01
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: managed-csi
-  volumeName: postgres-postgres-data-01
-  resources:
-    requests:
-      storage: 16Gi
