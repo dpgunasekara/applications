@@ -10,7 +10,7 @@ spec:
   type: LoadBalancer
   loadBalancerIP: 10.207.10.101
   ports:
-  - port: 8085
+  - port: 8443
     targetPort: 8443
 ---
 apiVersion: apps/v1
