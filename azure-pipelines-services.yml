@@ -1726,4 +1726,4 @@ stages:
                  echo "Running helm upgrade..."
                  cd uat/helm/novusware-containers
                  helm upgrade svc-release . --namespace drcs-uat-01
-                displayName: 'Helm Upgrade'
+                displayName: 'Helm Upgrade' 
