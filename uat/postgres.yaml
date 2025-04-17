@@ -68,8 +68,8 @@ kind: Secret
 metadata:
   name: pgpass
 data:
-#created with: echo "postgres.novusware.com.sg:5432:keycloak:postgres:postgres" | base64
-  pgpass: cG9zdGdyZXMubm92dXN3YXJlLmNvbS5zZzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+#created with: echo "postgres.uat.novaware.com.sg:5432:keycloak:postgres:postgres" | base64
+  pgpass: cG9zdGdyZXMudWF0Lm5vdmF3YXJlLmNvbS5zZzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
 ---
 apiVersion: batch/v1
 kind: CronJob
