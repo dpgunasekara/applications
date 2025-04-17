@@ -19,6 +19,9 @@ resources:
    - repository: bobburssimulator
      type: git
      name: 'BOB - Digital Revenue Collection System/bobburssimulator'
+   - repository: bobcicd
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobcicd'
 
 variables:
   - name: dockerfilePath
@@ -184,3 +187,31 @@ stages:
         tags: |
           latest
           $(Build.BuildId)                        
+- stage: Deploy
+  displayName: Deploy to AKS
+  jobs:
+    - deployment: HelmDeploy
+      displayName: Deploy using Helm
+      environment: 'uat'
+      pool:
+        name: AKS-UAT-Pool-01
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: bobcicd
+
+              - task: AzureCLI@2
+                displayName: 'Login to AKS cluster'
+                inputs:
+                  azureSubscription: 'HelmDeployConnection'
+                  scriptType: pscore
+                  scriptLocation: inlineScript
+                  inlineScript: |
+                    echo "Getting AKS credentials"
+                    az aks get-credentials --resource-group rg-aksc-nonprod-ldzn-cin-01 --name aks-uat-01 --overwrite-existing
+              - script: |
+                 echo "Running helm upgrade..."
+                 cd uat/helm/novusware-containers
+                 helm upgrade svc-release . --namespace drcs-uat-01
+                displayName: 'Helm Upgrade'          
