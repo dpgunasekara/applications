@@ -48,6 +48,7 @@ spec:
           readOnly: true 
         - name: nginx-api-gateway-content
           mountPath: /etc/nginx/html
+          subPath: "nginx-api-gateway"
       volumes:
       - name: nginx-config-volume
         configMap:
