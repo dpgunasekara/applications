@@ -155,21 +155,18 @@ data:
         configureAdminUserDetails: https://boburm-service.uat.novaware.com.sg:8443/internal/urm/user/configureAdminUserDetails
       cors:
         allowedOrigins:
+        - https://bobr3portal.uat.novaware.com.sg:8443
         - https://bobr3portal.uat.novaware.com.sg:3006
         - https://bobr3portal.uat.novaware.com.sg
-        - https://portal.uat.novaware.com.sg:3006
-        - https://portal.uat.novaware.com.sg
-        - https://portal.drcs.uat.novaware.com.sg:443
-        - https://portal.drcs.uat.novaware.com.sg
+        - https://signage.uat.novaware.com.sg:8443
         - https://signage.uat.novaware.com.sg:3008
         - https://signage.uat.novaware.com.sg
-        - https://signage.drcs.uat.novaware.com.sg
-        - https://signage.drcs.uat.novaware.com.sg:443
+        - https://bobnovatrackintportal.uat.novaware.com.sg:8443 
         - https://bobnovatrackintportal.uat.novaware.com.sg:3005
         - https://bobnovatrackintportal.uat.novaware.com.sg
+        - https://bobnovatrackextportal.uat.novaware.com.sg:8443 
         - https://bobnovatrackextportal.uat.novaware.com.sg:3007
         - https://bobnovatrackextportal.uat.novaware.com.sg
+        - https://bobburssimulator.uat.novaware.com.sg:8443 
         - https://bobburssimulator.uat.novaware.com.sg:3009
         - https://bobburssimulator.uat.novaware.com.sg
-        - https://bobburssimulator.drcs.uat.novaware.com.sg
-        - https://bobburssimulator.drcs.uat.novaware.com.sg:443
