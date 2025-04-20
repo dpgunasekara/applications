@@ -99,7 +99,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: kafka-0
+  name: kafka
 spec:
   capacity:
     storage: 16Gi
@@ -109,74 +109,10 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: kafka-0
+    volumeHandle: kafka
     volumeAttributes:
       resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-      shareName: kafka-0
-    nodeStageSecretRef:
-      name: n0vakscuat01
-      namespace: default
-  mountOptions:
-    - dir_mode=0777
-    - file_mode=0777
-    - uid=0
-    - gid=0
-    - mfsymlinks
-    - cache=strict
-    - nosharesock
-    - nobrl
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: kafka-1
-spec:
-  capacity:
-    storage: 16Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
-  csi:
-    driver: file.csi.azure.com
-    volumeHandle: kafka-1
-    volumeAttributes:
-      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-      shareName: kafka-1
-    nodeStageSecretRef:
-      name: n0vakscuat01
-      namespace: default
-  mountOptions:
-    - dir_mode=0777
-    - file_mode=0777
-    - uid=0
-    - gid=0
-    - mfsymlinks
-    - cache=strict
-    - nosharesock
-    - nobrl
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: kafka-2
-spec:
-  capacity:
-    storage: 16Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
-  csi:
-    driver: file.csi.azure.com
-    volumeHandle: kafka-2
-    volumeAttributes:
-      resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-      shareName: kafka-2
+      shareName: kafka
     nodeStageSecretRef:
       name: n0vakscuat01
       namespace: default

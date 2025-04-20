@@ -40,38 +40,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-kafka-0
+  name: data-kafka
 spec:
   accessModes:
     - ReadWriteMany
   storageClassName: azurefile-csi
-  volumeName: kafka-0
-  resources:
-    requests:
-      storage: 16Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-kafka-1
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: kafka-1
-  resources:
-    requests:
-      storage: 16Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-kafka-2
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: kafka-2
+  volumeName: kafka
   resources:
     requests:
       storage: 16Gi
