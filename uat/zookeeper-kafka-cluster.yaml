@@ -74,9 +74,9 @@ spec:
           image: grepplabs/kafka-proxy:latest
           args:
             - server
-            - --bootstrap-server-mapping=kafka-0.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:9092
-            - --bootstrap-server-mapping=kafka-1.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:9092
-            - --bootstrap-server-mapping=kafka-2.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:9092
+            - --bootstrap-server-mapping=kafka-0.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:19092
+            - --bootstrap-server-mapping=kafka-1.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:19092
+            - --bootstrap-server-mapping=kafka-2.kafka-headless.default.svc.cluster.local:8444,0.0.0.0:9092,kafka.uat.novaware.com.sg:19092
           ports:
             - containerPort: 19092
 ---  
