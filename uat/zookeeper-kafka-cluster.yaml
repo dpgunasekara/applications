@@ -9,7 +9,7 @@ spec:
   selector:
     app: kafka
   type: LoadBalancer
-  loadBalancerIP: 10.207.10.102
+  loadBalancerIP: 10.207.10.9
   ports:
     - name: internal-8444
       port: 8444
