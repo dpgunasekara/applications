@@ -5,4 +5,4 @@ Set-Location "$env:USERPROFILE\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat\hel
 helm uninstall svc-release --namespace drcs-uat-01
 
 # Navigate back to the previous directory
-Set-Location "$env:USERPROFILE\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat"
+Set-Location "$env:USERPROFILE\Documents\NovusTechComSg\BOB-DRCS\bobcicd\uat\helm"

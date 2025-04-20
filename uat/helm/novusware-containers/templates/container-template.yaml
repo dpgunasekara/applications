@@ -167,6 +167,8 @@ spec:
       app: {{ .name }}
   template:
     metadata:
+      annotations:
+        rollme: "{{ now | unixEpoch }}"
       labels:
         app: {{ .name }}
     spec:
@@ -302,6 +304,8 @@ spec:
       app: {{ .name }}
   template:
     metadata:
+      annotations:
+        rollme: "{{ now | unixEpoch }}"
       labels:
         app: {{ .name }}
     spec:
