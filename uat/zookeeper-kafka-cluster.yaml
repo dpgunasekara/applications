@@ -38,10 +38,6 @@ spec:
           ports:
             - containerPort: 8444
             - containerPort: 9092
-          volumeMounts:
-#            - name: data
-#              mountPath: /var/lib/kafka
-#              subPathExpr: "$(POD_NAME)"
           env:
             - name: KAFKA_HEAP_OPTS
               value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
@@ -62,10 +58,6 @@ spec:
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: "INTERNAL"
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data-kafka
 ---
 apiVersion: v1
 kind: Service
