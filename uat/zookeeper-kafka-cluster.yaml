@@ -39,9 +39,9 @@ spec:
             - containerPort: 8444
             - containerPort: 9092  
           volumeMounts:
-            - name: data
-              mountPath: /bitnami
-              subPathExpr: "$(POD_NAME)"
+#            - name: data
+#              mountPath: /bitnami
+#              subPathExpr: "$(POD_NAME)"
           env:
             - name: KAFKA_HEAP_OPTS
               value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"          
