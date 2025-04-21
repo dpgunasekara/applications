@@ -37,19 +37,19 @@ spec:
               subPathExpr: "$(POD_NAME)"
           env:
             - name: KAFKA_HEAP_OPTS
-              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"             
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"          
             - name: KAFKA_CFG_ZOOKEEPER_CONNECT
               value: zookeeper.default.svc.cluster.local:2181
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"
             - name: KAFKA_CFG_LISTENERS
-              value: PLAINTEXT://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092
+              value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: PLAINTEXT://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.uat.novaware.com.sg:9092
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.novusware.com.sg:9092"
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
