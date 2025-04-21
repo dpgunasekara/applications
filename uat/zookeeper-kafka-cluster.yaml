@@ -58,6 +58,17 @@ spec:
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: "INTERNAL"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/kafka
+  volumeClaimTemplates:
+    - metadata:
+      name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
