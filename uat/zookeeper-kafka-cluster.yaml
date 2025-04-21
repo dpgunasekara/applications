@@ -61,14 +61,11 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/kafka
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 10Gi
+              subPathExpr: "$(POD_NAME)"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-kafka
 ---
 apiVersion: v1
 kind: Service
