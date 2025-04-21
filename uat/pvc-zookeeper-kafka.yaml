@@ -4,8 +4,8 @@ metadata:
   name: data-zookeeper-0
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
+    - ReadWriteOnce
+  storageClassName: managed-csi
   volumeName: zookeeper-0
   resources:
     requests:
@@ -17,8 +17,8 @@ metadata:
   name: data-zookeeper-1
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
+    - ReadWriteOnce
+  storageClassName: managed-csi
   volumeName: zookeeper-1
   resources:
     requests:
@@ -30,8 +30,8 @@ metadata:
   name: data-zookeeper-2
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
+    - ReadWriteOnce
+  storageClassName: managed-csi
   volumeName: zookeeper-2
   resources:
     requests:
@@ -40,12 +40,38 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-kafka
+  name: data-kafka-0
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: kafka
+    - ReadWriteOnce
+  storageClassName: managed-csi
+  volumeName: kafka-0
+  resources:
+    requests:
+      storage: 16Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: managed-csi
+  volumeName: kafka-1
+  resources:
+    requests:
+      storage: 16Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-2
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: managed-csi
+  volumeName: kafka-2
   resources:
     requests:
       storage: 16Gi
