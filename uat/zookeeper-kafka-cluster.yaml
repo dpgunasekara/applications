@@ -41,7 +41,6 @@ spec:
           env:
             - name: KAFKA_HEAP_OPTS
               value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
-            # ADD THIS ENVIRONMENT VARIABLE:
             - name: KAFKA_ZOOKEEPER_CONNECT
               value: zookeeper.default.svc.cluster.local:2181
             - name: ALLOW_PLAINTEXT_LISTENER
@@ -53,7 +52,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: "INTERNAL://kafka-0.kafka-headless.default.svc.cluster.local:8444,EXTERNAL://kafka-0.kafka.uat.novaware.com.sg:9092"
+              value: "INTERNAL://$(POD_NAME).kafka-headless.default.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.uat.novaware.com.sg:9092"
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
@@ -63,7 +62,7 @@ spec:
               mountPath: /var/lib/kafka
   volumeClaimTemplates:
     - metadata:
-      name: data
+        name: data
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
@@ -75,12 +74,12 @@ kind: Service
 metadata:
   name: kafka
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Set to 'false' for an EXTERNAL LoadBalancer
+    service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Change to 'false' if you want external LB
 spec:
   selector:
     app: kafka
   type: LoadBalancer
-  loadBalancerIP: 10.207.10.102 # Your desired IP address (internal or external)
+  loadBalancerIP: 10.207.10.102 # Replace with your IP if needed
   ports:
     - name: internal
       port: 8444
