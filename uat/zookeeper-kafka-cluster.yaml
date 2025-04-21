@@ -29,8 +29,15 @@ spec:
       containers:
         - name: kafka
           image: bitnami/kafka:3.9.0
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              memory: "1G"
+              cpu: "1" 
           ports:
             - containerPort: 8444
+            - containerPort: 9092  
           volumeMounts:
             - name: data
               mountPath: /bitnami
