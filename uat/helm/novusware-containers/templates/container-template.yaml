@@ -182,6 +182,13 @@ spec:
             - name: listener
               containerPort: {{ .target_2 }}
 {{ end }}
+          resources:
+            requests:
+              cpu: {{ .req_cpu }}
+              memory:  {{ .req_mem }}
+            limits:
+              cpu: {{ .lim_cpu }}
+              memory: {{ .lim_mem }}
           env:
             - name: KEY_STORE_PASSWORD
               valueFrom:
