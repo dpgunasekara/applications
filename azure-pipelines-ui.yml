@@ -24,8 +24,10 @@ resources:
      name: 'BOB - Digital Revenue Collection System/bobcicd'
 
 variables:
-  - name: dockerfilePath
-    value: '$(Build.SourcesDirectory)/Dockerfile'
+  - name: dockerfilePath-1
+    value: '$(Build.SourcesDirectory)/Dockerfile-1'
+  - name: dockerfilePath-2
+    value: '$(Build.SourcesDirectory)/Dockerfile-2'
   - name: tag
     value: '$(Build.BuildId)'
   - name: vmImageName
@@ -44,15 +46,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobR3portal
-    - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
-      displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: 'bobr3portal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -62,7 +61,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobr3portal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
@@ -74,15 +73,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobsignage
-    - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
-      displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: 'bobsignage'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -92,7 +88,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobsignage'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
@@ -104,15 +100,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobnovatrackintportal
-    - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
-      displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackintportal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -122,7 +115,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackintportal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
@@ -134,15 +127,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobnovatrackextportal
-    - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
-      displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackextportal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -152,7 +142,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackextportal'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
@@ -164,15 +154,12 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: bobburssimulator
-    - script: |
-        cp $(Build.SourcesDirectory)/.env.$(environmentName) $(Build.SourcesDirectory)/.env
-      displayName: "Use environment-specific .env"    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: 'bobburssimulator'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -182,7 +169,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobburssimulator'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
