@@ -321,6 +321,13 @@ spec:
           image: creguat01.azurecr.io/{{ .name }}:latest
           ports:
             - containerPort: {{ .target_1 }}
+          resources:
+            requests:
+              cpu: {{ .req_cpu }}
+              memory:  {{ .req_mem }}
+            limits:
+              cpu: {{ .lim_cpu }}
+              memory: {{ .lim_mem }}
           envFrom:
             - configMapRef:
                 name: {{ .name }}-config
@@ -341,8 +348,7 @@ spec:
             - name: keystore-volume-privkey
               mountPath: "/app/config/uat.novaware-privkey.pem"
               subPath: "uat.novaware-privkey.pem"
-              readOnly: true 
-
+              readOnly: true             
       volumes:
         - name: {{ .name }}-config
           persistentVolumeClaim:
