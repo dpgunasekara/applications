@@ -174,7 +174,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobburssimulator'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
@@ -184,7 +184,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobburssimulator'
-        dockerfile: $(dockerfilePath)
+        dockerfile: $(dockerfilePath-2)
         containerRegistry: $(dockerRegistryServiceConnection2)
         tags: |
           latest
