@@ -34,6 +34,7 @@ data:
         getAllTransactionTypes: https://bobagency-service.novusware.com.sg:8130/master/getAllTransactionTypes
         getAppConfigs: https://bobagency-service.novusware.com.sg:8130/master/getAppConfigs
         getCustomerContact: https://bobagency-service.novusware.com.sg:8130/bob/getCustomerContact
+        fetchSwiftDataIfForeignRequest: http://bobdevapp.novussl.com:8130/bob/fetchSwiftDataIfForeignRequest
       rf:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
