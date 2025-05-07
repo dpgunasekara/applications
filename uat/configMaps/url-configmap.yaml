@@ -34,6 +34,7 @@ data:
         getAllTransactionTypes: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllTransactionTypes
         getAppConfigs: https://bobagency-service.uat.novaware.com.sg:8443/master/getAppConfigs
         getCustomerContact: https://bobagency-service.uat.novaware.com.sg:8443/bob/getCustomerContact
+        fetchSwiftDataIfForeignRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/fetchSwiftDataIfForeignRequest
       rf:
         generateS3: https://bobreferencing-service.uat.novaware.com.sg:8443/staging/generateS3
         generateUrn: https://bobreferencing-service.uat.novaware.com.sg:8443/referencing/generateUrn
