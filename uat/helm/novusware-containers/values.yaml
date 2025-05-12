@@ -15,9 +15,9 @@ containers:
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
-    req_mem: 256Mi
+    req_mem: 512Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobburs
     database: bur_db_uat
@@ -25,9 +25,9 @@ containers:
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
-    req_mem: 256Mi
+    req_mem: 512Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobfileprocessing
     database: fp_db_uat
@@ -57,7 +57,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobmpos
     database: bobmpos_db_uat
@@ -67,7 +67,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobmposinterface
     database: mi_db_uat
@@ -77,7 +77,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobmposlogger
     database: bobmposlogger_db_uat
@@ -88,7 +88,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 10242Mi
   - name: boboag
     database: og_db_uat
     loadBalancerIP: 10.207.10.129
@@ -97,7 +97,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobonegov
     database: ogo_db_uat
@@ -117,7 +117,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobqueuemanager
     database: qm_db_uat
@@ -127,7 +127,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobreferencing
     database: rf_db_uat
@@ -137,7 +137,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobreporting
     database: rp_db_uat
@@ -165,7 +165,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobuserlimits
     database: ul_db_uat
@@ -175,7 +175,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobmerchantmate
     database: bobmerchantmate_db_uat
@@ -185,7 +185,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobnovatrackintapp
     database: bobnovatrack_db_uat
@@ -195,7 +195,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobnovatrackextapp
     database: bobnovatrack_db_uat
@@ -205,7 +205,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven
   - name: bobcoindeposit
     database: cs_db_uat
@@ -215,7 +215,7 @@ containers:
     req_cpu: 125m
     req_mem: 256Mi
     lim_cpu: 250m
-    lim_mem: 512Mi
+    lim_mem: 1024Mi
     type: maven    
   - name: bobr3portal
     loadBalancerIP: 10.207.10.141
