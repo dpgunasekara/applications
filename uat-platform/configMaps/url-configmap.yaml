@@ -14,7 +14,7 @@ data:
         sendHtmlEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
       au:
         # getAuditLogs : https://bobaudit-service.novusware.com.sg:8120/audit/getAuditLogs
-        getAuditLogs : https://10.210.5.33:8120:8120/audit/getAuditLogs
+        getAuditLogs : https://10.210.5.33:8120/audit/getAuditLogs
       ui:
         forceChangePwdUrl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
