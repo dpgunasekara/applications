@@ -13,7 +13,7 @@ data:
         sendHtmlEmailWithReceipt: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailWithReceipt
         sendHtmlEmailAndSms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
       au:
-        getAuditLogs : https://bobaudit-service.novusware.com.sg:8120/audit/getAuditLogs
+        getAuditLogs : https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogs
       ui:
         forceChangePwdUrl: https://portal.drcs.uat.novaware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
