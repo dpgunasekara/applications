@@ -9,7 +9,7 @@ spec:
   selector:
     app: redis
   type: LoadBalancer
-  loadBalancerIP: 10.210.5.11
+  loadBalancerIP: 10.210.5.96
   ports:
     - name: redis-tls
       port: 6379
