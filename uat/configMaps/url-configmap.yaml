@@ -12,6 +12,8 @@ data:
         sendHtmlEmail: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmail
         sendHtmlEmailWithReceipt: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailWithReceipt
         sendHtmlEmailAndSms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
+      au:
+        getAuditLogs : https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogs
       ui:
         forceChangePwdUrl: https://portal.drcs.uat.novaware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
@@ -39,6 +41,7 @@ data:
         generateS3: https://bobreferencing-service.uat.novaware.com.sg:8443/staging/generateS3
         generateUrn: https://bobreferencing-service.uat.novaware.com.sg:8443/referencing/generateUrn
       ps:
+        processRfPayment: https://bobpayment-service.uat.novaware.com.sg:8125/ps/processRfPayment
         assignConsolidation: https://bobpayment-service.uat.novaware.com.sg:8443/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/cancelWithdrawalReference
         dashBoardVlnBdleNotDeposit: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDshBrdViolationOfBdleNotDeposit
