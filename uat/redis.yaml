@@ -1,84 +1,103 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: keycloak
+  name: redis
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
   selector:
-    app: keycloak
+    app: redis
   type: LoadBalancer
-  loadBalancerIP: 10.207.10.101
+  loadBalancerIP: 10.207.10.103
   ports:
-  - port: 8443
-    targetPort: 8443
+    - name: redis-tls
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+type: Opaque
+stringData:
+  REDIS_PASSWORD: R@nd0m2025R@nd0m
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: keycloak
+  name: redis
 spec:
+  serviceName: redis
   replicas: 1
-  serviceName: keycloak
   selector:
     matchLabels:
-      app: keycloak
+      app: redis
   template:
     metadata:
       labels:
-        app: keycloak
+        app: redis
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
-        - name: keycloak
-          image: quay.io/keycloak/keycloak:latest
-          args: ["start"]
+        - name: redis
+          image: bitnami/redis:7.2.4-debian-11-r0
+          securityContext:
+            runAsUser: 1001
+          ports:
+            - containerPort: 6379
+              name: redis-tls
           env:
-            - name: KEYCLOAK_ADMIN
-              value: admin
-            - name: KEYCLOAK_ADMIN_PASSWORD
-              value: admin
-            - name: KEYCLOAK_USER
-              value: admin
-            - name: KEYCLOAK_PASSWORD
-              value: admin
-            - name: KC_HOSTNAME
-              value: keycloak.uat.novaware.com.sg
-            - name: KC_HTTPS_KEY_STORE_FILE
-              value: /etc/x509/https/uat.novaware.p12
-            - name: KC_HTTPS_KEY_STORE_PASSWORD
+            - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ssl-keystore-secret
-                  key: key-store-password
-            - name: KC_HTTPS_KEY_STORE_TYPE
-              value: PKCS12
-            - name: KC_HOSTNAME_STRICT_HTTPS
-              value: "false"
-            - name: KC_DB
-              value: postgres
-            - name: KC_DB_URL
-              value: "jdbc:postgresql://postgres.uat.novaware.com.sg:5432/keycloak?user=postgres&password=postgres"
-          ports:
-            - containerPort: 8443
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          command:
+            - "sh"
+            - "-c"
+            - |
+              redis-server \
+                --tls-port 6379 \
+                --port 0 \
+                --tls-cert-file /certs/uat.novaware-fullchain.pem \
+                --tls-key-file /certs/uat.novaware-privkey.pem \
+                --tls-ca-cert-file /certs/uat.novaware-fullchain.pem \
+                --requirepass "$REDIS_PASSWORD"
           volumeMounts:
-            - name: keycloak-config
-              mountPath: /opt/keycloak/conf
-            - name: keystore
-              mountPath: /etc/x509/https
-#            - name: keycloak-data
-#              mountPath: /opt/keycloak/data/h2
-            - name: keycloak-log
-              mountPath: /opt/keycloak/logs
+            - name: data
+              mountPath: /bitnami/redis/data
+            - name: keystore-volume-fullchain
+              mountPath: /certs/uat.novaware-fullchain.pem
+              subPath: "uat.novaware-fullchain.pem"
+              readOnly: true
+            - name: keystore-volume-privkey
+              mountPath: /certs/uat.novaware-privkey.pem
+              subPath: "uat.novaware-privkey.pem"
+              readOnly: true
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
       volumes:
-        - name: keycloak-config
-          persistentVolumeClaim:
-            claimName: keycloak-config
-        - name: keycloak-data
-          persistentVolumeClaim:
-            claimName: keycloak-data
-        - name: keycloak-log
-          persistentVolumeClaim:
-            claimName: keycloak-log
-        - name: keystore
+        - name: keystore-volume-fullchain
           secret:
-            secretName: uat.novaware-keystore
+            secretName: fullchain-uat.novaware-keystore
+        - name: keystore-volume-privkey
+          secret:
+            secretName: privkey-uat.novaware-keystore
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: managed-csi
+        resources:
+          requests:
+            storage: 5Gi
