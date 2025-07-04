@@ -14,6 +14,9 @@ spec:
     - name: redis-tls
       port: 6379
       targetPort: 6379
+    - name: redis-sentinel
+      port: 26379
+      targetPort: 26379
 ---
 apiVersion: v1
 kind: Secret
@@ -29,7 +32,7 @@ metadata:
   name: redis
 spec:
   serviceName: redis
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: redis
@@ -63,7 +66,12 @@ spec:
                 --tls-cert-file /certs/redis-fullchain.pem \
                 --tls-key-file /certs/redis-privkey.pem \
                 --tls-ca-cert-file /certs/redis-fullchain.pem \
-                --requirepass "$REDIS_PASSWORD"
+                --requirepass "$REDIS_PASSWORD" \
+                --masterauth "$REDIS_PASSWORD" \
+                --appendonly yes \
+                --cluster-enabled no \
+                --bind 0.0.0.0 \
+                --protected-mode no
           volumeMounts:
             - name: data
               mountPath: /bitnami/redis/data
@@ -85,6 +93,34 @@ spec:
               port: 6379
             initialDelaySeconds: 10
             periodSeconds: 10
+
+        - name: sentinel
+          image: bitnami/redis-sentinel:8.0.2-debian-12-r4
+          ports:
+            - containerPort: 26379
+              name: redis-sentinel
+          env:
+            - name: REDIS_MASTER_HOST
+              value: redis-0.redis.default.svc.cluster.local
+            - name: REDIS_MASTER_PORT_NUMBER
+              value: "6379"
+            - name: REDIS_SENTINEL_QUORUM
+              value: "2"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          command:
+            - "sh"
+            - "-c"
+            - |
+              redis-sentinel /opt/bitnami/redis-sentinel/etc/sentinel.conf \
+              --sentinel monitor mymaster "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER" 2 \
+              --sentinel auth-pass mymaster "$REDIS_PASSWORD" \
+              --sentinel down-after-milliseconds mymaster 10000 \
+              --sentinel parallel-syncs mymaster 1 \
+              --sentinel failover-timeout mymaster 180000
       volumes:
         - name: keystore-volume-fullchain
           secret:
