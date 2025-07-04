@@ -95,7 +95,7 @@ spec:
             periodSeconds: 10
 
         - name: sentinel
-          image: bitnami/redis-sentinel:8.0.2-debian-12-r4
+          image: bitnami/redis:8.0.2-debian-12-r4
           ports:
             - containerPort: 26379
               name: redis-sentinel
