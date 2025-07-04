@@ -1,0 +1,103 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
+spec:
+  selector:
+    app: redis
+  type: LoadBalancer
+  loadBalancerIP: 10.207.10.103
+  ports:
+    - name: redis-tls
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+type: Opaque
+stringData:
+  REDIS_PASSWORD: R@nd0m2025R@nd0m
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: redis
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: redis
+          image: bitnami/redis:8.0.2-debian-12-r4
+          securityContext:
+            runAsUser: 1001
+          ports:
+            - containerPort: 6379
+              name: redis-tls
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          command:
+            - "sh"
+            - "-c"
+            - |
+              redis-server \
+                --tls-port 6379 \
+                --port 0 \
+                --tls-cert-file /certs/redis.uat.novusware-fullchain.pem \
+                --tls-key-file /certs/redis.uat.novusware-privkey.pem \
+                --tls-ca-cert-file /certs/redis.uat.novusware-fullchain.pem \
+                --requirepass "$REDIS_PASSWORD"
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/redis/data
+            - name: keystore-volume-fullchain
+              mountPath: /certs/redis.uat.novusware-fullchain.pem
+              subPath: "redis.uat.novusware-fullchain.pem"
+              readOnly: true
+            - name: keystore-volume-privkey
+              mountPath: /certs/redis.uat.novusware-privkey.pem
+              subPath: "redis.uat.novusware-privkey.pem"
+              readOnly: true
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: keystore-volume-fullchain
+          secret:
+            secretName: fullchain-redis.uat.novusware-keystore
+        - name: keystore-volume-privkey
+          secret:
+            secretName: privkey-redis.uat.novusware-keystore
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: managed-csi
+        resources:
+          requests:
+            storage: 5Gi
