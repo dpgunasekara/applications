@@ -60,20 +60,20 @@ spec:
               redis-server \
                 --tls-port 6379 \
                 --port 0 \
-                --tls-cert-file /certs/redis.uat.novusware-fullchain.pem \
-                --tls-key-file /certs/redis.uat.novusware-privkey.pem \
-                --tls-ca-cert-file /certs/redis.uat.novusware-fullchain.pem \
+                --tls-cert-file /certs/redis-fullchain.pem \
+                --tls-key-file /certs/redis-privkey.pem \
+                --tls-ca-cert-file /certs/redis-fullchain.pem \
                 --requirepass "$REDIS_PASSWORD"
           volumeMounts:
             - name: data
               mountPath: /bitnami/redis/data
             - name: keystore-volume-fullchain
-              mountPath: /certs/redis.uat.novusware-fullchain.pem
-              subPath: "redis.uat.novusware-fullchain.pem"
+              mountPath: /certs/redis-fullchain.pem
+              subPath: "redis-fullchain.pem"
               readOnly: true
             - name: keystore-volume-privkey
-              mountPath: /certs/redis.uat.novusware-privkey.pem
-              subPath: "redis.uat.novusware-privkey.pem"
+              mountPath: /certs/redis-privkey.pem
+              subPath: "redis-privkey.pem"
               readOnly: true
           livenessProbe:
             tcpSocket:
@@ -88,10 +88,10 @@ spec:
       volumes:
         - name: keystore-volume-fullchain
           secret:
-            secretName: fullchain-redis.uat.novusware-keystore
+            secretName: fullchain-redis-keystore
         - name: keystore-volume-privkey
           secret:
-            secretName: privkey-redis.uat.novusware-keystore
+            secretName: privkey-redis-keystore
   volumeClaimTemplates:
     - metadata:
         name: data
