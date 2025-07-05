@@ -72,9 +72,9 @@ spec:
                 redis-server \
                   --tls-port 6379 \
                   --port 6380 \
-                  --tls-cert-file /certs/redis-fullchain.pem \
-                  --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-file /certs/redis-fullchain.pem \
+                  --tls-cert-file /certs/uat.novaware-fullchain.pem \
+                  --tls-key-file /certs/uat.novaware-privkey.pem \
+                  --tls-ca-cert-file /certs/uat.novaware-fullchain.pem \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD"
               else
@@ -82,9 +82,9 @@ spec:
                 redis-server \
                   --tls-port 6379 \
                   --port 6380 \
-                  --tls-cert-file /certs/redis-fullchain.pem \
-                  --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-file /certs/redis-fullchain.pem \
+                  --tls-cert-file /certs/uat.novaware-fullchain.pem \
+                  --tls-key-file /certs/uat.novaware-privkey.pem \
+                  --tls-ca-cert-file /certs/uat.novaware-fullchain.pem \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD" \
                   --replicaof redis-0.redis.default.svc.cluster.local 6379
