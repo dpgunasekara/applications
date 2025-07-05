@@ -31,17 +31,22 @@ spec:
             - sh
             - -c
             - |
-              echo "[Sentinel] Waiting for redis-0.redis.default.svc.cluster.local to resolve..."
-              until getent hosts redis-0.redis.default.svc.cluster.local; do sleep 2; done
+              echo "[Sentinel] Resolving redis-0 IP..."
+              until redis_ip=$(getent hosts redis-0.redis.default.svc.cluster.local | awk '{ print $1 }'); do
+                echo "[Sentinel] Waiting for redis-0 to resolve..."
+                sleep 2
+              done
+              
+              echo "[Sentinel] Resolved redis-0 IP: $redis_ip"
 
               cat <<EOF > /tmp/sentinel.conf
-              sentinel monitor mymaster redis-0.redis.default.svc.cluster.local 6380 2
+              sentinel monitor mymaster $redis_ip 6380 2
               sentinel auth-pass mymaster $REDIS_PASSWORD
               sentinel down-after-milliseconds mymaster 5000
               sentinel failover-timeout mymaster 10000
               EOF
 
-              echo "[Sentinel] Starting with:"
+              echo "[Sentinel] Config written:"
               cat /tmp/sentinel.conf
 
               redis-sentinel /tmp/sentinel.conf
