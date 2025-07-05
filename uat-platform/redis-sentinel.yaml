@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-sentinel
+spec:
+  selector:
+    app: redis-sentinel
+  ports:
+    - name: sentinel
+      port: 26379
+      targetPort: 26379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-sentinel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-sentinel
+  template:
+    metadata:
+      labels:
+        app: redis-sentinel
+    spec:
+      containers:
+        - name: sentinel
+          image: bitnami/redis:8.0.2-debian-12-r4
+          command:
+            - sh
+            - -c
+            - |
+              echo "[Sentinel] Resolving redis-0 IP..."
+              until redis_ip=$(getent hosts redis-0.redis.default.svc.cluster.local | awk '{ print $1 }'); do
+                echo "[Sentinel] Waiting for redis-0 to resolve..."
+                sleep 2
+              done
+              
+              echo "[Sentinel] Resolved redis-0 IP: $redis_ip"
+
+              cat <<EOF > /tmp/sentinel.conf
+              sentinel monitor mymaster $redis_ip 6380 2
+              sentinel auth-pass mymaster $REDIS_PASSWORD
+              sentinel down-after-milliseconds mymaster 5000
+              sentinel failover-timeout mymaster 10000
+              EOF
+
+              echo "[Sentinel] Config written:"
+              cat /tmp/sentinel.conf
+
+              redis-sentinel /tmp/sentinel.conf
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          ports:
+            - containerPort: 26379
+              name: sentinel
