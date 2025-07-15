@@ -25,7 +25,7 @@ containers:
     type: maven
   - name: boblogger
     database: bl_db_dev
-    loadBalancerIP: 10.210.5.14
+    loadBalancerIP: 10.210.5.32
     port_1: 80
     target_1: 8080
     type: maven
