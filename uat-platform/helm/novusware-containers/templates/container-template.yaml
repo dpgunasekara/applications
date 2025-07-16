@@ -227,6 +227,10 @@ spec:
               mountPath: "/app/config/security.yaml"
               subPath: "security.yaml"
               readOnly: true
+            - name: redis-config
+              mountPath: "/app/config/redis.yaml"
+              subPath: "redis.yaml"
+              readOnly: true
       volumes:
         - name: {{ .name }}-config
           persistentVolumeClaim:
@@ -269,7 +273,13 @@ spec:
             name: security-config
             items:
             - key: security.yaml
-              path: security.yaml  
+              path: security.yaml
+        - name: redis-config
+          configMap:
+            name: redis-config
+            items:
+            - key: redis.yaml
+              path: redis.yaml
 ---
 {{ end }}
 {{if eq .type "react" }}
