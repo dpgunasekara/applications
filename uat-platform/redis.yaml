@@ -54,12 +54,15 @@ spec:
       labels:
         app: redis
     spec:
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001    
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
           image: bitnami/redis:8.0.2-debian-12-r4
           securityContext:
-            runAsUser: 1001
+            runAsUser: 0 # Run as root          
           ports:
             - containerPort: 6379
               name: redis-tls
@@ -82,7 +85,7 @@ spec:
                   --port 6380 \
                   --tls-cert-file /certs/redis-fullchain.pem \
                   --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-file /certs/redis-fullchain.pem \
+                  --tls-ca-cert-dir /certs \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD"
               else
@@ -92,10 +95,11 @@ spec:
                   --port 6380 \
                   --tls-cert-file /certs/redis-fullchain.pem \
                   --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-file /certs/redis-fullchain.pem \
+                  --tls-ca-cert-dir /certs \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD" \
-                  --replicaof redis-0.redis.default.svc.cluster.local 6379
+                  --replicaof redis-0.redis.default.svc.cluster.local 6379 \
+                  --tls-replication yes
               fi
           volumeMounts:
             - name: data
@@ -107,6 +111,10 @@ spec:
             - name: keystore-volume-privkey
               mountPath: /certs/redis-privkey.pem
               subPath: "redis-privkey.pem"
+              readOnly: true
+            - name: keystore-volume-cakey
+              mountPath: /certs/redis-cakey.pem
+              subPath: "redis-cakey.pem"
               readOnly: true
           livenessProbe:
             tcpSocket:
@@ -125,6 +133,9 @@ spec:
         - name: keystore-volume-privkey
           secret:
             secretName: privkey-redis-keystore
+        - name: keystore-volume-cakey
+          secret:
+            secretName: cakey-redis-keystore
   volumeClaimTemplates:
     - metadata:
         name: data
