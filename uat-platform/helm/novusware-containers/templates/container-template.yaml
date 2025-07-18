@@ -191,6 +191,11 @@ spec:
                 secretKeyRef:
                   name: db-cred-secret
                   key: key-store-password
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
             - name: SERVICE_NAME
               value: {{ .name }}
             - name: DB_SERVER
@@ -279,7 +284,7 @@ spec:
             name: redis-config
             items:
             - key: redis.yaml
-              path: redis.yaml  
+              path: redis.yaml
 ---
 {{ end }}
 {{if eq .type "react" }}

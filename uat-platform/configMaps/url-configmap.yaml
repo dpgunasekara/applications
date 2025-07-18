@@ -13,12 +13,18 @@ data:
         sendHtmlEmailWithReceipt: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailWithReceipt
         sendHtmlEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
       au:
-        # getAuditLogs : https://bobaudit-service.novusware.com.sg:8120/audit/getAuditLogs
-        getAuditLogs : https://bobaudit-service.default.svc.cluster.local:8120/audit/getAuditLogs
+        getAuditLogsWithPagination: https://bobauditservice-service.novusware.com.sg:8120/audit/getAuditLogsWithPagination
+        getAuditLogs : https://bobauditservice-service.novusware.com.sg:8120/audit/getAuditLogs
+      #  getAuditLogs : https://bobaudit-service.default.svc.cluster.local:8120/audit/getAuditLogs
       ui:
         forceChangePwdUrl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
+      og:
+        updateUserLimitForReversal: https://boboag-service.novusware.com.sg:8135/oag/updateUserLimitForReversal
+      br:
+        updateUserLimitForReversal: https://bobburs-service.novusware.com.sg:8145/br/updateUserLimitForReversal
       bb:
+        processReversalTransaction: https://bobagency-service.novusware.com.sg:8130/bob/processReversalTransaction
         getAllLocation: https://bobagency-service.novusware.com.sg:8130/master/getAllLocation
         getAllRevenueCodeGroup: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeGroup
         getAllRevenueCodeByRevenueCodeGroupIdList: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeByRevenueCodeGroupIdList
@@ -42,12 +48,21 @@ data:
         generateS3: https://bobreferencing-service.novusware.com.sg:8095/staging/generateS3
         generateUrn: https://bobreferencing-service.novusware.com.sg:8095/referencing/generateUrn
       ps:
+        validateExcessWithdrawalRefNum: https://bobpayment-service.novusware.com.sg:8125/ps/validateExcessWithdrawalRefNum
+        withdrawExcessAmount: https://bobpayment-service.novusware.com.sg:8125/ps/withdrawExcessAmount
+        getAllPartialStagingByStagedRefNum: https://bobpayment-service.novusware.com.sg:8125/ps/getAllPartialStagingByStagedRefNum
+        getBhTransactionsJourney: https://bobpayment-service.novusware.com.sg:8125/ps/getBhTransactionsJourney
+        processReversalTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/processReversalTransaction
+        getSplitAmountForWithdrawal: https://bobpayment-service.novusware.com.sg:8125/ps/getSplitAmountForWithdrawal
+        saveBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/saveBankingHallTransaction
+        getBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallTransaction
+        validateBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/validateBankingHallTransaction
+        updateBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/updateBankingHallTransaction
+        deleteBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/deleteBankingHallTransaction
         assignConsolidation: https://bobpayment-service.novusware.com.sg:8125/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/cancelWithdrawalReference
         dashBoardVlnBdleNotDeposit: https://bobpayment-service.novusware.com.sg:8125/ps/getDshBrdViolationOfBdleNotDeposit
-        deleteBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/deleteBankingHallDepositAmount
         expireWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/expireWithdrawalReference
-        getBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallDepositAmount
         getBankingHallDepositTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallDepositTransactions
         getBundleTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBundleTransactions
         getCommercialBankUserTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getCommercialBankUserTransactions
@@ -70,7 +85,6 @@ data:
         getUrnSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getUrnSummary
         getUrnTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getUrnTransactions
         getUserTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getUserTransactions
-        saveBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/saveBankingHallDepositAmount
         searchS3: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3
         searchS3FutureResult: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3FutureResult
         searchS3History: https://bobpayment-service.novusware.com.sg:8125/ps/searchS3History
@@ -80,7 +94,6 @@ data:
         validateComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/validateComBankTxn
         validateStagingDataForUser: https://bobpayment-service.novusware.com.sg:8125/ps/validateStagingDataForUser
         validateBankingHallDepositAmount: https://bobpayment-service.novusware.com.sg:8125/ps/validateBankingHallDepositAmount
-        updateBankingHallTxn: https://bobpayment-service.novusware.com.sg:8125/ps/updateBankingHallTxn
         getPartialStagingJourney: https://bobpayment-service.novusware.com.sg:8125/ps/getPartialStagingJourney
         reconcileCardPayment: https://bobpayment-service.novusware.com.sg:8125/ps/reconcileCardPayment
         getPOSCollectionSummary: https://bobpayment-service.novusware.com.sg:8125/ps/getPOSCollectionSummary
@@ -92,10 +105,12 @@ data:
         terminalfreeNotification: https://bobqueuemanager-service.novusware.com.sg:8100/queue/terminalfreeNotification
         updateQueueStatus: https://bobqueuemanager-service.novusware.com.sg:8100/queue/updateQueueStatus
       sw:
+        processUpdateT24: https://bobswitchinterface-service.novusware.com.sg:8175/processUpdateT24
         generateOtp: https://bobswitchinterface-service.novusware.com.sg:8175/sw/generateOtp
         processS3ValidationRequest: https://bobswitchinterface-service.novusware.com.sg:8175/processS3ValidationRequest
         processTxnNotificationRequest: https://bobswitchinterface-service.novusware.com.sg:8175/processTxnNotificationRequest
       ul:
+        updateUserLimitForReversal: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateUserLimitForReversal
         deleteLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/deleteLimits
         depositAmt: https://bobuserlimits-service.novusware.com.sg:8165/limits/depositAmt
         getAllViolationDetails: https://bobuserlimits-service.novusware.com.sg:8165/limits/getAllViolationDetails
@@ -107,6 +122,7 @@ data:
         updateBulkUserLimits: https://bobuserlimits-service.novusware.com.sg:8165/limits/updateBulkUserLimits
         validateUserLimit: https://bobuserlimits-service.novusware.com.sg:8165/limits/validateUserLimit
       um:
+        hasPermissionForRole: https://boburm-service.novusware.com.sg:8110/authentication/hasPermissionForRole
         getAllIdentityType:  https://boburm-service.novusware.com.sg:8110/idType/getAllIdentityType
         getUser: https://boburm-service.novusware.com.sg:8110/urm/getUser
         view: https://boburm-service.novusware.com.sg:8110/user/view
