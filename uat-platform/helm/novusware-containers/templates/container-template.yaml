@@ -194,7 +194,7 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: REDIS_PASSWORD
+                  name: redis-secret
                   key: REDIS_PASSWORD
             - name: SERVICE_NAME
               value: {{ .name }}
