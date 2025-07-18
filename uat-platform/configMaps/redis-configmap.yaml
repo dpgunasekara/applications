@@ -13,6 +13,5 @@ data:
         redis:
           port: 6379
           host: redis.novusware.com.sg
-          ssl: true
           password: ${REDIS_PASSWORD}
 
