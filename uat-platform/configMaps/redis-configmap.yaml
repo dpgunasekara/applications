@@ -11,7 +11,8 @@ data:
           time-to-live: 5m
       data:
         redis:
-          port: 6380
+          port: 6379
           host: redis.novusware.com.sg
+          ssl: true
           password: ${REDIS_PASSWORD}
 
