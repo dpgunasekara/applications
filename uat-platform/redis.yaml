@@ -85,7 +85,7 @@ spec:
                   --port 6380 \
                   --tls-cert-file /certs/redis-fullchain.pem \
                   --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-dir /certs \
+                  --tls-ca-cert-file /certs/redis-cakey.pem \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD"
               else
@@ -95,7 +95,7 @@ spec:
                   --port 6380 \
                   --tls-cert-file /certs/redis-fullchain.pem \
                   --tls-key-file /certs/redis-privkey.pem \
-                  --tls-ca-cert-dir /certs \
+                  --tls-ca-cert-file /certs/redis-cakey.pem \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD" \
                   --replicaof redis-0.redis.default.svc.cluster.local 6379 \
