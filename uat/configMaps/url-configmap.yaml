@@ -34,6 +34,7 @@ data:
         getLocation: https://bobagency-service.uat.novaware.com.sg:8443/master/getLocation
         getParentCommercialBankCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getParentCommercialBankCode
         getRevenueCodeByRevenueCode: https://bobagency-service.uat.novaware.com.sg:8443/master/getRevenueCodeByRevenueCode
+        processReversalTransaction: https://bobagency-service.uat.novaware.com.sg:8443/bob/processReversalTransaction
         validateApiRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateApiRequest
         validateImportUserList: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateImportUserList        
         validateMerchantSecret: https://bobagency-service.uat.novaware.com.sg:8443/master/validateMerchantSecret        
