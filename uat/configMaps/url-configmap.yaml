@@ -13,31 +13,33 @@ data:
         sendHtmlEmailAndSms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
         sendHtmlEmailWithReceipt: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailWithReceipt
       au:
-        getAuditLogs : https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogs
-        getAuditLogsWithPagination: https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogsWithPagination
+        getAuditLogs : https://bobaudit-service.uat.novaware.com.sg:8443/audit/getAuditLogs
+        getAuditLogsWithPagination: https://bobaudit-service.uat.novaware.com.sg:8443/audit/getAuditLogsWithPagination
       ui:
         forceChangePwdUrl: https://portal.drcs.uat.novaware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
       bb:
+        bankingHallTransactionNotification: https://bobagency-service.uat.novaware.com.sg:8443/bob/bankingHallTransactionNotification
+        fetchSwiftDataIfForeignRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/fetchSwiftDataIfForeignRequest
+        getAllAgencyCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getAllAgencyCode
         getAllLocation: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllLocation
         getAllRevenueCodeGroup: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllRevenueCodeGroup
         getAllRevenueCodeByRevenueCodeGroupIdList: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllRevenueCodeByRevenueCodeGroupIdList
-        getCommercialBankByBankId: https://bobagency-service.uat.novaware.com.sg:8443/bob/getCommercialBankByBankId
-        getParentCommercialBankCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getParentCommercialBankCode
-        getAllSubAgencyCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getSubAgencyCode
-        getRevenueCodeByRevenueCode: https://bobagency-service.uat.novaware.com.sg:8443/master/getRevenueCodeByRevenueCode
-        validateApiRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateApiRequest
-        validateStagingReference: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateStagingReference
-        validateImportUserList: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateImportUserList
-        getLocation: https://bobagency-service.uat.novaware.com.sg:8443/master/getLocation
-        getCbsAccountDetails: https://bobagency-service.uat.novaware.com.sg:8443/master/getCbsAccountDetails
-        validateMerchantSecret: https://bobagency-service.uat.novaware.com.sg:8443/master/validateMerchantSecret
-        bankingHallTransactionNotification: https://bobagency-service.uat.novaware.com.sg:8443/bob/bankingHallTransactionNotification
-        getAllAgencyCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getAllAgencyCode
+        getAllSubAgencyCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getSubAgencyCode        
         getAllTransactionTypes: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllTransactionTypes
         getAppConfigs: https://bobagency-service.uat.novaware.com.sg:8443/master/getAppConfigs
+        getCbsAccountDetails: https://bobagency-service.uat.novaware.com.sg:8443/master/getCbsAccountDetails
+        getCommercialBankByBankId: https://bobagency-service.uat.novaware.com.sg:8443/bob/getCommercialBankByBankId
         getCustomerContact: https://bobagency-service.uat.novaware.com.sg:8443/bob/getCustomerContact
-        fetchSwiftDataIfForeignRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/fetchSwiftDataIfForeignRequest
+        getLocation: https://bobagency-service.uat.novaware.com.sg:8443/master/getLocation
+        getParentCommercialBankCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getParentCommercialBankCode
+        getRevenueCodeByRevenueCode: https://bobagency-service.uat.novaware.com.sg:8443/master/getRevenueCodeByRevenueCode
+        validateApiRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateApiRequest
+        validateImportUserList: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateImportUserList        
+        validateMerchantSecret: https://bobagency-service.uat.novaware.com.sg:8443/master/validateMerchantSecret        
+        validateStagingReference: https://bobagency-service.uat.novaware.com.sg:8443/bob/validateStagingReference
+      br:
+        updateUserLimitForReversal: https://bobburs-service.uat.novaware.com.sg:8443/br/updateUserLimitForReversal        
       rf:
         generateS3: https://bobreferencing-service.uat.novaware.com.sg:8443/staging/generateS3
         generateUrn: https://bobreferencing-service.uat.novaware.com.sg:8443/referencing/generateUrn
@@ -46,9 +48,13 @@ data:
         cancelWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/cancelWithdrawalReference
         dashBoardVlnBdleNotDeposit: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDshBrdViolationOfBdleNotDeposit
         deleteBankingHallDepositAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/deleteBankingHallDepositAmount
+        deleteBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/deleteBankingHallTransaction
         expireWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/expireWithdrawalReference
+        getAllPartialStagingByStagedRefNum: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getAllPartialStagingByStagedRefNum
         getBankingHallDepositAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getBankingHallDepositAmount
         getBankingHallDepositTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getBankingHallDepositTransactions
+        getBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getBankingHallTransaction
+        getBhTransactionsJourney: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getBhTransactionsJourney
         getBundleTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getBundleTransactions
         getCommercialBankUserTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getCommercialBankUserTransactions
         getCollectionTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getCollectionTransactions
@@ -56,11 +62,14 @@ data:
         getDashboardBobDistOverview: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDashboardBobDistOverview
         getDashboardCashMovement: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDashboardCashMovement
         getDshBoardRevenueCollDetailedView: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDshBoardRevenueCollDetailedView
-        getNextStage: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getNextStage
         getListOfPaymentForComBankTxn: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getListOfPaymentForComBankTxn
         getListOfPaymentForStaging: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getListOfPaymentForStaging
+        getNextStage: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getNextStage        
+        getPOSCollectionSummary: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getPOSCollectionSummary
         getPreviousStage: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getPreviousStage
+        getPartialStagingJourney: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getPartialStagingJourney
         getReceipt: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getReceipt
+        getSplitAmountForWithdrawal: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getSplitAmountForWithdrawal
         getStagedTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getStagedTransaction
         getStagingDetails: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getStagingDetails
         getStagingDetailWithHistory: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getStagingDetailWithHistory
@@ -70,21 +79,29 @@ data:
         getUrnSummary: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getUrnSummary
         getUrnTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getUrnTransactions
         getUserTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getUserTransactions
+        processReversalTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/processReversalTransaction
+        processRfPayment: https://bobpayment-service.uat.novaware.com.sg:8443/ps/processRfPayment
+        reconcileCardPayment: https://bobpayment-service.uat.novaware.com.sg:8443/ps/reconcileCardPayment
         saveBankingHallDepositAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/saveBankingHallDepositAmount
+        saveBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/saveBankingHallTransaction
         searchS3: https://bobpayment-service.uat.novaware.com.sg:8443/ps/searchS3
         searchS3FutureResult: https://bobpayment-service.uat.novaware.com.sg:8443/ps/searchS3FutureResult
         searchS3History: https://bobpayment-service.uat.novaware.com.sg:8443/ps/searchS3History
+        updateBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/updateBankingHallTransaction
+        updateBankingHallTxn: https://bobpayment-service.uat.novaware.com.sg:8443/ps/updateBankingHallTxn
         updateComBankTxnValidation: https://bobpayment-service.uat.novaware.com.sg:8443/ps/updateComBankTxnValidation
         updateStagingValidation: https://bobpayment-service.uat.novaware.com.sg:8443/ps/updateStagingValidation
         urnSearch: https://bobpayment-service.uat.novaware.com.sg:8443/ps/urnSearch
         validateComBankTxn: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateComBankTxn
         validateStagingDataForUser: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateStagingDataForUser
         validateBankingHallDepositAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateBankingHallDepositAmount
-        updateBankingHallTxn: https://bobpayment-service.uat.novaware.com.sg:8443/ps/updateBankingHallTxn
-        getPartialStagingJourney: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getPartialStagingJourney
-        reconcileCardPayment: https://bobpayment-service.uat.novaware.com.sg:8443/ps/reconcileCardPayment
-        getPOSCollectionSummary: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getPOSCollectionSummary
-        processRfPayment: https://bobpayment-service.uat.novaware.com.sg:8443/ps/processRfPayment
+        validateBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateBankingHallTransaction
+        validateExcessWithdrawalRefNum: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateExcessWithdrawalRefNum
+        withdrawExcessAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/withdrawExcessAmount
+        
+        
+        
+        
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/changeOperatingstatusTerminal
@@ -92,6 +109,7 @@ data:
         terminalfreeNotification: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/terminalfreeNotification
         updateQueueStatus: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/updateQueueStatus
       sw:
+        processUpdateT24: https://bobswitchinterface-service.uat.novaware.com.sg:8443/processUpdateT24
         generateOtp: https://bobswitchinterface-service.uat.novaware.com.sg:8443/sw/generateOtp
         processS3ValidationRequest: https://bobswitchinterface-service.uat.novaware.com.sg:8443/processS3ValidationRequest
         processTxnNotificationRequest: https://bobswitchinterface-service.uat.novaware.com.sg:8443/processTxnNotificationRequest
@@ -105,14 +123,16 @@ data:
         revertUserLimit: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/revertUserLimit
         updateLimits: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/updateLimits
         updateBulkUserLimits: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/updateBulkUserLimits
+        updateUserLimitForReversal: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/updateUserLimitForReversal
         validateUserLimit: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/validateUserLimit
       um:
+        addUserNotification: https://boburm-service.uat.novaware.com.sg:8443/notification/addUserNotification      
         getAllIdentityType:  https://boburm-service.uat.novaware.com.sg:8443/idType/getAllIdentityType
         getUser: https://boburm-service.uat.novaware.com.sg:8443/urm/getUser
-        view: https://boburm-service.uat.novaware.com.sg:8443/user/view
-        addUserNotification: https://boburm-service.uat.novaware.com.sg:8443/notification/addUserNotification
         getUserDetailsByPermissionId: https://boburm-service.uat.novaware.com.sg:8443/urm/getUserDetailsByPermissionId
+        hasPermissionForRole: https://boburm-service.uat.novaware.com.sg:8443/authentication/hasPermissionForRole
         removeRevenueCodeGroup: https://boburm-service.uat.novaware.com.sg:8443/user/removeRevenueCodeGroup
+        view: https://boburm-service.uat.novaware.com.sg:8443/user/view
       extapp:
         createUser: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/createURM
         savemerchant: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/save
@@ -124,15 +144,15 @@ data:
         disputeAttchment: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/mportal/chargeback/downloadFile
         serviceAttchment: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/mportal/request/downloadFile
       extApp:
-        createUser: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/novatrack/nova/merchant/createURM
-        setTerminalPwd: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/setTerminalPswdInt
+        changeMidStatus: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/updateUserStatus
         changeTerminalPwd: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/changeTerminalPswdInt
+        createUser: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/novatrack/nova/merchant/createURM
+        disputeAttchment: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/mportal/chargeback/downloadFile
         resetTerminalPwd: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/resetTerminalPswdInt
         resetMerchantPwd: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/authentication/resetPassword
-        changeMidStatus: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/updateUserStatus
-        viewMerchantStatus: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/viewStatus
-        disputeAttchment: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/mportal/chargeback/downloadFile
         serviceAttchment: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/mportal/request/downloadFile
+        setTerminalPwd: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/setTerminalPswdInt
+        viewMerchantStatus: https://bobnovatrackextapp-service.uat.novaware.com.sg:8443/bobnovatrack/nova/merchant/viewStatus
       intApp:
         getDisputeAttchments: https://bobnovatrackintapp-service.uat.novaware.com.sg:8443/bobnovatrack-internal/disputeChargeback/getDisputeAttachment
       mpos:
@@ -142,21 +162,21 @@ data:
         updateTransactionStatusBatch: https://bobmpos-service.uat.novaware.com.sg:8443/mpos/updateTransactionStatusBatch
       urm:
         createUser: https://boburm-service.uat.novaware.com.sg:8443/user/add
-        updateStatus: https://boburm-service.uat.novaware.com.sg:8443/user/updateStatus
+        resetMerchantPwd: https://boburm-service.uat.novaware.com.sg:8443/authentication/resetPassword
         viewStatus: https://boburm-service.uat.novaware.com.sg:8443/user/viewStatus
         updateMidTidAndSerialNo: https://boburm-service.uat.novaware.com.sg:8443/userTerminal/updateMidTidAndSerialNo
+        updateStatus: https://boburm-service.uat.novaware.com.sg:8443/user/updateStatus
         updateTerminalSerialNoByMidAndTid: https://boburm-service.uat.novaware.com.sg:8443/userTerminal/updateTerminalSerialNoByMidAndTid
         updateUserForUnLinkMid: https://boburm-service.uat.novaware.com.sg:8443/userTerminal/updateUserForUnLinkMid
-        resetMerchantPwd: https://boburm-service.uat.novaware.com.sg:8443/authentication/resetPassword
       alert:
-        sendmailandsms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
         sendmail: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmail
+        sendmailandsms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
         sendmailHtml: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmail
         sendsms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendSms
       intUrm:
+        configureAdminUserDetails: https://boburm-service.uat.novaware.com.sg:8443/internal/urm/user/configureAdminUserDetails
         createUser: https://boburm-service.uat.novaware.com.sg:8443/internal/urm/user/add
         updateNotificationDetails: https://boburm-service.uat.novaware.com.sg:8443/internal/urm/notification/updateUserNotifications
-        configureAdminUserDetails: https://boburm-service.uat.novaware.com.sg:8443/internal/urm/user/configureAdminUserDetails
       cors:
         allowedOrigins:
         - https://bobr3portal.uat.novaware.com.sg:8443
