@@ -44,6 +44,8 @@ data:
       rf:
         generateS3: https://bobreferencing-service.uat.novaware.com.sg:8443/staging/generateS3
         generateUrn: https://bobreferencing-service.uat.novaware.com.sg:8443/referencing/generateUrn
+      og:
+        updateUserLimitForReversal: https://boboag-service.uat.novaware.com.sg:8443/oag/updateUserLimitForReversal        
       ps:
         assignConsolidation: https://bobpayment-service.uat.novaware.com.sg:8443/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/cancelWithdrawalReference
@@ -99,10 +101,6 @@ data:
         validateBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateBankingHallTransaction
         validateExcessWithdrawalRefNum: https://bobpayment-service.uat.novaware.com.sg:8443/ps/validateExcessWithdrawalRefNum
         withdrawExcessAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/withdrawExcessAmount
-        
-        
-        
-        
       qm:
         changebusystatusTerminal: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/changebusystatusTerminal
         changeOperatingstatusTerminal: https://bobqueuemanager-service.uat.novaware.com.sg:8443/queue/changeOperatingstatusTerminal
