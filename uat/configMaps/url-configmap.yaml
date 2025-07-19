@@ -10,10 +10,11 @@ data:
         sendEmail: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendEmail
         sendEmailAndSms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendEmailAndSms
         sendHtmlEmail: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmail
-        sendHtmlEmailWithReceipt: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailWithReceipt
         sendHtmlEmailAndSms: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailAndSms
+        sendHtmlEmailWithReceipt: https://bobmessaging-service.uat.novaware.com.sg:8443/am/sendHtmlEmailWithReceipt
       au:
         getAuditLogs : https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogs
+        getAuditLogsWithPagination: https://bobaudit-service.uat.novaware.com.sg:8120/audit/getAuditLogsWithPagination
       ui:
         forceChangePwdUrl: https://portal.drcs.uat.novaware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
