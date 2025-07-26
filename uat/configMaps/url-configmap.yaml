@@ -126,6 +126,7 @@ data:
         validateUserLimit: https://bobuserlimits-service.uat.novaware.com.sg:8443/limits/validateUserLimit
       um:
         addUserNotification: https://boburm-service.uat.novaware.com.sg:8443/notification/addUserNotification      
+        getAgencyWiseParentMid: https://boburm-service.uat.novaware.com.sg:8443/urm/getAgencyWiseParentMid
         getAllIdentityType:  https://boburm-service.uat.novaware.com.sg:8443/idType/getAllIdentityType
         getUser: https://boburm-service.uat.novaware.com.sg:8443/urm/getUser
         getUserDetailsByPermissionId: https://boburm-service.uat.novaware.com.sg:8443/urm/getUserDetailsByPermissionId
