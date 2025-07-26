@@ -21,6 +21,7 @@ data:
       bb:
         bankingHallTransactionNotification: https://bobagency-service.uat.novaware.com.sg:8443/bob/bankingHallTransactionNotification
         fetchSwiftDataIfForeignRequest: https://bobagency-service.uat.novaware.com.sg:8443/bob/fetchSwiftDataIfForeignRequest
+        getAgencyLocations: https://bobagency-service.uat.novaware.com.sg:8443/bob/getAgencyLocations
         getAllAgencyCode: https://bobagency-service.uat.novaware.com.sg:8443/bob/getAllAgencyCode
         getAllLocation: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllLocation
         getAllRevenueCodeGroup: https://bobagency-service.uat.novaware.com.sg:8443/master/getAllRevenueCodeGroup
