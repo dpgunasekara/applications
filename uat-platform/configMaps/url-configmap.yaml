@@ -24,6 +24,7 @@ data:
       br:
         updateUserLimitForReversal: https://bobburs-service.novusware.com.sg:8145/br/updateUserLimitForReversal
       bb:
+        getAgencyLocations: https://bobagency-service.novusware.com.sg:8130/master/getAgencyLocations
         processReversalTransaction: https://bobagency-service.novusware.com.sg:8130/bob/processReversalTransaction
         getAllLocation: https://bobagency-service.novusware.com.sg:8130/master/getAllLocation
         getAllRevenueCodeGroup: https://bobagency-service.novusware.com.sg:8130/master/getAllRevenueCodeGroup
@@ -157,6 +158,7 @@ data:
         updateTerminal: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTerminal
         updateTransactionStatusBatch: https://bobmpos-service.novusware.com.sg:8120/mpos/updateTransactionStatusBatch
       urm:
+        getAgencyWiseParentMid: https://boburm-service.novusware.com.sg:8110/urm/getAgencyWiseParentMid
         createUser: https://boburm-service.novusware.com.sg:8110/user/add
         updateStatus: https://boburm-service.novusware.com.sg:8110/user/updateStatus
         viewStatus: https://boburm-service.novusware.com.sg:8110/user/viewStatus
