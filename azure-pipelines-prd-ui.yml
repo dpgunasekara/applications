@@ -22,7 +22,7 @@ resources:
 
 variables:
   - name: dockerfilePath-1
-    value: '$(Build.SourcesDirectory)/Dockerfile-3'
+    value: '$(Build.SourcesDirectory)/Dockerfile-prd'
   - name: tag
     value: '$(Build.BuildId)'
   - name: vmImageName
@@ -46,7 +46,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobr3portal'
-        dockerfile: $(dockerfilePath-3)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
@@ -63,7 +63,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobsignage'
-        dockerfile: $(dockerfilePath-3)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
@@ -80,7 +80,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackintportal'
-        dockerfile: $(dockerfilePath-3)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
@@ -97,7 +97,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: 'bobnovatrackextportal'
-        dockerfile: $(dockerfilePath-3)
+        dockerfile: $(dockerfilePath-1)
         containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
