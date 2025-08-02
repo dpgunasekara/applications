@@ -13,9 +13,8 @@ data:
         sendHtmlEmailWithReceipt: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailWithReceipt
         sendHtmlEmailAndSms: https://bobmessaging-service.novusware.com.sg:8115/am/sendHtmlEmailAndSms
       au:
-        getAuditLogsWithPagination: https://bobauditservice-service.novusware.com.sg:8120/audit/getAuditLogsWithPagination
-        getAuditLogs : https://bobauditservice-service.novusware.com.sg:8120/audit/getAuditLogs
-      #  getAuditLogs : https://bobaudit-service.default.svc.cluster.local:8120/audit/getAuditLogs
+        getAuditLogsWithPagination: https://bobaudit-service.novusware.com.sg:8120/audit/getAuditLogsWithPagination
+        getAuditLogs: https://bobaudit-service.novusware.com.sg:8120/audit/getAuditLogs
       ui:
         forceChangePwdUrl: https://portal.drcs.novusware.com.sg/drcs-force-change-password
         changePwdPage: drcs-force-change-password
