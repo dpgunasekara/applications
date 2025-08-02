@@ -1,0 +1,386 @@
+{{- range .Values.containers }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-log
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-log-01
+    volumeAttributes:
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
+      shareName: log
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: drcs-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-log
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-data-01
+    volumeAttributes:
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
+      shareName: data
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: drcs-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-data
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: {{ .name }}-config
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: {{ .name }}-config-01
+    volumeAttributes:
+      resourceGroup: rg-drcs-nonprod-ldzn-cin-01
+      shareName: config
+    nodeStageSecretRef:
+      name: n0vdrcsuat01
+      namespace: drcs-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - actimeo=30
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile-csi
+  volumeName: {{ .name }}-config
+  resources:
+    requests:
+      storage: 5Gi
+---
+{{if eq .type "maven" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .loadBalancerIP }}
+  ports:
+    - name: service
+      port: {{ .port_1 }}
+      targetPort: {{ .target_1 }}
+{{ if .port_2 }}
+    - name: listener
+      port: {{ .port_2 }}
+      targetPort: {{ .target_2 }}
+{{ end }}
+  selector:
+    app: {{ .name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      annotations:
+        rollme: "{{ now | unixEpoch }}"
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: creguat01.azurecr.io/{{ .name }}:latest
+          ports:
+            - name: service
+              containerPort: {{ .target_1 }}
+{{ if .port_2 }}
+            - name: listener
+              containerPort: {{ .target_2 }}
+{{ end }}
+          resources:
+            requests:
+              cpu: {{ .req_cpu }}
+              memory:  {{ .req_mem }}
+            limits:
+              cpu: {{ .lim_cpu }}
+              memory: {{ .lim_mem }}
+          env:
+            - name: KEY_STORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ssl-keystore-secret
+                  key: key-store-password
+            - name: DB_CRED
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred-secret
+                  key: key-store-password
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD                  
+            - name: SERVICE_NAME
+              value: {{ .name }}
+            - name: DB_SERVER
+              value: drcs-uat-dbs-01.uat.novaware.com.sg:1433
+            - name: DB
+              value: {{ .database }}
+          volumeMounts:
+            - name: {{ .name }}-config
+              mountPath: /app/config
+              subPath: {{ .name }}
+            - name: {{ .name }}-data
+              mountPath: /app/data
+              subPath: {{ .name }}
+            - name: {{ .name }}-log
+              mountPath: /app/log
+              subPath: {{ .name }}
+            - name: keystore-volume
+              mountPath: "/etc/ssl/certs/uat.novaware.p12"
+              subPath: "uat.novaware.p12"
+            - name: url-config
+              mountPath: "/app/config/url.yaml"
+              subPath: "url.yaml"
+              readOnly: true
+            - name: server-config
+              mountPath: "/app/config/server.yaml"
+              subPath: "server.yaml"
+              readOnly: true
+            - name: data-config
+              mountPath: "/app/config/data.yaml"
+              subPath: "data.yaml"
+              readOnly: true
+            - name: logging-config
+              mountPath: "/app/config/logging.yaml"
+              subPath: "logging.yaml"
+              readOnly: true
+            - name: security-config
+              mountPath: "/app/config/security.yaml"
+              subPath: "security.yaml"
+              readOnly: true
+            - name: redis-config
+              mountPath: "/app/config/redis.yaml"
+              subPath: "redis.yaml"
+              readOnly: true              
+      volumes:
+        - name: {{ .name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .name }}-config
+        - name: {{ .name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .name }}-data
+        - name: {{ .name }}-log
+          persistentVolumeClaim:
+            claimName: {{ .name }}-log
+        - name: keystore-volume
+          secret:
+            secretName: uat.novaware-keystore
+        - name: url-config
+          configMap:
+            name: url-config
+            items:
+            - key: url.yaml
+              path: url.yaml  
+        - name: server-config
+          configMap:
+            name: server-config
+            items:
+            - key: server.yaml
+              path: server.yaml  
+        - name: data-config
+          configMap:
+            name: data-config
+            items:
+            - key: data.yaml
+              path: data.yaml  
+        - name: logging-config
+          configMap:
+            name: logging-config
+            items:
+            - key: logging.yaml
+              path: logging.yaml  
+        - name: security-config
+          configMap:
+            name: security-config
+            items:
+            - key: security.yaml
+              path: security.yaml
+        - name: redis-config
+          configMap:
+            name: redis-config
+            items:
+            - key: redis.yaml
+              path: redis.yaml                
+---
+{{ end }}
+{{if eq .type "react" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: {{ .loadBalancerIP }}
+  ports:
+    - port: {{ .port_1 }}
+      targetPort: {{ .target_1 }}
+  selector:
+    app: {{ .name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      annotations:
+        rollme: "{{ now | unixEpoch }}"
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: creguat01.azurecr.io/{{ .name }}:latest
+          ports:
+            - containerPort: {{ .target_1 }}
+          resources:
+            requests:
+              cpu: {{ .req_cpu }}
+              memory:  {{ .req_mem }}
+            limits:
+              cpu: {{ .lim_cpu }}
+              memory: {{ .lim_mem }}
+          envFrom:
+            - configMapRef:
+                name: {{ .name }}-config
+          volumeMounts:
+            - name: {{ .name }}-config
+              mountPath: /app/config
+              subPath: {{ .name }}
+            - name: {{ .name }}-data
+              mountPath: /app/data
+              subPath: {{ .name }}
+            - name: {{ .name }}-log
+              mountPath: /app/log
+              subPath: {{ .name }}
+            - name: keystore-volume-fullchain
+              mountPath: "/app/config/uat.novaware-fullchain.pem"
+              subPath: "uat.novaware-fullchain.pem"
+              readOnly: true 
+            - name: keystore-volume-privkey
+              mountPath: "/app/config/uat.novaware-privkey.pem"
+              subPath: "uat.novaware-privkey.pem"
+              readOnly: true             
+      volumes:
+        - name: {{ .name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .name }}-config
+        - name: {{ .name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .name }}-data
+        - name: {{ .name }}-log
+          persistentVolumeClaim:
+            claimName: {{ .name }}-log
+        - name: keystore-volume-fullchain
+          secret:
+            secretName: fullchain-uat.novaware-keystore
+        - name: keystore-volume-privkey
+          secret:
+            secretName: privkey-uat.novaware-keystore
+
+---
+{{ end }}
+{{- end }}

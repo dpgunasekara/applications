@@ -1,0 +1,264 @@
+containers:
+  - name: bobagency
+    database: bb_db_uat
+    loadBalancerIP: 10.207.10.120
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 512Mi
+    lim_cpu: 250m
+    lim_mem: 1Gi
+    type: maven
+  - name: bobaudit
+    database: au_db_uat
+    loadBalancerIP: 10.207.10.121
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 512Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobburs
+    database: bur_db_uat
+    loadBalancerIP: 10.207.10.122
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 512Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobfileprocessing
+    database: fp_db_uat
+    loadBalancerIP: 10.207.10.123
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: maven
+  - name: boblogger
+    database: bl_db_uat
+    loadBalancerIP: 10.207.10.124
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: maven
+  - name: bobmessaging
+    database: am_db_uat
+    loadBalancerIP: 10.207.10.125
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobmpos
+    database: bobmpos_db_uat
+    loadBalancerIP: 10.207.10.126
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobmposinterface
+    database: mi_db_uat
+    loadBalancerIP: 10.207.10.127
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobmposlogger
+    database: bobmposlogger_db_uat
+    loadBalancerIP: 10.207.10.128
+    port_1: 8443
+    target_1: 8080
+    type: maven
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 10242Mi
+  - name: boboag
+    database: og_db_uat
+    loadBalancerIP: 10.207.10.129
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobonegov
+    database: ogo_db_uat
+    loadBalancerIP: 10.207.10.130
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 512Mi
+    lim_cpu: 250m
+    lim_mem: 1Gi
+    type: maven
+  - name: bobpayment
+    database: ps_db_uat
+    loadBalancerIP: 10.207.10.131
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobqueuemanager
+    database: qm_db_uat
+    loadBalancerIP: 10.207.10.132
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobreferencing
+    database: rf_db_uat
+    loadBalancerIP: 10.207.10.133
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobreporting
+    database: rp_db_uat
+    loadBalancerIP: 10.207.10.134
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 512Mi
+    lim_cpu: 250m
+    lim_mem: 1Gi
+    type: maven
+#  - name: bobswitchinterface
+#    database: sw_db_uat
+#    loadBalancerIP: 10.207.10.36
+#    port_1: 8175
+#    target_1: 8080
+#    port_2: 6666
+#    target_2: 6666
+#    type: maven
+  - name: boburm
+    database: urm_db_uat
+    loadBalancerIP: 10.207.10.135
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobuserlimits
+    database: ul_db_uat
+    loadBalancerIP: 10.207.10.136
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobmerchantmate
+    database: bobmerchantmate_db_uat
+    loadBalancerIP: 10.207.10.137
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobnovatrackintapp
+    database: bobnovatrack_db_uat
+    loadBalancerIP: 10.207.10.138
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobnovatrackextapp
+    database: bobnovatrack_db_uat
+    loadBalancerIP: 10.207.10.139
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven
+  - name: bobcoindeposit
+    database: cs_db_uat
+    loadBalancerIP: 10.207.10.140
+    port_1: 8443
+    target_1: 8080
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 1024Mi
+    type: maven    
+  - name: bobr3portal
+    loadBalancerIP: 10.207.10.141
+    port_1: 8443
+    target_1: 3006
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: react
+  - name: bobsignage
+    loadBalancerIP: 10.207.10.142
+    port_1: 8443
+    target_1: 3008
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: react
+  - name: bobnovatrackintportal
+    loadBalancerIP: 10.207.10.143
+    port_1: 8443
+    target_1: 3005
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: react
+  - name: bobnovatrackextportal
+    loadBalancerIP: 10.207.10.144
+    port_1: 8443
+    target_1: 3007
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: react
+  - name: bobburssimulator
+    loadBalancerIP: 10.207.10.145
+    port_1: 8443
+    target_1: 3009
+    req_cpu: 125m
+    req_mem: 256Mi
+    lim_cpu: 250m
+    lim_mem: 512Mi
+    type: react

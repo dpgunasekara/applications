@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+data:
+  server.yaml: |
+    server:
+      ssl:
+        key-store-type: PKCS12
+        key-store: /etc/ssl/certs/uat.novaware.p12
+        key-store-password: ${KEY_STORE_PASSWORD}
+        key-store-alias: uat.novaware
+        enabled: true
+    management:
+      endpoint:
+        health:
+          show-details: always
+          probes:
+            enabled: true
+      health:
+        livenessState:
+          enabled: true
+        readinessState:
+          enabled: true

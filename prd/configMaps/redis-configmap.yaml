@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+data:
+  redis.yaml: |
+    spring:
+      cache:
+        type: redis
+        redis:
+          time-to-live: 5m
+      data:
+        redis:
+          port: 6379
+          host: redis.uat.novaware.com.sg
+          password: ${REDIS_PASSWORD}

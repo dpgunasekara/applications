@@ -1,0 +1,1 @@
+kubectl create configmap bobsignage-config --from-env-file=signage.env --namespace drcs-uat-01

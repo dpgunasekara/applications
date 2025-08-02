@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logging-config
+data:
+  logging.yaml: |
+    logging:
+      file:
+        name: /app/log/${SERVICE_NAME}-${HOSTNAME}.log
+    level:
+      root: INFO
+      com.drcs: TRACE
+    pattern:
+      file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'

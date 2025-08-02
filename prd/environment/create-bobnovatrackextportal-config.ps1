@@ -1,0 +1,1 @@
+kubectl create configmap bobnovatrackextportal-config --from-env-file=bobnovatrackextportal.env --namespace drcs-uat-01
