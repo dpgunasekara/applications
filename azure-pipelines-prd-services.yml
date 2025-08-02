@@ -2,10 +2,10 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-
+  
 resources:
  repositories:
-   - repository: bobagency
+   - repository: bobagency 
      type: git
      name: 'BOB - Digital Revenue Collection System/bobagency'
      ref: refs/heads/release
@@ -80,32 +80,43 @@ resources:
    - repository: bobmerchantmate
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmerchantmate'
-     ref: refs/heads/release     
+     ref: refs/heads/release
    - repository: bobnovatrackextapp
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackextapp'
-     ref: refs/heads/release     
+     ref: refs/heads/release
    - repository: bobnovatrackintapp
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackintapp'
-     ref: refs/heads/release     
+     ref: refs/heads/release
    - repository: bobcoindeposit
      type: git
      name: 'BOB - Digital Revenue Collection System/bobcoindeposit'
-     ref: refs/heads/release     
+     ref: refs/heads/release
+   - repository: bobcicd
+     type: git
+     name: 'BOB - Digital Revenue Collection System/bobcicd'
+     ref: refs/heads/release
+
 
 variables:
-  dockerRegistryServiceConnection: 'db9b844b-fbd5-4c4b-9e0f-41e21cd3087f'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-  vmImageName: 'ubuntu-latest'
-  environmentName: 'prd'    
+  - name: dockerfilePath
+    value: '$(Build.SourcesDirectory)/Dockerfile'
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+  - name: environmentName
+    value: 'prd'
+  - group: build-variables
 
 stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
   - job: Build_bobagency
+    variables:
+      imageRepository: bobagency
     displayName: Build bobagency
     pool:
       vmImage: $(vmImageName)
@@ -123,17 +134,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobagency/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobagency/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobagency'
+        repository: bobagency
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_boblogger
+    variables:
+      imageRepository: boblogger
     displayName: Build boblogger
     pool:
       vmImage: $(vmImageName)
@@ -151,17 +197,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "boblogger/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boblogger/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'boblogger'
+        repository: boblogger
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobburs
+    variables:
+      imageRepository: bobburs  
     displayName: Build bobburs
     pool:
       vmImage: $(vmImageName)
@@ -179,17 +260,53 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobburs/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobburs/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobburs'
+        repository: bobburs
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobfileprocessing
+    variables:
+      imageRepository: bobfileprocessing  
     displayName: Build bobfileprocessing
     pool:
       vmImage: $(vmImageName)
@@ -207,18 +324,54 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobfileprocessing/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobfileprocessing/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobfileprocessing'
+        repository: bobfileprocessing
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobonegov
-    displayName: Build bobonegov
+    variables:
+      imageRepository: bobonegov 
+    displayName: Build bobonegov      
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -235,17 +388,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobonegov/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobonegov/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobonegov'
+        repository: bobonegov
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_bobReporting
+  - job: Build_bobreporting
+    variables:
+      imageRepository: bobreporting
     displayName: Build bobreporting
     pool:
       vmImage: $(vmImageName)
@@ -263,17 +451,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobreporting/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobreporting/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobreporting'
+        repository: bobreporting
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobuserlimits
+    variables:
+      imageRepository: bobuserlimits  
     displayName: Build bobuserlimits
     pool:
       vmImage: $(vmImageName)
@@ -291,17 +514,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobuserlimits/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobuserlimits/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobuserlimits'
+        repository: bobuserlimits
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobmposinterface
+    variables:
+      imageRepository: bobmposinterface 
     displayName: Build bobmposinterface
     pool:
       vmImage: $(vmImageName)
@@ -319,17 +577,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobmposinterface/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmposinterface/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobmposinterface'
+        repository: bobmposinterface
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobqueuemanager
+    variables:
+      imageRepository: bobqueuemanager 
     displayName: Build bobqueuemanager
     pool:
       vmImage: $(vmImageName)
@@ -347,17 +640,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobqueuemanager/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobqueuemanager/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobqueuemanager'
+        repository: bobqueuemanager
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobreferencing
+    variables:
+      imageRepository: bobreferencing
     displayName: Build bobreferencing
     pool:
       vmImage: $(vmImageName)
@@ -375,17 +703,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobreferencing/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobreferencing/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobreferencing'
+        repository: bobreferencing
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobpayment
+    variables:
+      imageRepository: bobpayment
     displayName: Build bobpayment
     pool:
       vmImage: $(vmImageName)
@@ -403,17 +766,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobpayment/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobpayment/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobpayment'
+        repository: bobpayment
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_boboag
+    variables:
+      imageRepository: boboag
     displayName: Build boboag
     pool:
       vmImage: $(vmImageName)
@@ -431,17 +829,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "boboag/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boboag/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'boboag'
+        repository: boboag
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobaudit
+    variables:
+      imageRepository: bobaudit
     displayName: Build bobaudit
     pool:
       vmImage: $(vmImageName)
@@ -459,17 +892,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobaudit/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobaudit/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobaudit'
+        repository: bobaudit
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_boburm
+    variables:
+      imageRepository: boburm
     displayName: Build boburm
     pool:
       vmImage: $(vmImageName)
@@ -487,17 +955,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "boburm/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boburm/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'boburm'
+        repository: boburm
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobmessaging
+    variables:
+      imageRepository: bobmessaging
     displayName: Build bobmessaging
     pool:
       vmImage: $(vmImageName)
@@ -515,17 +1018,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobmessaging/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmessaging/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobmessaging'
+        repository: bobmessaging
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobswitchinterface
+    variables:
+      imageRepository: bobswitchinterface
     displayName: Build bobswitchinterface
     pool:
       vmImage: $(vmImageName)
@@ -543,17 +1081,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobswitchinterface/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobswitchinterface/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobswitchinterface'
+        repository: bobswitchinterface
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_mpos
+  - job: Build_bobmpos
+    variables:
+      imageRepository: bobmpos
     displayName: Build bobmpos
     pool:
       vmImage: $(vmImageName)
@@ -571,17 +1144,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobmpos/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmpos/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobmpos'
+        repository: bobmpos
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
-  - job: Build_mposlogger
+  - job: Build_bobmposlogger
+    variables:
+      imageRepository: bobmposlogger
     displayName: Build bobmposlogger
     pool:
       vmImage: $(vmImageName)
@@ -599,17 +1207,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobmposlogger/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmposlogger/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobmposlogger'
+        repository: bobmposlogger
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobmerchantmate
+    variables:
+      imageRepository: bobmerchantmate
     displayName: Build bobmerchantmate
     pool:
       vmImage: $(vmImageName)
@@ -627,17 +1270,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobmerchantmate/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmerchantmate/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobmerchantmate'
+        repository: bobmerchantmate
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobnovatrackintapp
+    variables:
+      imageRepository: bobnovatrackintapp
     displayName: Build bobnovatrackintapp
     pool:
       vmImage: $(vmImageName)
@@ -655,17 +1333,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobnovatrackintapp/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobnovatrackintapp/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackintapp'
+        repository: bobnovatrackintapp
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobnovatrackextapp
+    variables:
+      imageRepository: bobnovatrackextapp
     displayName: Build bobnovatrackextapp
     pool:
       vmImage: $(vmImageName)
@@ -683,17 +1396,52 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobnovatrackextapp/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobnovatrackextapp/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobnovatrackextapp'
+        repository: bobnovatrackextapp
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
   - job: Build_bobcoindeposit
+    variables:
+      imageRepository: bobcoindeposit
     displayName: Build bobcoindeposit
     pool:
       vmImage: $(vmImageName)
@@ -711,13 +1459,46 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenAuthenticateFeed: true
+        
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
+            --path "bobcoindeposit/application-$(environmentName).yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application-$(environmentName).yml'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureStorageConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobcoindeposit/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
+      displayName: 'Copy application.yml'
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push an image to container registry 3
       inputs:
         command: buildAndPush
-        repository: 'bobcoindeposit'
+        repository: bobcoindeposit
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistryServiceConnection3)
         tags: |
           latest
           $(Build.BuildId)
