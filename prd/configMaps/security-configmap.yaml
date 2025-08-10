@@ -9,8 +9,8 @@ data:
         oauth2:
           resourceserver:
            jwt:
-             issuer-uri: https://keycloak.uat.novaware.com.sg:8443/realms/BobUrmRealm
+             issuer-uri: https://keycloak.bh.bob.bw:8443/realms/BobUrmRealm
            opaquetoken:
-             introspection-uri: https://keycloak.uat.novaware.com.sg:8443/realms/BobUrmRealm/protocol/openid-connect/token/introspect
+             introspection-uri: https://keycloak.bh.bob.bw:8443/realms/BobUrmRealm/protocol/openid-connect/token/introspect
              client-id: bob-urm
              client-secret: Ufpc23uQGvKGkf0oXsrrzgMgwiTDc8gV
