@@ -208,7 +208,7 @@ spec:
             - name: SERVICE_NAME
               value: {{ .name }}
             - name: DB_SERVER
-              value: drcs-uat-dbs-01.uat.novaware.com.sg:1433
+              value: bh-prd-dbs-00.bh.bob.bw:1433
             - name: DB
               value: {{ .database }}
           volumeMounts:
@@ -222,8 +222,8 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume
-              mountPath: "/etc/ssl/certs/uat.novaware.p12"
-              subPath: "uat.novaware.p12"
+              mountPath: "/etc/ssl/certs/bh-bob-bw.p12"
+              subPath: "bh-bob-bw.p12"
             - name: url-config
               mountPath: "/app/config/url.yaml"
               subPath: "url.yaml"
@@ -260,7 +260,7 @@ spec:
             claimName: {{ .name }}-log
         - name: keystore-volume
           secret:
-            secretName: uat.novaware-keystore
+            secretName: bh-bob-bw-keystore
         - name: url-config
           configMap:
             name: url-config
@@ -357,12 +357,12 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume-fullchain
-              mountPath: "/app/config/uat.novaware-fullchain.pem"
-              subPath: "uat.novaware-fullchain.pem"
+              mountPath: "/app/config/bh-bob-bw-fullchain.pem"
+              subPath: "bh-bob-bw-fullchain.pem"
               readOnly: true 
             - name: keystore-volume-privkey
-              mountPath: "/app/config/uat.novaware-privkey.pem"
-              subPath: "uat.novaware-privkey.pem"
+              mountPath: "/app/config/bh-bob-bw-privkey.pem"
+              subPath: "bh-bob-bw-privkey.pem"
               readOnly: true             
       volumes:
         - name: {{ .name }}-config
@@ -376,10 +376,10 @@ spec:
             claimName: {{ .name }}-log
         - name: keystore-volume-fullchain
           secret:
-            secretName: fullchain-uat.novaware-keystore
+            secretName: fullchain-bh-bob-bw-keystore
         - name: keystore-volume-privkey
           secret:
-            secretName: privkey-uat.novaware-keystore
+            secretName: privkey-bh-bob-bw-keystore
 
 ---
 {{ end }}
