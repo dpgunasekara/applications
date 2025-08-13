@@ -123,7 +123,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: creguat01.azurecr.io/{{ .name }}:latest
+          image: {{ .containerRegistry }}/{{ .name }}:latest
           ports:
             - name: service
               containerPort: {{ .target_1 }}
