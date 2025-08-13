@@ -1,4 +1,5 @@
 nfsServer: 10.0.0.25
+containerRegistry: creguat01.azurecr.io
 containers:
   - name: bobagency
     database: bb_db_prd
