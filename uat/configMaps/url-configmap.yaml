@@ -50,7 +50,6 @@ data:
       ps:
         assignConsolidation: https://bobpayment-service.uat.novaware.com.sg:8443/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/cancelWithdrawalReference
-        dashBoardVlnBdleNotDeposit: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDshBrdViolationOfBdleNotDeposit
         deleteBankingHallDepositAmount: https://bobpayment-service.uat.novaware.com.sg:8443/ps/deleteBankingHallDepositAmount
         deleteBankingHallTransaction: https://bobpayment-service.uat.novaware.com.sg:8443/ps/deleteBankingHallTransaction
         expireWithdrawalReference: https://bobpayment-service.uat.novaware.com.sg:8443/ps/expireWithdrawalReference
@@ -63,9 +62,6 @@ data:
         getCommercialBankUserTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getCommercialBankUserTransactions
         getCollectionTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getCollectionTransactions
         getConsoliadtionTransactions: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getConsoliadtionTransactions
-        getDashboardBobDistOverview: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDashboardBobDistOverview
-        getDashboardCashMovement: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDashboardCashMovement
-        getDshBoardRevenueCollDetailedView: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getDshBoardRevenueCollDetailedView
         getListOfPaymentForComBankTxn: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getListOfPaymentForComBankTxn
         getListOfPaymentForStaging: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getListOfPaymentForStaging
         getNextStage: https://bobpayment-service.uat.novaware.com.sg:8443/ps/getNextStage        

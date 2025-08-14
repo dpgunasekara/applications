@@ -3,7 +3,7 @@ containerRegistry: creguat01.azurecr.io
 containers:
   - name: bobagency
     database: bb_db_prd
-    loadBalancerIP: 10.10.140.1
+    loadBalancerIP: 10.253.253.101
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -13,7 +13,7 @@ containers:
     type: maven
   - name: bobaudit
     database: au_db_prd
-    loadBalancerIP: 10.10.140.2
+    loadBalancerIP: 10.253.253.102
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -23,7 +23,7 @@ containers:
     type: maven
   - name: bobburs
     database: bur_db_prd
-    loadBalancerIP: 10.10.140.3
+    loadBalancerIP: 10.253.253.103
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -33,7 +33,7 @@ containers:
     type: maven
   - name: bobfileprocessing
     database: fp_db_prd
-    loadBalancerIP: 10.10.140.4
+    loadBalancerIP: 10.253.253.104
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -43,7 +43,7 @@ containers:
     type: maven
   - name: boblogger
     database: bl_db_prd
-    loadBalancerIP: 10.10.140.5
+    loadBalancerIP: 110.253.253.105
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -53,7 +53,7 @@ containers:
     type: maven
   - name: bobmessaging
     database: am_db_prd
-    loadBalancerIP: 10.10.140.6
+    loadBalancerIP: 10.253.253.106
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -63,7 +63,7 @@ containers:
     type: maven
   - name: bobmpos
     database: bobmpos_db_prd
-    loadBalancerIP: 10.10.140.7
+    loadBalancerIP: 10.253.253.107
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -73,7 +73,7 @@ containers:
     type: maven
   - name: bobmposinterface
     database: mi_db_prd
-    loadBalancerIP: 10.10.140.8
+    loadBalancerIP: 10.253.253.108
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -83,7 +83,7 @@ containers:
     type: maven
   - name: bobmposlogger
     database: bobmposlogger_db_prd
-    loadBalancerIP: 10.10.140.9
+    loadBalancerIP: 10.253.253.109
     port_1: 8443
     target_1: 8080
     type: maven
@@ -93,7 +93,7 @@ containers:
     lim_mem: 10242Mi
   - name: boboag
     database: og_db_prd
-    loadBalancerIP: 10.10.140.10
+    loadBalancerIP: 10.253.253.110
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -103,7 +103,7 @@ containers:
     type: maven
   - name: bobonegov
     database: ogo_db_prd
-    loadBalancerIP: 10.10.140.11
+    loadBalancerIP: 10.253.253.111
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -113,7 +113,7 @@ containers:
     type: maven
   - name: bobpayment
     database: ps_db_prd
-    loadBalancerIP: 10.10.140.12
+    loadBalancerIP: 10.253.253.112
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -123,7 +123,7 @@ containers:
     type: maven
   - name: bobqueuemanager
     database: qm_db_prd
-    loadBalancerIP: 10.10.140.13
+    loadBalancerIP: 10.253.253.113
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -133,7 +133,7 @@ containers:
     type: maven
   - name: bobreferencing
     database: rf_db_prd
-    loadBalancerIP: 10.10.140.14
+    loadBalancerIP: 10.253.253.114
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -143,7 +143,7 @@ containers:
     type: maven
   - name: bobreporting
     database: rp_db_prd
-    loadBalancerIP: 10.10.14015
+    loadBalancerIP: 10.253.253.115
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -153,7 +153,7 @@ containers:
     type: maven
 #  - name: bobswitchinterface
 #    database: sw_db_prd
-#    loadBalancerIP: 10.10.140.16
+#    loadBalancerIP: 10.253.253.116
 #    port_1: 8175
 #    target_1: 8080
 #    port_2: 6666
@@ -161,7 +161,7 @@ containers:
 #    type: maven
   - name: boburm
     database: urm_db_prd
-    loadBalancerIP: 10.10.140.17
+    loadBalancerIP: 10.253.253.117
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -171,7 +171,7 @@ containers:
     type: maven
   - name: bobuserlimits
     database: ul_db_prd
-    loadBalancerIP: 10.10.140.18
+    loadBalancerIP: 10.253.253.118
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -181,7 +181,7 @@ containers:
     type: maven
   - name: bobmerchantmate
     database: bobmerchantmate_db_prd
-    loadBalancerIP: 10.10.140.28
+    loadBalancerIP: 10.253.253.127
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -191,7 +191,7 @@ containers:
     type: maven
   - name: bobnovatrackintapp
     database: bobnovatrack_db_prd
-    loadBalancerIP: 10.10.140.31
+    loadBalancerIP: 10.253.253.130
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -201,7 +201,7 @@ containers:
     type: maven
   - name: bobnovatrackextapp
     database: bobnovatrack_db_prd
-    loadBalancerIP: 10.10.140.29
+    loadBalancerIP: 10.253.253.128
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -211,7 +211,7 @@ containers:
     type: maven
   - name: bobcoindeposit
     database: cs_db_prd
-    loadBalancerIP: 10.10.140.27
+    loadBalancerIP: 10.253.253.126
     port_1: 8443
     target_1: 8080
     req_cpu: 125m
@@ -220,7 +220,7 @@ containers:
     lim_mem: 1024Mi
     type: maven    
   - name: bobr3portal
-    loadBalancerIP: 10.10.140.19
+    loadBalancerIP: 10.253.253.119
     port_1: 8443
     target_1: 3006
     req_cpu: 125m
@@ -229,7 +229,7 @@ containers:
     lim_mem: 512Mi
     type: react
   - name: bobsignage
-    loadBalancerIP: 10.10.140.20
+    loadBalancerIP: 10.253.253.120
     port_1: 8443
     target_1: 3008
     req_cpu: 125m
@@ -238,7 +238,7 @@ containers:
     lim_mem: 512Mi
     type: react
   - name: bobnovatrackintportal
-    loadBalancerIP: 10.10.140.32
+    loadBalancerIP: 10.253.253.131
     port_1: 8443
     target_1: 3005
     req_cpu: 125m
@@ -247,7 +247,7 @@ containers:
     lim_mem: 512Mi
     type: react
   - name: bobnovatrackextportal
-    loadBalancerIP: 10.10.140.30
+    loadBalancerIP: 10.253.253.129
     port_1: 8443
     target_1: 3007
     req_cpu: 125m
@@ -255,12 +255,12 @@ containers:
     lim_cpu: 250m
     lim_mem: 512Mi
     type: react
-  - name: bobburssimulator
-    loadBalancerIP: 10.10.140.34
-    port_1: 8443
-    target_1: 3009
-    req_cpu: 125m
-    req_mem: 256Mi
-    lim_cpu: 250m
-    lim_mem: 512Mi
-    type: react
+  # - name: bobburssimulator
+  #   loadBalancerIP: 10.10.140.34
+  #   port_1: 8443
+  #   target_1: 3009
+  #   req_cpu: 125m
+  #   req_mem: 256Mi
+  #   lim_cpu: 250m
+  #   lim_mem: 512Mi
+  #   type: react

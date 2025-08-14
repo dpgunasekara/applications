@@ -61,16 +61,12 @@ data:
         deleteBankingHallTransaction: https://bobpayment-service.novusware.com.sg:8125/ps/deleteBankingHallTransaction
         assignConsolidation: https://bobpayment-service.novusware.com.sg:8125/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/cancelWithdrawalReference
-        dashBoardVlnBdleNotDeposit: https://bobpayment-service.novusware.com.sg:8125/ps/getDshBrdViolationOfBdleNotDeposit
         expireWithdrawalReference: https://bobpayment-service.novusware.com.sg:8125/ps/expireWithdrawalReference
         getBankingHallDepositTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBankingHallDepositTransactions
         getBundleTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getBundleTransactions
         getCommercialBankUserTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getCommercialBankUserTransactions
         getCollectionTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getCollectionTransactions
         getConsoliadtionTransactions: https://bobpayment-service.novusware.com.sg:8125/ps/getConsoliadtionTransactions
-        getDashboardBobDistOverview: https://bobpayment-service.novusware.com.sg:8125/ps/getDashboardBobDistOverview
-        getDashboardCashMovement: https://bobpayment-service.novusware.com.sg:8125/ps/getDashboardCashMovement
-        getDshBoardRevenueCollDetailedView: https://bobpayment-service.novusware.com.sg:8125/ps/getDshBoardRevenueCollDetailedView
         getNextStage: https://bobpayment-service.novusware.com.sg:8125/ps/getNextStage
         getListOfPaymentForComBankTxn: https://bobpayment-service.novusware.com.sg:8125/ps/getListOfPaymentForComBankTxn
         getListOfPaymentForStaging: https://bobpayment-service.novusware.com.sg:8125/ps/getListOfPaymentForStaging
