@@ -121,7 +121,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: {{ $.Values.containerRegistry }}/{{ .name }}:latest
+          image: {{ $.Values.containerRegistry }}/{{ $.Values.project }}/{{ .name }}:latest
           ports:
             - name: service
               containerPort: {{ .target_1 }}

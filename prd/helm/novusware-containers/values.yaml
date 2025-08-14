@@ -1,5 +1,5 @@
-nfsServer: xxx.xxx.com
-containerRegistry: creguat01.azurecr.io
+containerRegistry: bh-prd-hbr-01.bh.bob.bw
+project: bob_prd
 containers:
   - name: bobagency
     database: bb_db_prd
