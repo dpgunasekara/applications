@@ -62,8 +62,8 @@ metadata:
   name: pgpass
   namespace: prd
 data:
-#created with: echo "postgres.uat.novaware.com.sg:5432:keycloak:postgres:postgres" | base64
-  pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5idzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+#created with: echo "postgres-prd-service.bh.bob.sg:5432:keycloak:postgres:postgres" | base64
+  pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5zZzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVz
 ---
 apiVersion: batch/v1
 kind: CronJob
