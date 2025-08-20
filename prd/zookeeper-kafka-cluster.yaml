@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-headless
+  namespace: prd
+spec:
+  clusterIP: None
+  selector:
+    app: kafka
+  ports:
+    - name: internal
+      port: 2180
+      targetPort: 9092
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+  namespace: prd
+spec:
+  serviceName: kafka-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: kafka
+          image: bitnami/kafka:3.9.0
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              memory: "1G"
+              cpu: "1"             
+          ports:
+            - containerPort: 9093
+            - containerPort: 9092
+            - containerPort: 8444
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami
+          env:
+            - name: KAFKA_HEAP_OPTS
+              value: "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"          
+            - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+              value: zookeeper.prd.svc.cluster.local:2181
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+            - name: KAFKA_CFG_LISTENERS
+              value: "INTERNAL://0.0.0.0:8444,EXTERNAL://0.0.0.0:9092"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: "INTERNAL://$(POD_NAME).kafka-headless.prd.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka-prd-service.bh.bob.bw:9092"
+            - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+              value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+            - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+              value: "INTERNAL"
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        namespace: prd
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        # storageClassName: "managed-csi"
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  namespace: prd
+  # annotations:
+  #   service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Change to 'false' if you want external LB
+spec:
+  selector:
+    app: kafka
+  type: LoadBalancer
+  loadBalancerIP: 10.253.253.122 # Replace with your IP if needed
+  ports:
+    - name: internal
+      port: 8444
+      targetPort: 8444
+    - name: external
+      port: 9092
+      targetPort: 9092

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  namespace: prd
+spec:
+  type: ExternalName
+  externalName: kafka.prd.svc.cluster.local
+  ports:
+    - name: internal
+      port: 8444

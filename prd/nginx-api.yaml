@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-api-service
+  namespace: prd
+  annotations:
+    nbc
+spec:
+  type: LoadBalancer
+  loadBalancerIP: nbc
+  ports:
+  - port: 8443
+    targetPort: 8443
+  selector:
+    app: nginx-api-gateway
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-api-gateway
+  namespace: prd
+  labels:
+    app: nginx-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-api-gateway
+  template:
+    metadata:
+      labels:
+        app: nginx-api-gateway
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.29.0
+        ports:
+        - containerPort: 8443
+        volumeMounts:
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: keystore-volume-fullchain
+          mountPath: "/etc/nginx/certs/nginx-api-gateway-prd-service-fullchain.pem"
+          subPath: "nginx-api-gateway-prd-service-fullchain.pem"
+          readOnly: true 
+        - name: keystore-volume-privkey
+          mountPath: "/etc/nginx/certs/nginx-api-gateway-prd-service-privkey.pem"
+          subPath: "nginx-api-gateway-prd-service-privkey.pem"
+          readOnly: true 
+        - name: nginx-api-gateway-content
+          mountPath: /etc/nginx/html
+          subPath: "nginx-api-gateway"
+      volumes:
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config
+      - name: nginx-api-gateway-content
+        persistentVolumeClaim:
+          claimName: nginx-api-gateway-content
+      - name: keystore-volume-fullchain
+        secret:
+          secretName: fullchain-nginx-api-gateway-prd-service-keystore
+      - name: keystore-volume-privkey
+        secret:
+          secretName: privkey-nginx-api-gateway-prd-service-keystore
+
+
+
+

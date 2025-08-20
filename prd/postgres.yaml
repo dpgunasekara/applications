@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: prd
+  # annotations:
+    # service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  selector:
+    app: postgres
+  type: LoadBalancer
+  loadBalancerIP: 10.253.253.125
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: prd
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: keycloak
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: keycloak-data
+              mountPath: /var/backups
+              subPath: keycloak/postgres-backup
+            - name: keycloak-postgres-data-01
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: keycloak-data
+          persistentVolumeClaim:
+            claimName: keycloak-data
+        - name: keycloak-postgres-data-01
+          persistentVolumeClaim:
+            claimName: keycloak-postgres-data-01
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pgpass
+  namespace: prd
+data:
+#created with: echo "postgres.uat.novaware.com.sg:5432:keycloak:postgres:postgres" | base64
+  pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5idzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: prd
+spec:
+  # Backup the database every day at 2AM
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgres-backup
+            image: postgres:16
+            command: ["/bin/sh"]
+            args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgress-prd-service.bh.bob.bw keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+            env:
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: pgpass
+                  key: pgpass
+            volumeMounts:
+              - name: keycloak-data
+                mountPath: /var/backups
+                subPath: keycloak/postgres-backup
+          restartPolicy: Never
+          volumes:
+            - name: keycloak-data
+              persistentVolumeClaim:
+                claimName: keycloak-data

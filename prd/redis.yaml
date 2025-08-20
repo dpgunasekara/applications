@@ -1,0 +1,145 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: prd
+spec:
+  clusterIP: None
+  selector:
+    app: redis
+  ports:
+    - name: redis-plain
+      port: 6379
+      targetPort: 6379
+    - name: redis-tls
+      port: 6380
+      targetPort: 6380
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-external
+  namespace: prd
+  # annotations:
+  #   service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.253.253.132
+  selector:
+    statefulset.kubernetes.io/pod-name: redis-0
+  ports:
+    - name: redis-plain
+      port: 6379
+      targetPort: 6379
+#    - name: redis-tls
+#      port: 6380
+#      targetPort: 6380
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: prd
+spec:
+  serviceName: redis
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001     
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: redis
+          image: bitnami/redis:8.0.2-debian-12-r4
+          securityContext:
+            runAsUser: 0
+          ports:
+            - containerPort: 6379
+              name: redis-plain
+            - containerPort: 6380
+              name: redis-tls              
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ "$(hostname)" = "redis-0" ]; then
+                echo "Starting master..."
+                redis-server \
+                  --port 6379 \
+                  --tls-port 6380 \
+                  --tls-cert-file /certs/redis-prd-service-fullchain.pem \
+                  --tls-key-file /certs/redis-prd-service-privkey.pem \
+                  --tls-ca-cert-file /certs/isrgrootx1.pem \
+                  --requirepass "$REDIS_PASSWORD" \
+                  --masterauth "$REDIS_PASSWORD"
+              else
+                echo "Starting replica of redis-0..."
+                redis-server \
+                  --port 6379 \
+                  --tls-port 6380 \
+                  --tls-cert-file /certs/redis-prd-service-fullchain.pem \
+                  --tls-key-file /certs/redis-prd-service-privkey.pem \
+                  --tls-ca-cert-file /certs/isrgrootx1.pem \
+                  --requirepass "$REDIS_PASSWORD" \
+                  --masterauth "$REDIS_PASSWORD" \
+                  --replicaof redis-0.redis.default.svc.cluster.local 6379
+                  --tls-replication no
+              fi
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/redis/data
+            - name: keystore-volume-fullchain
+              mountPath: /certs/redis-prd-service-fullchain.pem
+              subPath: "redis-prd-service-fullchain.pem"
+              readOnly: true
+            - name: keystore-volume-privkey
+              mountPath: /certs/redis-prd-service-privkey.pem
+              subPath: "redis-prd-service-privkey.pem"
+              readOnly: true
+            - name: keystore-volume-isrgrootx1
+              mountPath: /certs/isrgrootx1.pem
+              subPath: "isrgrootx1.pem"
+              readOnly: true              
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: keystore-volume-fullchain
+          secret:
+            secretName: fullchain-redis-prd-service-keystore
+        - name: keystore-volume-privkey
+          secret:
+            secretName: privkey-redis-prd-service-keystore
+        - name: keystore-volume-isrgrootx1
+          secret:
+            secretName: isrgrootx1-keystore            
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        # storageClassName: managed-csi
+        resources:
+          requests:
+            storage: 5Gi

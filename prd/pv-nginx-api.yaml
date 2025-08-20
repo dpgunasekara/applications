@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  # annotations:
+  #   pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: nginx-api-gateway-data
+  namespace: prd
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  # storageClassName: azurefile-csi
+  # csi:
+  #   driver: file.csi.azure.com
+  #   volumeHandle: nginx-api-gateway-data-01
+  #   volumeAttributes:
+  #     resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+  #     shareName: data
+  #   nodeStageSecretRef:
+  #     name: n0vdrcsuat01
+  #     namespace: drcs-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  # annotations:
+  #   pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: nginx-api-gateway-content
+  namespace: prd
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  # storageClassName: azurefile-csi
+  # csi:
+  #   driver: file.csi.azure.com
+  #   volumeHandle: nginx-api-gateway-content-01
+  #   volumeAttributes:
+  #     resourceGroup: rg-aksc-nonprod-ldzn-cin-01
+  #     shareName: config
+  #   nodeStageSecretRef:
+  #     name: n0vdrcsuat01
+  #     namespace: drcs-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
