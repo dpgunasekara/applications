@@ -4,10 +4,10 @@ metadata:
   name: nginx-api-service
   namespace: prd
   annotations:
-    nbc
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
-  loadBalancerIP: nbc
+  loadBalancerIP: 10.253.253.121
   ports:
   - port: 8443
     targetPort: 8443
