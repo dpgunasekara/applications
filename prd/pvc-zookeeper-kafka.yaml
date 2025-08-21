@@ -6,8 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: zookeeper-0
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
@@ -20,8 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: zookeeper-1
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
@@ -34,8 +32,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: zookeeper-2
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
@@ -48,8 +45,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: kafka-0
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
@@ -62,8 +58,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: kafka-1
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
@@ -76,8 +71,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: kafka-2
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 8Gi
