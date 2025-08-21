@@ -23,8 +23,8 @@ data:
       server {
         listen 8443 ssl;
         server_name nginx-api-prd-service.bh.bob.bw:8443;
-        ssl_certificate /etc/nginx/certs/bh-bob-bw-fullchain.pem;
-        ssl_certificate_key /etc/nginx/certs/bh-bob-bw-privkey.pem;
+        ssl_certificate /etc/nginx/certs/nginx-api-gateway-prd-service-fullchain.pem;
+        ssl_certificate_key /etc/nginx/certs/nginx-api-gateway-prd-service-privkey.pem;
         http2 on;
         location /authentication/ {
             add_header 'Access-Control-Allow-Methods' 'GET, POST';
