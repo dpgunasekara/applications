@@ -34,7 +34,7 @@ spec:
             claimName: data
       containers:
         - name: kafka
-          image: bitnami/kafka:3.9.0
+          image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/kafka@sha256:55df55bfc7ed5980447387620afa3498eab3985a4d8c731013d82b3fa8b43bff
           securityContext:
             runAsUser: 0
           resources:
@@ -73,7 +73,7 @@ spec:
         namespace: prd
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        # storageClassName: "managed-csi"
+        storageClassName: "tkg-stoarge-policy"
         resources:
           requests:
             storage: 5Gi
@@ -83,8 +83,8 @@ kind: Service
 metadata:
   name: kafka
   namespace: prd
-  # annotations:
-  #   service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Change to 'false' if you want external LB
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Change to 'false' if you want external LB
 spec:
   selector:
     app: kafka
