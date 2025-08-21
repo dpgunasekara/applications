@@ -59,12 +59,10 @@ spec:
         persistentVolumeClaim:
           claimName: nginx-api-gateway-content
       - name: keystore-volume-fullchain
-        secret:
-          secretName: fullchain-nginx-api-gateway-prd-service-keystore
+        nfs:
+          server: 10.250.250.130
+          path: /mnt/nfs/data/config/nginx-api-gateway/nginx-api-gateway-prd-service-fullchain.pem
       - name: keystore-volume-privkey
-        secret:
-          secretName: privkey-nginx-api-gateway-prd-service-keystore
-
-
-
-
+        nfs:
+          server: 10.250.250.130
+          path:  /mnt/nfs/data/config/nginx-api-gateway/nginx-api-gateway-prd-service-privkey.pem
