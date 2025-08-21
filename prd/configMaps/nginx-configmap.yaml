@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-config
-  namespace:prd
+  namespace: prd
 data:
   nginx.conf: |
     worker_processes auto; 
