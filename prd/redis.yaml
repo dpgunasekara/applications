@@ -96,7 +96,7 @@ spec:
                   --tls-ca-cert-file /certs/isrgrootx1.pem \
                   --requirepass "$REDIS_PASSWORD" \
                   --masterauth "$REDIS_PASSWORD" \
-                  --replicaof redis-0.redis.default.svc.cluster.local 6379
+                  --replicaof redis-0.redis.prd.svc.cluster.local 6379
                   --tls-replication no
               fi
           volumeMounts:
