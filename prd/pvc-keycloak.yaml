@@ -6,8 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: keycloak-config
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
@@ -20,8 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: keycloak-data
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
@@ -34,8 +32,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: keycloak-log
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
@@ -48,8 +45,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: keycloak-postgres-data-01
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
