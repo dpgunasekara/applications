@@ -6,8 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: redis-0
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 5Gi
@@ -20,8 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: redis-1
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 5Gi
@@ -34,8 +32,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: managed-csi
-  volumeName: redis-2
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 5Gi
