@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: postgres
   namespace: prd
-  # annotations:
-    # service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   selector:
     app: postgres
@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:16
+          image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/postgres:16
           ports:
             - containerPort: 5432
           env:
