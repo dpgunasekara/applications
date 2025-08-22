@@ -6,8 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: postgres-config
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
@@ -20,8 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: postgres-data
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
@@ -34,8 +32,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: postgres-log
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
