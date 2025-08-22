@@ -21,8 +21,8 @@ kind: Service
 metadata:
   name: redis-external
   namespace: prd
-  # annotations:
-  #   service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
   type: LoadBalancer
   loadBalancerIP: 10.253.253.132
@@ -58,7 +58,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: bitnami/redis:8.0.2-debian-12-r4
+          image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/redis:8.0.2-debian-12-r4
           securityContext:
             runAsUser: 0
           ports:
@@ -139,7 +139,7 @@ spec:
         name: data
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        # storageClassName: managed-csi
+        storageClassName: tkg-storage-policy
         resources:
           requests:
             storage: 5Gi
