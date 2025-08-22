@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: sentinel
-          image: bitnami/redis:8.0.2-debian-12-r4
+          image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/redis:8.0.2-debian-12-r4
           command:
             - sh
             - -c
