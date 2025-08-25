@@ -169,8 +169,8 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume
-              mountPath: "/etc/ssl/certs/bh-bob-bw.p12"
-              subPath: "bh-bob-bw.p12"
+              mountPath: "/etc/ssl/certs/{{ .name }}-service.p12"
+              subPath: "{{ .name }}-service.p12"
             - name: url-config
               mountPath: "/app/config/url.yaml"
               subPath: "url.yaml"
@@ -207,7 +207,7 @@ spec:
             claimName: {{ .name }}-log
         - name: keystore-volume
           secret:
-            secretName: bh-bob-bw-keystore
+            secretName: {{ .name }}-keystore
         - name: url-config
           configMap:
             name: url-config
@@ -278,7 +278,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: {{ $.Values.containerRegistry }}/{{ .name }}:latest
+          image: {{ $.Values.containerRegistry }}/{{ $.Values.project }}/{{ .name }}:latest
           ports:
             - containerPort: {{ .target_1 }}
           resources:
@@ -302,12 +302,12 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume-fullchain
-              mountPath: "/app/config/bh-bob-bw-fullchain.pem"
-              subPath: "bh-bob-bw-fullchain.pem"
+              mountPath: "/app/config/{{ .name }}-fullchain.pem"
+              subPath: "{{ .name }}-fullchain.pem"
               readOnly: true 
             - name: keystore-volume-privkey
-              mountPath: "/app/config/bh-bob-bw-privkey.pem"
-              subPath: "bh-bob-bw-privkey.pem"
+              mountPath: "/app/config/{{ .name }}-privkey.pem"
+              subPath: "{{ .name }}-privkey.pem"
               readOnly: true             
       volumes:
         - name: {{ .name }}-config
@@ -321,10 +321,10 @@ spec:
             claimName: {{ .name }}-log
         - name: keystore-volume-fullchain
           secret:
-            secretName: fullchain-bh-bob-bw-keystore
+            secretName: {{ .name }}-fullchain-keystore
         - name: keystore-volume-privkey
           secret:
-            secretName: privkey-bh-bob-bw-keystore
+            secretName: {{ .name }}-privkey-keystore
 
 ---
 {{ end }}
