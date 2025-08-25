@@ -7,7 +7,7 @@ data:
     server:
       ssl:
         key-store-type: PKCS12
-        key-store: /etc/ssl/certs/bh-bob-bw.p12
+        key-store: /etc/ssl/certs/$(SERVICE-NAME)-service.p12
         key-store-password: ${KEY_STORE_PASSWORD}
         key-store-alias: bh.bob.bw
         enabled: true
