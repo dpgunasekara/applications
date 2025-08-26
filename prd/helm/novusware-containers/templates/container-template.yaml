@@ -155,7 +155,7 @@ spec:
             - name: SERVICE_NAME
               value: {{ .name }}
             - name: DB_SERVER
-              value: bh-prd-dbs-00.bh.bob.bw:1433
+              value: BHPRDDBS00.bh.bob.bw:1433
             - name: DB
               value: {{ .database }}
           volumeMounts:
