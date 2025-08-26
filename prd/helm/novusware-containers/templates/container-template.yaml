@@ -10,9 +10,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-client
-  nfs:
-    server: {{ $.Values.nfsServer }}
-    path: /exports/log
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -38,9 +35,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-client
-  nfs:
-    server: {{ $.Values.nfsServer }}
-    path: /exports/data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
