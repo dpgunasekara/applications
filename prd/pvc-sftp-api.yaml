@@ -6,34 +6,33 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: bob-sftp-config
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
+namespace: prd
 metadata:
   name: bob-sftp-data
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: bob-sftp-data
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
+namespace: prd
 metadata:
   name: bob-sftp-log
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile-csi
-  volumeName: bob-sftp-log
+  storageClassName: tkg-storage-policy
   resources:
     requests:
       storage: 16Gi
