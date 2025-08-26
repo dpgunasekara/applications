@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
+  storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
     volumeHandle: bob-sftp-config-01
@@ -44,7 +44,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
+  storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
     volumeHandle: bob-sftp-data-01
@@ -77,7 +77,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile-csi
+  storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
     volumeHandle: bob-sftp-log-01
