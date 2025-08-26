@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: PersistentVolume
+namespace: prd
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: bob-sftp-config
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: bob-sftp-config-01
+    volumeAttributes:
+      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
+      shareName: config
+    nodeStageSecretRef:
+      name: n0vnvtkuat01
+      namespace: novatrack-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
+---
+apiVersion: v1
+kind: PersistentVolume
+namespace: prd
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: bob-sftp-data
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: bob-sftp-data-01
+    volumeAttributes:
+      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
+      shareName: data
+    nodeStageSecretRef:
+      name: n0vnvtkuat01
+      namespace: novatrack-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
+---
+apiVersion: v1
+kind: PersistentVolume
+namespace: prd
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: file.csi.azure.com
+  name: bob-sftp-log
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    volumeHandle: bob-sftp-log-01
+    volumeAttributes:
+      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
+      shareName: log
+    nodeStageSecretRef:
+      name: n0vnvtkuat01
+      namespace: novatrack-uat-01
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl

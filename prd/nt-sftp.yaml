@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+namespace: prd
+metadata:
+  name: bobsftp-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  selector:
+    app: bob-sftp
+  type: LoadBalancer
+  loadBalancerIP: 10.207.10.150
+  ports:
+  - port: 22
+    targetPort: 22
+---
+apiVersion: apps/v1
+kind: StatefulSet
+namespace: prd
+metadata:
+  name: bob-sftp
+spec:
+  replicas: 1
+  serviceName: bob-sftp-service
+  selector:
+    matchLabels:
+      app: bob-sftp
+  template:
+    metadata:
+      labels:
+        app: bob-sftp
+    spec:
+      containers:
+        - name: bob-sftp
+          image: atmoz/sftp:latest
+          env:
+            - name: SFTP_USER_SECRET
+              valueFrom: 
+                secretKeyRef:
+                  name: bob-sftp-secret
+                  key: password
+          args: ["bob-sftp-user-01:$(SFTP_USER_SECRET):1001:100:data"]
+          ports:
+            - containerPort: 22
+          volumeMounts:
+            - name: bob-sftp-data
+              moubobPath: /home/bob-sftp-user-01/data
+              subPath: bob-sftp
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+      volumes:
+        - name: bob-sftp-data
+          persistentVolumeClaim:
+            claimName: bob-sftp-data
