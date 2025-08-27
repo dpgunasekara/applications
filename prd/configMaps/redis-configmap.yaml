@@ -13,5 +13,5 @@ data:
       data:
         redis:
           port: 6379
-          host: redis.bh.bob.bw
+          host: redis-prd-service.bh.bob.bw
           password: ${REDIS_PASSWORD}
