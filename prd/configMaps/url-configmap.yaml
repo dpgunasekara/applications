@@ -16,7 +16,7 @@ data:
         getAuditLogs : https://bobaudit-prd-service.bh.bob.bw:8443/audit/getAuditLogs
         getAuditLogsWithPagination: https://bobaudit-prd-service.bh.bob.bw:8443/audit/getAuditLogsWithPagination
       ui:
-        forceChangePwdUrl: https://portal.drcs.uat.novaware.com.sg/drcs-force-change-password
+        forceChangePwdUrl: https://portal.drcs.bh.bob.bw/drcs-force-change-password
         changePwdPage: drcs-force-change-password
       bb:
         bankingHallTransactionNotification: https://bobagency-prd-service.bh.bob.bw:8443/bob/bankingHallTransactionNotification
