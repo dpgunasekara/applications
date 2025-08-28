@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 namespace: prd
 metadata:
-  name: bob-sftp-config
+  name: bobsftp-config
 spec:
   accessModes:
     - ReadWriteMany
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 namespace: prd
 metadata:
-  name: bob-sftp-data
+  name: bobsftp-data
 spec:
   accessModes:
     - ReadWriteMany
@@ -28,7 +28,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 namespace: prd
 metadata:
-  name: bob-sftp-log
+  name: bobsftp-log
 spec:
   accessModes:
     - ReadWriteMany
