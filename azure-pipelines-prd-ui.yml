@@ -7,23 +7,23 @@ resources:
    - repository: bobr3portal
      type: git
      name: 'BOB - Digital Revenue Collection System/bobr3portal'
-     ref: refs/heads/main     
+     ref: refs/heads/release   
    - repository: bobsignage
      type: git
      name: 'BOB - Digital Revenue Collection System/bobsignage'
-     ref: refs/heads/main     
+     ref: refs/heads/release     
    - repository: bobnovatrackintportal
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackintportal'
-     ref: refs/heads/main     
+     ref: refs/heads/release     
    - repository: bobnovatrackextportal
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackextportal'
-     ref: refs/heads/main     
+     ref: refs/heads/release     
    - repository: bobcicd
      type: git
      name: 'BOB - Digital Revenue Collection System/bobcicd'
-     ref: refs/heads/main     
+     ref: refs/heads/release     
 
 variables:
   - name: dockerfilePath-1
