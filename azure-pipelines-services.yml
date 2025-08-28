@@ -180,26 +180,10 @@ stages:
             --account-key "$(configstorageAccountKey)" \
             --share-name "$(configFileShareName)" \
             --source "$(Build.SourcesDirectory)/app/config/application-$(environmentName).yml" \
-            --path "boblogger/application-$(environmentName).yml" \
-            --auth-mode key \
-            --enable-file-backup-request-intent
-      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
-
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'AzureStorageConnection'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az storage file upload \
-            --account-name "$(configStorageAccountName)" \
-            --account-key "$(configstorageAccountKey)" \
-            --share-name "$(configFileShareName)" \
-            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
             --path "boblogger/application.yml" \
             --auth-mode key \
             --enable-file-backup-request-intent
-      displayName: 'Copy application.yml'
+      displayName: 'Copy application-$(environmentName).yml, $(configStorageAccountName), $(configstorageAccountKey), $(configFileShareName)'
 
     - task: Docker@2
       displayName: Build and push an image to container registry
