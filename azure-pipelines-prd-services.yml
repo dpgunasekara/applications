@@ -157,13 +157,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobagency/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobagency/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -219,13 +220,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > boblogger/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boblogger/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -282,13 +284,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobburs/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobburs/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -345,13 +348,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobfileprocessing/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobfileprocessing/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -407,14 +411,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobonegov/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobonegov/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -470,14 +474,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobreporting/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobreporting/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -533,14 +537,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobuserlimits/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobuserlimits/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -596,14 +600,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobmposinterface/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmposinterface/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -659,14 +663,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobqueuemanager/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobqueuemanager/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -722,14 +726,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobreferencing/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobreferencing/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -785,14 +789,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobpayment/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobpayment/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -848,14 +852,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > boboag/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boboag/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -911,14 +915,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobaudit/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobaudit/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -974,14 +978,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > boburm/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "boburm/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1037,14 +1041,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobmessaging/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmessaging/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1100,14 +1104,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobswitchinterface/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobswitchinterface/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1163,14 +1167,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobmpos/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmpos/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1226,14 +1230,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobmposlogger/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmposlogger/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1289,14 +1293,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobmerchantmate/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobmerchantmate/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1352,14 +1356,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobnovatrackintapp/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobnovatrackintapp/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1415,14 +1419,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobnovatrackextapp/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobnovatrackextapp/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
@@ -1478,14 +1482,14 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          # Create application.yml dynamically
-          cat <<EOF > bobcoindeposit/application.yml
-          spring:
-            profiles:
-              active:
-              - $(environmentName)
-          EOF
-
+          az storage file upload \
+            --account-name "$(configStorageAccountName)" \
+            --account-key "$(configstorageAccountKey)" \
+            --share-name "$(configFileShareName)" \
+            --source "$(Build.SourcesDirectory)/app/config/application.yml" \
+            --path "bobcoindeposit/application.yml" \
+            --auth-mode key \
+            --enable-file-backup-request-intent
       displayName: 'Copy application.yml'
 
     - task: Docker@2
