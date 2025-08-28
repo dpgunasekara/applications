@@ -4,7 +4,7 @@ namespace: prd
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: bob-sftp-config
+  name: bobsftp-config
 spec:
   capacity:
     storage: 16Gi
@@ -14,7 +14,7 @@ spec:
   storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
-    volumeHandle: bob-sftp-config-01
+    volumeHandle: bobsftp-config-01
     volumeAttributes:
       resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
       shareName: config
@@ -37,7 +37,7 @@ namespace: prd
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: bob-sftp-data
+  name: bobsftp-data
 spec:
   capacity:
     storage: 16Gi
@@ -47,7 +47,7 @@ spec:
   storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
-    volumeHandle: bob-sftp-data-01
+    volumeHandle: bobsftp-data-01
     volumeAttributes:
       resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
       shareName: data
@@ -70,7 +70,7 @@ namespace: prd
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: file.csi.azure.com
-  name: bob-sftp-log
+  name: bobsftp-log
 spec:
   capacity:
     storage: 16Gi
@@ -80,7 +80,7 @@ spec:
   storageClassName: tkg-storage-policy
   csi:
     driver: file.csi.azure.com
-    volumeHandle: bob-sftp-log-01
+    volumeHandle: bobsftp-log-01
     volumeAttributes:
       resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
       shareName: log
