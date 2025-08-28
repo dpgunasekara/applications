@@ -8,95 +8,95 @@ resources:
    - repository: bobagency 
      type: git
      name: 'BOB - Digital Revenue Collection System/bobagency'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: boblogger
      type: git
      name: 'BOB - Digital Revenue Collection System/boblogger'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobburs
      type: git
      name: 'BOB - Digital Revenue Collection System/bobburs'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobfileprocessing
      type: git
      name: 'BOB - Digital Revenue Collection System/bobfileprocessing'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobonegov
      type: git
      name: 'BOB - Digital Revenue Collection System/bobonegov'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobreporting
      type: git
      name: 'BOB - Digital Revenue Collection System/bobreporting'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobuserlimits
      type: git
      name: 'BOB - Digital Revenue Collection System/bobuserlimits'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobmposinterface
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmposinterface'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobqueuemanager
      type: git
      name: 'BOB - Digital Revenue Collection System/bobqueuemanager'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobreferencing
      type: git
      name: 'BOB - Digital Revenue Collection System/bobreferencing'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobpayment
      type: git
      name: 'BOB - Digital Revenue Collection System/bobpayment'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: boboag
      type: git
      name: 'BOB - Digital Revenue Collection System/boboag'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobaudit
      type: git
      name: 'BOB - Digital Revenue Collection System/bobaudit'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: boburm
      type: git
      name: 'BOB - Digital Revenue Collection System/boburm'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobmessaging
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmessaging'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobswitchinterface
      type: git
      name: 'BOB - Digital Revenue Collection System/bobswitchinterface'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobmpos
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmpos'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobmposlogger
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmposlogger'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobmerchantmate
      type: git
      name: 'BOB - Digital Revenue Collection System/bobmerchantmate'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobnovatrackextapp
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackextapp'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobnovatrackintapp
      type: git
      name: 'BOB - Digital Revenue Collection System/bobnovatrackintapp'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobcoindeposit
      type: git
      name: 'BOB - Digital Revenue Collection System/bobcoindeposit'
-     ref: refs/heads/release
+     ref: refs/heads/main
    - repository: bobcicd
      type: git
      name: 'BOB - Digital Revenue Collection System/bobcicd'
-     ref: refs/heads/release
+     ref: refs/heads/main
 
 
 variables:
