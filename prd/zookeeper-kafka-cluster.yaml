@@ -62,7 +62,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: "INTERNAL://$(POD_NAME).kafka-headless.prd.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka-prd-service.bh.bob.bw:9092"
+              value: "INTERNAL://$(POD_NAME).kafka-headless.prd.svc.cluster.local:8444,EXTERNAL://$(POD_NAME).kafka.bh.bob.bw:9092"
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
             - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
