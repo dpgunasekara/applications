@@ -163,8 +163,8 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume
-              mountPath: "/etc/ssl/certs/{{ .name }}-service.p12"
-              subPath: "{{ .name }}-service.p12"
+              mountPath: "/etc/ssl/certs/{{ .name }}-prd-service.p12"
+              subPath: "{{ .name }}-prd-service.p12"
             - name: url-config
               mountPath: "/app/config/url.yaml"
               subPath: "url.yaml"
