@@ -5,8 +5,8 @@ metadata:
   namespace: prd
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+    - ReadWriteMany
+  storageClassName: nfs-client
   resources:
     requests:
       storage: 16Gi
@@ -18,8 +18,8 @@ metadata:
   namespace: prd
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+    - ReadWriteMany
+  storageClassName: nfs-client
   resources:
     requests:
       storage: 16Gi
@@ -31,8 +31,8 @@ metadata:
   namespace: prd
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+    - ReadWriteMany
+  storageClassName: nfs-client
   resources:
     requests:
       storage: 16Gi
