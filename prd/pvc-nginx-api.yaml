@@ -5,9 +5,8 @@ metadata:
   namespace: prd
 spec:
   accessModes:
-    - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: nginx-api-gateway-data
+    - ReadWriteMany
+  storageClassName: nfs-client
   resources:
     requests:
       storage: 16Gi
@@ -19,9 +18,8 @@ metadata:
   namespace: prd
 spec:
   accessModes:
-    - ReadWriteOnce
-  # storageClassName: azurefile-csi
-  volumeName: nginx-api-gateway-content
+    - ReadWriteMany
+  storageClassName: nfs-client
   resources:
     requests:
       storage: 16Gi
