@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper-headless
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  ports:
+    - name: client
+      port: 2181
+    - name: follower
+      port: 2888
+    - name: election
+      port: 3888
+  clusterIP: None
+  selector:
+    app: zookeeper
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  ports:
+    - name: client
+      port: 2181
+  selector:
+    app: zookeeper
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zookeeper-config
+  namespace: prd
+data:
+  ZOO_REPLICAS: "3"
+  ZOO_PORT_NUMBER: "2181"
+  ZOO_TICK_TIME: "2000"
+  ZOO_INIT_LIMIT: "10"
+  ZOO_SYNC_LIMIT: "5"
+  ZOO_SERVERS: "zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zookeeper
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  serviceName: zookeeper-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: bitnami/zookeeper:3.8.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: client
+              containerPort: 2181
+            - name: follower
+              containerPort: 2888
+            - name: election
+              containerPort: 3888
+          envFrom:
+            - configMapRef:
+                name: zookeeper-config
+          volumeMounts:
+            - name: datadir
+              mountPath: /bitnami/zookeeper
+  volumeClaimTemplates:
+    - metadata:
+        name: datadir
+        namespace: prd        
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "tkg-storage-policy-retain"        
+        resources:
+          requests:
+            storage: 8Gi
