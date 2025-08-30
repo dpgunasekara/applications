@@ -13,4 +13,4 @@ data:
            opaquetoken:
              introspection-uri: https://keycloack-prd-service.bh.bob.bw:8443/realms/BobUrmRealm/protocol/openid-connect/token/introspect
              client-id: bob-urm
-             client-secret: Ufpc23uQGvKGkf0oXsrrzgMgwiTDc8gV
+             client-secret: llCIno1cXz4Oypv3doPXoI4N69DVmt4r
