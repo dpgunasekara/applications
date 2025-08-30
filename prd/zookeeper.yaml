@@ -43,7 +43,7 @@ data:
   ZOO_INIT_LIMIT: "10"
   ZOO_SYNC_LIMIT: "5"
   ALLOW_ANONYMOUS_LOGIN: "yes"
-  ZOO_SERVERS: "zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
+  ZOO_SERVERS: "server.1=zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.2=zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.3=zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
