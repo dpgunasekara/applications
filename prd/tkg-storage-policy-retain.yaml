@@ -1,8 +1,6 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  labels:
-    isSyncedFromSupervisor: "yes"
   name: tkg-storage-policy-retain
 allowVolumeExpansion: true
 parameters:
