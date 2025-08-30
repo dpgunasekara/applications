@@ -1,77 +1,38 @@
 {{- range .Values.containers }}
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .name }}-log
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-client
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .name }}-log
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-client
+  storageClassName: nfs-client-retain
   volumeName: {{ .name }}-log
   resources:
     requests:
       storage: 5Gi
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .name }}-data
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-client
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .name }}-data
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-client
+  storageClassName: nfs-client-retain
   volumeName: {{ .name }}-data
   resources:
     requests:
       storage: 5Gi
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .name }}-config
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-client
-  nfs:
-    server: {{ $.Values.nfsServer }}
-    path: /exports/config
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .name }}-config
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-client
+  storageClassName: nfs-client-retain
   volumeName: {{ .name }}-config
   resources:
     requests:
@@ -296,12 +257,12 @@ spec:
               mountPath: /app/log
               subPath: {{ .name }}
             - name: keystore-volume-fullchain
-              mountPath: "/app/config/{{ .name }}-fullchain.pem"
-              subPath: "{{ .name }}-fullchain.pem"
+              mountPath: "/app/config/{{ .name }}-prd-service-fullchain.pem"
+              subPath: "{{ .name }}-prd-service-fullchain.pem"
               readOnly: true 
             - name: keystore-volume-privkey
-              mountPath: "/app/config/{{ .name }}-privkey.pem"
-              subPath: "{{ .name }}-privkey.pem"
+              mountPath: "/app/config/{{ .name }}-prd-service-privkey.pem"
+              subPath: "{{ .name }}-prd-service-privkey.pem"
               readOnly: true             
       volumes:
         - name: {{ .name }}-config
