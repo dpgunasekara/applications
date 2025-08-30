@@ -21,8 +21,6 @@ kind: Service
 metadata:
   name: redis-external
   namespace: prd
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: 'true'
 spec:
   type: LoadBalancer
   loadBalancerIP: 10.253.253.132
