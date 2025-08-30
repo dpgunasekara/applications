@@ -1,0 +1,15 @@
+mkdir -p /mnt/nfs/data/data/bobsftp/BOB/incoming/SwitchExtract
+mkdir -p /mnt/nfs/data/data/bobsftp/BOB/outgoing/MerchantOnBoarding
+mkdir -p /mnt/nfs/data/data/bobsftp/BOB/outgoing/Settlement/archive
+mkdir -p /mnt/nfs/data/data/bobsftp/OAG/outgoing/GABS_UPDATE
+mkdir -p /mnt/nfs/data/data/bobfileprocessing/fileProcessing/downloadFile
+mkdir -p /mnt/nfs/data/data/bobfileprocessing/fileProcessing/uploadFile
+mkdir -p /mnt/nfs/data/data/bobmpos/keystore
+mkdir -p /mnt/nfs/data/data/bobnovatrackextapp/disputeRequest
+mkdir -p /mnt/nfs/data/data/bobnovatrackextapp/requestReport
+mkdir -p /mnt/nfs/data/data/bobnovatrackextapp/serviceRequest
+mkdir -p /mnt/nfs/data/data/bobnovatrackintapp/disputeRequest
+mkdir -p /mnt/nfs/data/data/bobnovatrackintapp/SBKSettledTranReports/archive
+mkdir -p /mnt/nfs/data/data/bobnovatrackintapp/SBKSettledTranReports/inprogress
+mkdir -p /mnt/nfs/data/data/bobnovatrackintapp/serviceRequest
+mkdir -p /mnt/nfs/data/data/GABS_UPDATE/sftp_successfiles
