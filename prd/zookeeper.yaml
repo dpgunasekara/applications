@@ -42,6 +42,8 @@ data:
   ZOO_TICK_TIME: "2000"
   ZOO_INIT_LIMIT: "10"
   ZOO_SYNC_LIMIT: "5"
+  ALLOW_ANONYMOUS_LOGIN: "true"
+  ZOO_ENABLE_AUTH: "false"
   ZOO_SERVERS: "zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888;zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
 ---
 apiVersion: apps/v1
