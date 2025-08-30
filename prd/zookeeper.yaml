@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
         - name: zookeeper
-          image: bitnami/zookeeper:3.8.3
+          image: bh-prd-hbr-01.bh.bow.bw/bh-prd-hreg-01/zookeeper:3.9.3
           ports:
             - name: client
               containerPort: 2181
