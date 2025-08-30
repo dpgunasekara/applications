@@ -44,7 +44,7 @@ spec:
             - containerPort: 22
           volumeMounts:
             - name: bobsftp-data
-              moubobPath: /home/bob-sftp-user-01/data
+              mountPath: /home/bob-sftp-user-01/data
               subPath: bobsftp
           resources:
             requests:
