@@ -63,8 +63,13 @@ spec:
       labels:
         app: zookeeper
     spec:
+      securityContext:
+        fsGroup: 1001    
       containers:
         - name: zookeeper
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001        
           image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/zookeeper:3.9.3
           ports:
             - name: client
