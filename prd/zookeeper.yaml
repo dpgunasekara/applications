@@ -76,11 +76,11 @@ spec:
             - configMapRef:
                 name: zookeeper-config
           volumeMounts:
-            - name: datadir
+            - name: data
               mountPath: /bitnami/zookeeper
   volumeClaimTemplates:
     - metadata:
-        name: datadir
+        name: data
         namespace: prd        
       spec:
         accessModes: ["ReadWriteOnce"]
