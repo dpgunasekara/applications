@@ -65,7 +65,6 @@ spec:
       containers:
         - name: zookeeper
           image: bitnami/zookeeper:3.8.3
-          imagePullPolicy: IfNotPresent
           ports:
             - name: client
               containerPort: 2181
