@@ -1,8 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: postgres-config
   namespace: prd
 spec:
@@ -11,16 +9,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: azurefile-csi
-  # csi:
-  #   driver: file.csi.azure.com
-  #   volumeHandle: postgres-config-01
-  #   volumeAttributes:
-  #     resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-  #     shareName: config
-  #   nodeStageSecretRef:
-  #     name: n0vdrcsuat01
-  #     namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -34,8 +22,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: postgres-data
   namespace: prd
 spec:
@@ -44,16 +30,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: azurefile-csi
-  # csi:
-  #   driver: file.csi.azure.com
-  #   volumeHandle: postgres-data-01
-  #   volumeAttributes:
-  #     resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-  #     shareName: data
-  #   nodeStageSecretRef:
-  #     name: n0vdrcsuat01
-  #     namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -67,8 +43,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: postgres-log
   namespace: prd
 spec:
@@ -77,16 +51,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: azurefile-csi
-  # csi:
-  #   driver: file.csi.azure.com
-  #   volumeHandle: postgres-log-01
-  #   volumeAttributes:
-  #     resourceGroup: rg-aksc-nonprod-ldzn-cin-01
-  #     shareName: log
-  #   nodeStageSecretRef:
-  #     name: n0vdrcsuat01
-  #     namespace: drcs-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
