@@ -1,8 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: zookeeper-0
   namespace: prd
 spec:
@@ -11,18 +9,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-0
-  #   volumeAttributes:
-  #     fsType: ext4
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: zookeeper-1
   namespace: prd
 spec:
@@ -31,18 +21,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-1
-  #   volumeAttributes:
-  #     fsType: ext4
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: zookeeper-2
   namespace: prd
 spec:
@@ -51,18 +33,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/zookeeper-data-2
-  #   volumeAttributes:
-  #     fsType: ext4
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: kafka-0
   namespace: prd
 spec:
@@ -71,18 +45,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-0
-  #   volumeAttributes:
-  #     fsType: ext4
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: kafka-1
   namespace: prd
 spec:
@@ -91,18 +57,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-1
-  #   volumeAttributes:
-  #     fsType: ext4
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  # annotations:
-  #   pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: kafka-2
   namespace: prd
 spec:
@@ -111,9 +69,3 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # storageClassName: managed-csi
-  # csi:
-  #   driver: disk.csi.azure.com
-  #   volumeHandle: /subscriptions/b6b8b5ca-22e7-4919-bc86-9d21a9b5f640/resourcegroups/rg-aksc-nonprod-ldzn-cin-01/providers/Microsoft.Compute/disks/kafka-data-2
-  #   volumeAttributes:
-  #     fsType: ext4
