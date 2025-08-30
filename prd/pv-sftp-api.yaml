@@ -2,8 +2,6 @@ apiVersion: v1
 kind: PersistentVolume
 namespace: prd
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: bobsftp-config
 spec:
   capacity:
@@ -12,15 +10,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: tkg-storage-policy
-  csi:
-    driver: file.csi.azure.com
-    volumeHandle: bobsftp-config-01
-    volumeAttributes:
-      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
-      shareName: config
-    nodeStageSecretRef:
-      name: n0vnvtkuat01
-      namespace: novatrack-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -35,8 +24,6 @@ apiVersion: v1
 kind: PersistentVolume
 namespace: prd
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: bobsftp-data
 spec:
   capacity:
@@ -45,15 +32,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: tkg-storage-policy
-  csi:
-    driver: file.csi.azure.com
-    volumeHandle: bobsftp-data-01
-    volumeAttributes:
-      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
-      shareName: data
-    nodeStageSecretRef:
-      name: n0vnvtkuat01
-      namespace: novatrack-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
@@ -68,8 +46,6 @@ apiVersion: v1
 kind: PersistentVolume
 namespace: prd
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: file.csi.azure.com
   name: bobsftp-log
 spec:
   capacity:
@@ -78,15 +54,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: tkg-storage-policy
-  csi:
-    driver: file.csi.azure.com
-    volumeHandle: bobsftp-log-01
-    volumeAttributes:
-      resourceGroup: rg-nvtk-nonprod-ldzn-cin-01
-      shareName: log
-    nodeStageSecretRef:
-      name: n0vnvtkuat01
-      namespace: novatrack-uat-01
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
