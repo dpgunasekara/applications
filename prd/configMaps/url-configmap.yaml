@@ -182,7 +182,7 @@ data:
         allowedOrigins:
         - https://bobr3portal-prd-service.bh.bob.bw:8443
         - https://bobr3portal-prd-service.bh.bob.bw:3006
-        - https://bobr3portal-prd-service.bh.bob.bw.sg
+        - https://bobr3portal-prd-service.bh.bob.bw
         - https://signage-prd-service.bh.bob.bw:8443
         - https://signage-prd-service.bh.bob.bw:3008
         - https://signage-prd-service.bh.bob.bw
@@ -191,7 +191,7 @@ data:
         - https://bobnovatrackintportal-prd-service.bh.bob.bw
         - https://bobnovatrackextportal-prd-service.bh.bob.bw:8443 
         - https://bobnovatrackextportal-prd-service.bh.bob.bw:3007
-        - https://bobnovatrackextportal-prd-service.bh.bob.bw.sg
+        - https://bobnovatrackextportal-prd-service.bh.bob.bw
         - https://bobburssimulator-prd-service.bh.bob.bw:8443 
         - https://bobburssimulator-prd-service.bh.bob.bw:3009
         - https://bobburssimulator-prd-service.bh.bob.bw
