@@ -73,7 +73,7 @@ spec:
         namespace: prd
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "tkg-stoarge-policy"
+        storageClassName: "tkg-storage-policy-retain"
         resources:
           requests:
             storage: 5Gi
