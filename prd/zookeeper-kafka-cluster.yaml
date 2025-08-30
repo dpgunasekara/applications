@@ -70,7 +70,6 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-        namespace: prd
       spec:
         accessModes: [ "ReadWriteOnce" ]
         storageClassName: "tkg-storage-policy-retain"
