@@ -83,8 +83,6 @@ kind: Service
 metadata:
   name: kafka
   namespace: prd
-    annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: 'true' # Change to 'false' if you want external LB
 spec:
   selector:
     app: kafka
