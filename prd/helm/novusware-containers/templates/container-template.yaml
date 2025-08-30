@@ -1,49 +1,4 @@
 {{- range .Values.containers }}
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .name }}-log
-  annotations:
-    "helm.sh/resource-policy": keep
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-client-retain
-  volumeName: {{ .name }}-log
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .name }}-data
-  annotations:
-    "helm.sh/resource-policy": keep
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-client-retain
-  volumeName: {{ .name }}-data
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .name }}-config
-  annotations:
-    "helm.sh/resource-policy": keep
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-client-retain
-  volumeName: {{ .name }}-config
-  resources:
-    requests:
-      storage: 5Gi
----
 {{if eq .type "maven" }}
 apiVersion: v1
 kind: Service
@@ -159,13 +114,13 @@ spec:
       volumes:
         - name: {{ .name }}-config
           persistentVolumeClaim:
-            claimName: {{ .name }}-config
+            claimName: drcs-config
         - name: {{ .name }}-data
           persistentVolumeClaim:
-            claimName: {{ .name }}-data
+            claimName: drcs-data
         - name: {{ .name }}-log
           persistentVolumeClaim:
-            claimName: {{ .name }}-log
+            claimName: drcs-log
         - name: keystore-volume
           secret:
             secretName: {{ .name }}-keystore
@@ -273,13 +228,13 @@ spec:
       volumes:
         - name: {{ .name }}-config
           persistentVolumeClaim:
-            claimName: {{ .name }}-config
+            claimName: drcs-config
         - name: {{ .name }}-data
           persistentVolumeClaim:
-            claimName: {{ .name }}-data
+            claimName: drcs-data
         - name: {{ .name }}-log
           persistentVolumeClaim:
-            claimName: {{ .name }}-log
+            claimName: drcs-log
         - name: keystore-volume-fullchain
           secret:
             secretName: {{ .name }}-fullchain-keystore
