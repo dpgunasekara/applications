@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
@@ -19,7 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
@@ -32,7 +32,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
@@ -45,7 +45,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
@@ -58,7 +58,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
@@ -71,7 +71,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: tkg-storage-policy
+  storageClassName: tkg-storage-policy-retain
   resources:
     requests:
       storage: 8Gi
