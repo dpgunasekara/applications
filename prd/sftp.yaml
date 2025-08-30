@@ -7,7 +7,7 @@ spec:
   selector:
     app: bobsftp
   type: LoadBalancer
-  loadBalancerIP: 10.207.10.150
+  loadBalancerIP: 10.253.253.132
   ports:
   - port: 22
     targetPort: 22
