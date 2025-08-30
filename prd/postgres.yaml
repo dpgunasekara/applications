@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: postgres
   namespace: prd
-    annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   selector:
     app: postgres
