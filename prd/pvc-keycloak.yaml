@@ -13,6 +13,7 @@ spec:
     server: bh-prd-nfs-01.bh.bob.bw
     path: /mnt/nfs/data/config
 ---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: keycloak-config
