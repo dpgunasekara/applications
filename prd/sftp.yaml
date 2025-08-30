@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
-namespace: prd
 metadata:
   name: bobsftp-service
+  namespace: prd  
 spec:
   selector:
     app: bobsftp
@@ -14,9 +14,9 @@ spec:
 ---
 apiVersion: apps/v1
 kind: StatefulSet
-namespace: prd
 metadata:
   name: bobsftp
+  namespace: prd  
 spec:
   replicas: 1
   serviceName: bobsftp-service
