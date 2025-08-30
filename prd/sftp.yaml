@@ -39,7 +39,7 @@ spec:
                 secretKeyRef:
                   name: bobsftp-secret
                   key: password
-          args: ["bobsftp-user-01:$(SFTP_USER_SECRET):1001:100:data"]
+          args: ["bob-sftp-user-01:$(SFTP_USER_SECRET):1001:100:data"]
           ports:
             - containerPort: 22
           volumeMounts:
