@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: bobsftp
-          image: atmoz/sftp:latest
+          image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/atmoz/sftp:latest
           env:
             - name: SFTP_USER_SECRET
               valueFrom: 
