@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper-headless
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  ports:
+    - name: client
+      port: 2181
+    - name: follower
+      port: 2888
+    - name: election
+      port: 3888
+  clusterIP: None
+  selector:
+    app: zookeeper
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  ports:
+    - name: client
+      port: 2181
+  selector:
+    app: zookeeper
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zookeeper-config
+  namespace: prd
+data:
+  ZOO_REPLICAS: "3"
+  ZOO_PORT: "2181"
+  ZOO_TICK_TIME: "2000"
+  ZOO_INIT_LIMIT: "10"
+  ZOO_SYNC_LIMIT: "5"
+  ALLOW_ANONYMOUS_LOGIN: "yes"
+  ZOO_SERVERS: "server.1=zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.2=zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.3=zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zookeeper
+  namespace: prd
+  labels:
+    app: zookeeper
+spec:
+  serviceName: zookeeper-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              memory: "1G"
+              cpu: "1"             
+          image: bitnami/zookeeper:3.9.3
+          ports:
+            - name: client
+              containerPort: 2181
+            - name: follower
+              containerPort: 2888
+            - name: election
+              containerPort: 3888
+          envFrom:
+            - configMapRef:
+                name: zookeeper-config
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/zookeeper
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "tkg-storage-policy-retain"        
+        resources:
+          requests:
+            storage: 8Gi
