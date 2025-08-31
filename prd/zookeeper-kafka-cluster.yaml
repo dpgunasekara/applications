@@ -32,11 +32,21 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+      securityContext:            
+        runAsUser: 1001
+        fsGroup: 1001
+      #initContainers:
+      #  - name: fix-permissions
+      #    image: busybox
+      #    command: ['sh', '-c', 'chown -R 1001:1001 /bitnami']
+      #    securityContext:
+      #      runAsUser: 0
+      #    volumeMounts:
+      #      - name: data
+      #        mountPath: /bitnami
       containers:
         - name: kafka
           image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/kafka@sha256:55df55bfc7ed5980447387620afa3498eab3985a4d8c731013d82b3fa8b43bff
-          securityContext:
-            runAsUser: 0
           resources:
             requests:
               memory: "1G"
