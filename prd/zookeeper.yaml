@@ -43,7 +43,7 @@ data:
   ZOO_INIT_LIMIT: "10"
   ZOO_SYNC_LIMIT: "5"
   ALLOW_ANONYMOUS_LOGIN: "yes"
-  ZOO_SERVERS: "server.1=zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.2=zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888 server.3=zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
+  ZOO_SERVERS: "zookeeper-0.zookeeper-headless.prd.svc.cluster.local:2888:3888,zookeeper-1.zookeeper-headless.prd.svc.cluster.local:2888:3888,zookeeper-2.zookeeper-headless.prd.svc.cluster.local:2888:3888"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -63,10 +63,20 @@ spec:
       labels:
         app: zookeeper
     spec:
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      #initContainers:
+      #  - name: fix-permissions
+      #    image: busybox
+      #    command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/zookeeper']
+      #    securityContext:
+      #      runAsUser: 0
+      #    volumeMounts:
+      #      - name: data
+      #        mountPath: /bitnami/zookeeper     
       containers:
         - name: zookeeper
-          securityContext:
-            runAsUser: 0
           image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/zookeeper:3.9.3
           ports:
             - name: client
