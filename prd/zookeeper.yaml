@@ -66,15 +66,15 @@ spec:
       securityContext:
         runAsUser: 1001
         fsGroup: 1001
-      #initContainers:
-      #  - name: fix-permissions
-      #    image: busybox
-      #    command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/zookeeper']
-      #    securityContext:
-      #      runAsUser: 0
-      #    volumeMounts:
-      #      - name: data
-      #        mountPath: /bitnami/zookeeper     
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/zookeeper']
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/zookeeper     
       containers:
         - name: zookeeper
           image: bh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/zookeeper:3.9.3
