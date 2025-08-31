@@ -76,7 +76,7 @@ spec:
         spec:
           containers:
           - name: postgres-backup
-            image: postgres:16
+            image: pbh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/postgres:16
             command: ["/bin/sh"]
             args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgress-prd-service.bh.bob.bw keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
             env:
