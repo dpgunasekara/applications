@@ -60,7 +60,7 @@ metadata:
   name: pgpass
   namespace: prd
 data:
-#created with: echo "postgress-prd-service.bh.bob.bw:5432:keycloak:postgres:postgres" | base64
+#created with: echo "postgres-prd-service.bh.bob.bw:5432:keycloak:postgres:postgres" | base64
   pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5idzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
 ---
 apiVersion: batch/v1
