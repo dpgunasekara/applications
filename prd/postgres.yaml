@@ -62,6 +62,7 @@ metadata:
 data:
 #created with: echo "postgress-prd-service.bh.bob.bw:5432:keycloak:postgres:postgres" | base64
   pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5idzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -78,7 +79,7 @@ spec:
           - name: postgres-backup
             image: pbh-prd-hbr-01.bh.bob.bw/bh-prd-hreg-01/postgres:16
             command: ["/bin/sh"]
-            args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgress-prd-service.bh.bob.bw keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+            args: ["-c", 'echo "$PGPASS" > /root/.pgpass && chmod 600 /root/.pgpass && pg_dump -U postgres -h postgres-prd-service.bh.bob.bw keycloak > /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
             env:
             - name: PGPASS
               valueFrom:
