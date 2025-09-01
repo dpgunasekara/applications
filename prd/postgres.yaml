@@ -61,7 +61,7 @@ metadata:
   namespace: prd
 data:
 #created with: echo "postgres-prd-service.bh.bob.bw:5432:keycloak:postgres:postgres" | base64
-  pgpass: cG9zdGdyZXNzLXByZC1zZXJ2aWNlLmJoLmJvYi5idzo1NDMyOmtleWNsb2FrOnBvc3RncmVzOnBvc3RncmVzCg==
+  pgpass: cG9zdGdyZXMtcHJkLXNlcnZpY2UuYmguYm9iLmJ3OjU0MzI6a2V5Y2xvYWs6cG9zdGdyZXM6cG9zdGdyZXM=
 ---
 apiVersion: batch/v1
 kind: CronJob
