@@ -57,7 +57,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL
-              value: "jdbc:postgresql://postgress-prd-service.bh.bob.bw:5432/keycloak?user=postgres&password=postgres"
+              value: "jdbc:postgresql://postgres-prd-service.bh.bob.bw:5432/keycloak?user=postgres&password=postgres"
           ports:
             - containerPort: 8443
           volumeMounts:
