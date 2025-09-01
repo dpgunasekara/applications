@@ -183,9 +183,9 @@ data:
         - https://bobr3portal-prd-service.bh.bob.bw:8443
         - https://bobr3portal-prd-service.bh.bob.bw:3006
         - https://bobr3portal-prd-service.bh.bob.bw
-        - https://signage-prd-service.bh.bob.bw:8443
-        - https://signage-prd-service.bh.bob.bw:3008
-        - https://signage-prd-service.bh.bob.bw
+        - https://bobsignage-prd-service.bh.bob.bw:8443
+        - https://bobsignage-prd-service.bh.bob.bw:3008
+        - https://bobsignage-prd-service.bh.bob.bw
         - https://bobnovatrackintportal-prd-service.bh.bob.bw:8443 
         - https://bobnovatrackintportal-prd-service.bh.bob.bw:3005
         - https://bobnovatrackintportal-prd-service.bh.bob.bw
