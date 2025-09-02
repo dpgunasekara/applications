@@ -186,12 +186,13 @@ data:
         - https://bobsignage-prd-service.bh.bob.bw:8443
         - https://bobsignage-prd-service.bh.bob.bw:3008
         - https://bobsignage-prd-service.bh.bob.bw
-        - https://bobnovatrackintportal-prd-service.bh.bob.bw:8443 
+        - https://bobnovatrackintportal-prd-service.bh.bob.bw:8443
         - https://bobnovatrackintportal-prd-service.bh.bob.bw:3005
         - https://bobnovatrackintportal-prd-service.bh.bob.bw
-        - https://bobnovatrackextportal-prd-service.bh.bob.bw:8443 
+        - https://bobnovatrackextportal-prd-service.bh.bob.bw:8443
         - https://bobnovatrackextportal-prd-service.bh.bob.bw:3007
         - https://bobnovatrackextportal-prd-service.bh.bob.bw
-        - https://bobburssimulator-prd-service.bh.bob.bw:8443 
+        - https://bobburssimulator-prd-service.bh.bob.bw:8443
         - https://bobburssimulator-prd-service.bh.bob.bw:3009
         - https://bobburssimulator-prd-service.bh.bob.bw
+        
