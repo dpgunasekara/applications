@@ -37,16 +37,16 @@ data:
         getRevenueCodeByRevenueCode: https://bobagency-prd-service.bh.bob.bw:8443/master/getRevenueCodeByRevenueCode
         processReversalTransaction: https://bobagency-prd-service.bh.bob.bw:8443/bob/processReversalTransaction
         validateApiRequest: https://bobagency-prd-service.bh.bob.bw:8443/bob/validateApiRequest
-        validateImportUserList: https://bobagency-prd-service.bh.bob.bw:8443/bob/validateImportUserList        
-        validateMerchantSecret: https://bobagency-prd-service.bh.bob.bw:8443/master/validateMerchantSecret        
+        validateImportUserList: https://bobagency-prd-service.bh.bob.bw:8443/bob/validateImportUserList
+        validateMerchantSecret: https://bobagency-prd-service.bh.bob.bw:8443/master/validateMerchantSecret
         validateStagingReference: https://bobagency-prd-service.bh.bob.bw:8443/bob/validateStagingReference
       br:
-        updateUserLimitForReversal: https://bobburs-prd-service.bh.bob.bw:8443/br/updateUserLimitForReversal        
+        updateUserLimitForReversal: https://bobburs-prd-service.bh.bob.bw:8443/br/updateUserLimitForReversal
       rf:
         generateS3: https://bobreferencing-prd-service.bh.bob.bw:8443/staging/generateS3
         generateUrn: https://bobreferencing-prd-service.bh.bob.bw:8443/referencing/generateUrn
       og:
-        updateUserLimitForReversal: https://boboag-prd-service.bh.bob.bw:8443/oag/updateUserLimitForReversal        
+        updateUserLimitForReversal: https://boboag-prd-service.bh.bob.bw:8443/oag/updateUserLimitForReversal
       ps:
         assignConsolidation: https://bobpayment-prd-service.bh.bob.bw:8443/ps/assignConsolidation
         cancelWithdrawalReference: https://bobpayment-prd-service.bh.bob.bw:8443/ps/cancelWithdrawalReference
@@ -126,7 +126,7 @@ data:
         updateUserLimitForReversal: https://bobuserlimits-prd-service.bh.bob.bw:8443/limits/updateUserLimitForReversal
         validateUserLimit: https://bobuserlimits-prd-service.bh.bob.bw:8443/limits/validateUserLimit
       um:
-        addUserNotification: https://boburm-prd-service.bh.bob.bw:8443/notification/addUserNotification      
+        addUserNotification: https://boburm-prd-service.bh.bob.bw:8443/notification/addUserNotification
         getAgencyWiseParentMid: https://boburm-prd-service.bh.bob.bw:8443/urm/getAgencyWiseParentMid
         getAllIdentityType:  https://boburm-prd-service.bh.bob.bw:8443/idType/getAllIdentityType
         getUser: https://boburm-prd-service.bh.bob.bw:8443/urm/getUser
@@ -158,7 +158,7 @@ data:
         getDisputeAttchments: https://bobnovatrackintapp-prd-service.bh.bob.bw:8443/bobnovatrack-internal/disputeChargeback/getDisputeAttachment
       mpos:
         savemerchant: https://bobmpos-prd-service.bh.bob.bw:8443/mpos/onboard/save
-        updateAmountMaster: https://bobmpos-prd-service.bh.bob.bw:8443/mpos/updateAmountMaster    
+        updateAmountMaster: https://bobmpos-prd-service.bh.bob.bw:8443/mpos/updateAmountMaster
         updateTerminal: https://bobmpos-prd-service.bh.bob.bw:8443/mpos/updateTerminal
         updateTransactionStatusBatch: https://bobmpos-prd-service.bh.bob.bw:8443/mpos/updateTransactionStatusBatch
       urm:
@@ -195,4 +195,3 @@ data:
         - https://bobburssimulator-prd-service.bh.bob.bw:8443
         - https://bobburssimulator-prd-service.bh.bob.bw:3009
         - https://bobburssimulator-prd-service.bh.bob.bw
-        
