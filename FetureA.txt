@@ -1,1 +1,3 @@
 This is the file featureA
+
+Change has made to featureA
